@@ -12,7 +12,7 @@ public class AnvisaTest {
 		servico.setProcesso("25351.297487/2005-05");
 		servico.setExpediente("239266/11-6");
 		servico.setCnpj("07075590000160"); 
-		 
+		  
 		Anvisa anvisa = new Anvisa();
 		anvisa.consultar(servico); 
 	}
