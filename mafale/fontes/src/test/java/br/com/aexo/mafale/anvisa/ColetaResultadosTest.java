@@ -31,7 +31,7 @@ public class ColetaResultadosTest {
 		Contexto contexto = new Contexto();
 		contexto.set("servico", servico);
 		contexto.set("consulta", recuperarArquivo("resultadoconsulta") );
-		coletor.executar(contexto);
+		coletor.executar(contexto); 
 		
 		SituacaoNaAnvisa situacao =  contexto.get("situacaoNaAnvisa");
 		
