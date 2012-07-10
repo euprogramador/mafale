@@ -7,7 +7,6 @@ import br.com.aexo.mafale.anvisa.procedimentoparaconsulta.ProcedimentoParaConsul
 public class AnvisaMain {
 
 	public static void main(String[] args) {
-
 		System.out.println("processo cnpj");
 
 		ProcessoNaAnvisa processo = new ProcessoNaAnvisa();

@@ -9,6 +9,8 @@ import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.parsers.SAXParser;
 import javax.xml.parsers.SAXParserFactory;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.xml.sax.SAXException;
 
 import br.com.aexo.Contexto;
@@ -20,6 +22,8 @@ import br.com.aexo.mafale.anvisa.procedimentoparaconsulta.sax.ProcessadorPeticao
 import br.com.aexo.mafale.anvisa.procedimentoparaconsulta.sax.ProcessadorPeticoes;
 
 public class PassoInterpretacaoDoResultadoDaConsulta implements Passo {
+
+	private static final Logger log = LoggerFactory.getLogger(PassoInterpretacaoDoResultadoDaConsulta.class);
 
 	@Override
 	public void executar(Contexto contexto) {
@@ -35,7 +39,7 @@ public class PassoInterpretacaoDoResultadoDaConsulta implements Passo {
 				processo.registra(peticao);
 			}
 		} catch (Exception e) {
-
+			log.error("ocorreu um erro ao executar a consulta",e);
 			throw new DominioException("Não foi possivel executar a consulta");
 		}
 	}
