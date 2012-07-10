@@ -2,11 +2,11 @@ package br.com.aexo;
 
 import br.com.aexo.mafale.anvisa.Contexto;
 
-public class Processo implements Passo {
+public class Procedimento implements Passo {
 
 	private final Passo[] passos;
 
-	public Processo(Passo... passos) {
+	public Procedimento(Passo... passos) {
 		this.passos = passos;
 	}
 

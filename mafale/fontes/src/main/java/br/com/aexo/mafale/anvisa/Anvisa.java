@@ -3,14 +3,14 @@ package br.com.aexo.mafale.anvisa;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-import br.com.aexo.Processo;
+import br.com.aexo.Procedimento;
 
 public class Anvisa {
 
-	private Processo processoConsulta;
+	private Procedimento processoConsulta;
 
 	public Anvisa(){
-		processoConsulta = new Processo(new PreparaParaFazerConsulta(), new ExecutaConsulta(), new ColetaResultados());
+		processoConsulta = new Procedimento(new PreparaParaFazerConsulta(), new ExecutaConsulta(), new ColetaResultados());
 	}
 	
 	public void consultar(Servico servico) {

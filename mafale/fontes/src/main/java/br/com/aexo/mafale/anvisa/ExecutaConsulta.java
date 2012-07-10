@@ -29,7 +29,7 @@ public class ExecutaConsulta implements Passo {
 		params.add(new BasicNameValuePair("opTipo", "TEC"));
 		params.add(new BasicNameValuePair("NU_PROCESSO", servico.getProcesso()));
 		try {
-			try { 
+			try {
 
 				UrlEncodedFormEntity paramEntity = new UrlEncodedFormEntity(params);
 				request.setEntity(paramEntity);
