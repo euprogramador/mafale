@@ -1,5 +1,11 @@
 package br.com.aexo;
 
+/**
+ * classe que executa diversos passos juntos
+ * 
+ * @author carlosr
+ * 
+ */
 
 public class Procedimento implements Passo {
 
