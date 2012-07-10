@@ -1,4 +1,4 @@
-package br.com.aexo.mafale.novo.consultador;
+package br.com.aexo.mafale.anvisa;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;

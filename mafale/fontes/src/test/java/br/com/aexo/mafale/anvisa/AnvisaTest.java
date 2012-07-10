@@ -1,20 +1,38 @@
 package br.com.aexo.mafale.anvisa;
 
+import static org.mockito.Mockito.verify;
+
+import org.junit.Before;
 import org.junit.Test;
+import org.mockito.Mock;
+import org.mockito.Mockito;
+import org.mockito.MockitoAnnotations;
+
+import br.com.aexo.Contexto;
+import br.com.aexo.mafale.anvisa.Anvisa;
+import br.com.aexo.mafale.anvisa.ProcedimentoParaConsultaNaAnvisa;
+import br.com.aexo.mafale.anvisa.ProcessoNaAnvisa;
 
 public class AnvisaTest {
 
+	private Anvisa anvisa;
+	@Mock
+	private ProcedimentoParaConsultaNaAnvisa procedimentoParaConsultaNaAnvisa;
+
+	@Before
+	public void setup() {
+		MockitoAnnotations.initMocks(this);
+		anvisa = new Anvisa(procedimentoParaConsultaNaAnvisa);
+	}
 
 	@Test
-	public void deveriaFazerAConsultaAAnvisaRetornandoOsResultados() throws Exception {
-		Servico servico = new Servico();
-		
-		servico.setProcesso("25351.297487/2005-05");
-		servico.setExpediente("239266/11-6");
-		servico.setCnpj("07075590000160"); 
-		  
-		Anvisa anvisa = new Anvisa();
-		anvisa.consultar(servico); 
+	public void deveriaExecutarProcessoDeConsultaNaAnvisa() {
+		ProcessoNaAnvisa processo = new ProcessoNaAnvisa();
+		processo.setCnpj("321321321");
+		processo.setProcesso("a13ad13213d21d");
+		anvisa.consultar(processo);
+
+		verify(procedimentoParaConsultaNaAnvisa).executar(Mockito.any(Contexto.class));
 	}
 
 }

@@ -1,4 +1,4 @@
-package br.com.aexo.mafale.novo.consultador;
+package br.com.aexo.mafale.anvisa;
 
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
