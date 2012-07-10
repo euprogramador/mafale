@@ -1,4 +1,4 @@
-package br.com.aexo.mafale.anvisa;
+package br.com.aexo;
 
 import java.util.HashMap;
 import java.util.Map;

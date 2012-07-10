@@ -14,6 +14,8 @@ import org.apache.http.client.methods.HttpPost;
 import org.junit.Before;
 import org.junit.Test;
 
+import br.com.aexo.Contexto;
+
 public class PreparaParaFazerConsultaTest {
 
 	private PreparaParaFazerConsulta consulta;

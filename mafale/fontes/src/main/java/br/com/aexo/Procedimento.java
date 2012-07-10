@@ -1,6 +1,5 @@
 package br.com.aexo;
 
-import br.com.aexo.mafale.anvisa.Contexto;
 
 public class Procedimento implements Passo {
 

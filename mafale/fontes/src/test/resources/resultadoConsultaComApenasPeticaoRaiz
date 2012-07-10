@@ -1,0 +1,154 @@
+
+<!-- # include file="../Conecta.asp" -->
+
+<html>
+<head>
+<meta NAME="GENERATOR" Content="Microsoft Visual Studio 6.0">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link href="http:\\www.anvisa.gov.br\scriptsweb\layout_sistema\css\sistema_divs_formulario.css" rel="stylesheet" type="text/css">
+<script language="JavaScript" src="../library/popup.js"></script>
+<script language="javascript"></script>
+<title>Consulta de Situação de Processo</title>
+</head>
+<body>
+<table width="760" border="0" cellpadding="0" cellspacing="0">
+  <tr> 
+    <td align="left" bgcolor="#FFCC00"><a href="http://portal.saude.gov.br/saude/" target="_blank"><img src="http://www.anvisa.gov.br/scriptsweb/layout_sistema/imagens/logo_saude2_peq.gif" alt="Acesse o Portal  do Minist&eacute;rio da Sa&uacute;de" width="158" height="21" border="0"></a></td>
+    <td align="right" bgcolor="#FFCC00"></td>
+  </tr>
+  <tr> 
+    <td colspan="2"><img src="http://www.anvisa.gov.br/scriptsweb/layout_sistema/imagens/linhaverdecabecalho.gif" width="760" height="6"></td>
+  </tr>
+</table>
+<table width="760" cellpadding="0" cellspacing="0">
+  <tr> 
+    <td width="158"><a href="http://www.anvisa.gov.br"><img name="logo_extensa_site" src="http://www.anvisa.gov.br/scriptsweb/layout_sistema/imagens/logo_extensa_site.gif" width="158" height="52" border="0" alt=""></a> 
+    </td>
+    <td width="398" align="center" valign="middle" background="http://www.anvisa.gov.br/scriptsweb/layout_sistema/imagens/background_titulo.gif" bgcolor="#99CC66"><b>Consulta de Situação de Processo<b></td>
+    <td width="204" bgcolor="#669966"><img src="http://www.anvisa.gov.br/scriptsweb/layout_sistema/imagens/teclado_verde.gif" width="204" height="52"></td>
+  </tr>
+  <tr> 
+    <td width="166" height="18" bgcolor="#99CC66"><img name="sistema_r3_c1" src="http://www.anvisa.gov.br/scriptsweb/layout_sistema/imagens/sistema_r3_c1.gif" width="158" height="18" border="0" alt=""></td>
+    <td width="396" bgcolor="#669900"> <table width="396" border="0" align="center" cellpadding="0" cellspacing="0">
+        <tr> </tr>
+        <tr> 
+          <td align="center" valign="middle"><a href="http://www.anvisa.gov.br/institucional/index.htm" class="menu">Institucional</a></td>
+          <td align="center" valign="middle"><a href="http://www.anvisa.gov.br/divulga/index.htm" class="menu">Anvisa Divulga</a></td>
+          <td align="center" valign="middle"><a href="http://www.anvisa.gov.br/servicos/index.htm" class="menu">Servi&ccedil;os</a></td>
+          <td align="center" valign="middle"><a href="http://www.anvisa.gov.br/areas/index.htm" class="menu">&Aacute;reas de Atua&ccedil;&atilde;o</a></td>
+          <td align="center" valign="middle"><a href="http://www.anvisa.gov.br/legis/index.htm" class="menu" >Legisla&ccedil;&atilde;o</a></td>
+        </tr>
+      </table></td>
+    <td bgcolor="#99CC66" ><img name="sistema_r3_c3" src="http://www.anvisa.gov.br/scriptsweb/layout_sistema/imagens/sistema_r3_c3.gif" width="24" height="18" border="0" alt=""><a href="http://www.anvisa.gov.br/cidadao/index.htm" target="_parent"><img name="cidadao" src="http://www.anvisa.gov.br/scriptsweb/layout_sistema/imagens/cidadao.gif" width="56" height="18" border="0" alt=""></a><a href="http://www.anvisa.gov.br/profissional/index.htm" target="_parent"><img name="saude" src="http://www.anvisa.gov.br/scriptsweb/layout_sistema/imagens/saude.gif" width="68" height="18" border="0" alt=""></a><a href="http://www.anvisa.gov.br/regulado/index.htm" target="_parent"><img name="regulado" src="http://www.anvisa.gov.br/scriptsweb/layout_sistema/imagens/regulado.gif" width="56" height="18" border="0" alt=""></a></td>
+  </tr>
+</table>
+
+<table width="760" border="0" cellspacing="0">
+    <tr> 
+    <td>&nbsp;</td>
+  </tr>
+</table>
+<table WIDTH="760" BORDER="0" CELLSPACING="0" CELLPADDING="0">
+	<tr><td colspan="2" height="5"></td></tr>
+	<tr>
+		<td width="90" align="left" class="titulo">&nbsp;Empresa</td>
+		<td width="670" align="left" class="titulo">:&nbsp;
+			ABV COMÉRCIO DE MEDICAMENTOS LTDA - 07.075.590/0001-60
+		</td>
+	</tr>
+	
+</table>
+
+<br>
+
+<table class="formulario" width="760" border="0" cellspacing="0" cellpadding="2">
+
+	<tr>
+		<th width='120' align="center">Processo<br>(Expediente)</th>
+		<th width='120' align="center">Nº de Protocolo</th>
+		<th width='*'	align="center">Assunto</th>
+		<th width='70'	align="center">Data de Entrada</th>
+		<th width='150'	align="center">Situação</th>
+		<th width='110'	align="center">Encontra-se na</th>
+		<th width='90'	align="center">Publicação<br>(Resolução)</th>
+	</tr>
+	
+	<tr>
+	
+		<td align="center">
+		 25351.297487/2005-05&nbsp;<br>(352447/05-7)</td>
+		 <td align="center">25352.289845/2005-98&nbsp;</td>
+		 <td align="center">702 - MEDICAMENTOS e INSUMOS FARMACÊUTICOS - (AFE) de DISTRIBUIDORA do produto</td>
+		 <td align="center">04/03/2005&nbsp;</td>
+		
+		<td align="center" style="Cursor: default" onMouseMove="MostrarPopup('Glossário : ','Foi publicado em veículo oficial manifestação da ANVISA favorável ao pedido da empresa.')" onMouseOut="OcultarPopup()">
+		Publicado deferimento em 26/09/2005 
+		&nbsp;</td>
+		<td align="center" style="Cursor: default" onMouseMove="MostrarPopup('Nome da Unidade','COORDENAÇÃO DE AUTORIZAÇÃO DE FUNCIONAMENTO DE EMPRESAS')" onMouseOut="OcultarPopup()">COAFE<br><b>Enc.</b> 28/06/2012&nbsp;</td>
+		<td align="center">
+		26/09/2005<br>(2367)
+		</td>
+	</tr>
+	
+</table>
+
+<table class="formulario" width="760" border="0" cellspacing="0" cellpadding="3">
+
+	<tr>
+		<th colspan="7" style="HEIGHT: 20pt; TEXT-ALIGN: right" nowrap>
+			
+			<input type="button" value="  Voltar  " name="btnvoltar" onClick="javascript: history.go(-1);" class="botaoBusca">
+			<input type="button" value=" Nova Consulta " name="btnnova" onClick="javascript:window.location.href='Consulta_Processo.asp';" class="botaoBusca">
+		</th>
+	</tr>
+	<tr>
+		<td colspan="7">
+			<b>Encontra-se na:</b><br>
+			<b>Desde:</b> Data em que o documento foi recebido na gerência.<br>
+			<b>Enc.:</b> Data em que o documento foi encaminhado para gerência, mas não foi recebido.<br>
+		</td>
+	</tr>	
+</table>
+
+<br>
+
+<table width="760" border="0" cellpadding="3" cellspacing="3" class="relatorio" height="30">
+	<tr>
+		<td align="center" valign="middle">
+			<font face="Courier" size="2"><b>Esta consulta não produz efeitos legais.</b></font>
+		</td>
+	<tr>
+</table>
+
+<table width="760" border="0" cellpadding="3" cellspacing="3" height="30">
+	<tr>
+		<td align="right">
+			<!--<a href="http://www1.anvisa.gov.br/ouvidoria/CadastraSolicitacaoInter.jsp" target="_blank"> -->
+				<a href="http://200.198.201.78/ouvidoria/CadastroProcedimentoInternetACT.do?metodo=inicia" target="_blank">
+				<img src="http://www.anvisa.gov.br/imagens/ba_anvisatende.gif" width="135" height="42" border="0" alt="Anvisatende"></a><br>
+                <font face="Arial, Helvetica, sans-serif" size="1">Formul&aacute;rio 
+                para den&uacute;ncias, <br>
+                reclama&ccedil;&otilde;es e solicita&ccedil;&otilde;es.</font>
+
+		</td>
+	</tr>
+</table>
+
+<table WIDTH="760" BORDER="0" CELLSPACING="1" CELLPADDING="1">
+	<tr><td><br></td></tr>
+	<tr><td></div>
+<div class="rodapealto" style="align:left">
+	<p align="center">
+		SIA, Trecho 5, Área Especial 57, Bloco B, Térreo Brasília -DF - CEP: 71205-050 - Central de Atendimento Anvisa - 0800 642 9782
+	</p>
+</div>
+<img src="../images/footer.jpg">
+
+
+</body>
+</html>
+</td></tr>
+</table>
+</body>
+</html>
+<!-- # include file="../desconecta.asp" -->

@@ -1,17 +1,17 @@
 package br.com.aexo.mafale.anvisa;
 
-import java.util.Date;
+import org.joda.time.LocalDate;
 
-public class SituacaoNaAnvisa {
+public class PeticaoNaAnvisa {
 
 	private String expediente;
-	private Date dataEntrada;
+	private LocalDate dataEntrada;
 	private String protocolo;
 	private String assunto;
 	private String situacao;
 	private String encontraSeNa;
-	private Date encontraSeDesde;
-	private Date dataPublicacao;
+	private LocalDate encontraSeDesde;
+	private LocalDate dataPublicacao;
 	private String resolucao;
 
 	public String getExpediente() {
@@ -20,6 +20,14 @@ public class SituacaoNaAnvisa {
 
 	public void setExpediente(String expediente) {
 		this.expediente = expediente;
+	}
+
+	public LocalDate getDataEntrada() {
+		return dataEntrada;
+	}
+
+	public void setDataEntrada(LocalDate dataEntrada) {
+		this.dataEntrada = dataEntrada;
 	}
 
 	public String getProtocolo() {
@@ -54,28 +62,20 @@ public class SituacaoNaAnvisa {
 		this.encontraSeNa = encontraSeNa;
 	}
 
-	public Date getDataPublicacao() {
-		return dataPublicacao;
-	}
-
-	public void setDataPublicacao(Date dataPublicacao) {
-		this.dataPublicacao = dataPublicacao;
-	}
-
-	public Date getEncontraSeDesde() {
+	public LocalDate getEncontraSeDesde() {
 		return encontraSeDesde;
 	}
 
-	public void setEncontraSeDesde(Date encontraSeDesde) {
+	public void setEncontraSeDesde(LocalDate encontraSeDesde) {
 		this.encontraSeDesde = encontraSeDesde;
 	}
 
-	public Date getDataEntrada() {
-		return dataEntrada;
+	public LocalDate getDataPublicacao() {
+		return dataPublicacao;
 	}
 
-	public void setDataEntrada(Date dataEntrada) {
-		this.dataEntrada = dataEntrada;
+	public void setDataPublicacao(LocalDate dataPublicacao) {
+		this.dataPublicacao = dataPublicacao;
 	}
 
 	public String getResolucao() {

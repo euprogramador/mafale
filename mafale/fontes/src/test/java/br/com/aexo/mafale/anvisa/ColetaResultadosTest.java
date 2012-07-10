@@ -13,6 +13,9 @@ import java.text.SimpleDateFormat;
 import org.junit.Before;
 import org.junit.Test;
 
+import br.com.aexo.ColetaResultados;
+import br.com.aexo.Contexto;
+
 public class ColetaResultadosTest {
 
 	private ColetaResultados coletor;

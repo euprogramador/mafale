@@ -18,6 +18,8 @@ import org.junit.Test;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
+import br.com.aexo.Contexto;
+
 public class ExecutaConsultaTest {
 
 	ExecutaConsulta consultador;
