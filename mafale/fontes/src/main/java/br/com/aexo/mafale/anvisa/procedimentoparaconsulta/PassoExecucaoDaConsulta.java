@@ -1,4 +1,4 @@
-package br.com.aexo.mafale.anvisa;
+package br.com.aexo.mafale.anvisa.procedimentoparaconsulta;
 
 import java.io.InputStream;
 import java.util.ArrayList;
@@ -20,6 +20,7 @@ import org.apache.http.util.EntityUtils;
 import br.com.aexo.Contexto;
 import br.com.aexo.Passo;
 import br.com.aexo.mafale.DominioException;
+import br.com.aexo.mafale.anvisa.ProcessoNaAnvisa;
 
 public class PassoExecucaoDaConsulta implements Passo {
 	protected Properties config = new Properties();

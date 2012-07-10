@@ -1,5 +1,9 @@
 package br.com.aexo.mafale.anvisa;
 
+import br.com.aexo.mafale.anvisa.procedimentoparaconsulta.PassoExecucaoDaConsulta;
+import br.com.aexo.mafale.anvisa.procedimentoparaconsulta.PassoInterpretacaoDoResultadoDaConsulta;
+import br.com.aexo.mafale.anvisa.procedimentoparaconsulta.ProcedimentoParaConsultaNaAnvisa;
+
 public class AnvisaMain {
 
 	public static void main(String[] args) {

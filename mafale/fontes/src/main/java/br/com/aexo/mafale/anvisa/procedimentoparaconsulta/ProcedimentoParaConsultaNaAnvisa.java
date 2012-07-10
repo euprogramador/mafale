@@ -1,4 +1,4 @@
-package br.com.aexo.mafale.anvisa;
+package br.com.aexo.mafale.anvisa.procedimentoparaconsulta;
 
 import br.com.aexo.Procedimento;
 

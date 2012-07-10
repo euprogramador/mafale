@@ -1,18 +1,24 @@
-package br.com.aexo.mafale.anvisa;
+package br.com.aexo.mafale.anvisa.procedimentoparaconsulta.sax;
 
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.List;
 
 import org.joda.time.LocalDate;
 import org.xml.sax.SAXException;
 import org.xml.sax.helpers.DefaultHandler;
 
+import br.com.aexo.mafale.anvisa.PeticaoNaAnvisa;
 
-public class ProcessadorPeticoes extends DefaultHandler {
 
-	private List<PeticaoNaAnvisa> peticoes = new ArrayList<PeticaoNaAnvisa>();
-	private PeticaoNaAnvisa peticao = new PeticaoNaAnvisa();
+/**
+ * classe responsavel por fazer o processamento de um elemento raiz de uma
+ * peticao
+ * 
+ * @author carlosr
+ * 
+ */
+public class ProcessadorPeticaoRaiz extends DefaultHandler {
+
+	private final PeticaoNaAnvisa peticao = new PeticaoNaAnvisa();
 
 	int contagem = 0;
 	StringBuffer buffer = new StringBuffer();
@@ -25,22 +31,12 @@ public class ProcessadorPeticoes extends DefaultHandler {
 		}
 		if (qName.equals("tr")) {
 			contagem = 0;
-
-			if (peticao.getExpediente()!=null)
-				peticoes.add(peticao);
-
-			peticao = new PeticaoNaAnvisa();
 		}
 
 	}
 
 	@Override
-	public void endDocument() throws SAXException {
-	}
-
-	@Override
 	public void endElement(String uri, String localName, String qName) throws SAXException {
-
 		if (qName.equals("td")) {
 			switch (contagem) {
 			case 1:
@@ -53,17 +49,19 @@ public class ProcessadorPeticoes extends DefaultHandler {
 				extraiAssunto();
 				break;
 			case 4:
-				extraiSituacao();
+				extraiDataEntrada();
 				break;
 			case 5:
-				extraiLocalizacao();
+				extraiSituacao();
 				break;
 			case 6:
+				extraiLocalizacao();
+				break;
+			case 7:
 				extraiPublicacaoEResolucao();
 				break;
 			}
 		}
-
 	}
 
 	@Override
@@ -72,13 +70,11 @@ public class ProcessadorPeticoes extends DefaultHandler {
 	}
 
 	private void extraiPublicacaoEResolucao() {
-		
+		String[] publicacao = buffer.toString().trim().replace(")", "").split("\\(");
+		getPeticao().setResolucao(publicacao[1]);
 		try {
-			String[] publicacao = buffer.toString().trim().replace(")", "").split("\\(");
-			getPeticao().setResolucao(publicacao[1]);
 			getPeticao().setDataPublicacao(new LocalDate(new SimpleDateFormat("dd/MM/yyyy").parse(publicacao[0])));
 		} catch (Exception e) {
-			// excepcted
 		}
 	}
 
@@ -89,12 +85,18 @@ public class ProcessadorPeticoes extends DefaultHandler {
 		try {
 			getPeticao().setEncontraSeDesde(new LocalDate(new SimpleDateFormat("dd/MM/yyyy").parse(localizacao[2])));
 		} catch (Exception e) {
-			// excepcted
 		}
 	}
 
 	private void extraiSituacao() {
 		getPeticao().setSituacao(buffer.toString().trim());
+	}
+
+	private void extraiDataEntrada() {
+		try {
+			getPeticao().setDataEntrada(new LocalDate(new SimpleDateFormat("dd/MM/yyyy").parse(buffer.toString().trim())));
+		} catch (Exception e) {
+		}
 	}
 
 	private void extraiAssunto() {
@@ -106,21 +108,11 @@ public class ProcessadorPeticoes extends DefaultHandler {
 	}
 
 	private void extraiExpediente() {
-		String[] expediente = buffer.toString().trim().replace(")", "").split("\\(");
-		getPeticao().setExpediente(expediente[0]);
-		try {
-			getPeticao().setDataEntrada(new LocalDate(new SimpleDateFormat("dd/MM/yyyy").parse(expediente[1])));
-		} catch (Exception e) {
-			// expected
-		}
+		getPeticao().setExpediente(buffer.toString().trim().replace(")", "").split("\\(")[1]);
 	}
 
 	public PeticaoNaAnvisa getPeticao() {
 		return peticao;
-	}
-
-	public List<PeticaoNaAnvisa> getPeticoes() {
-		return peticoes;
 	}
 
 }

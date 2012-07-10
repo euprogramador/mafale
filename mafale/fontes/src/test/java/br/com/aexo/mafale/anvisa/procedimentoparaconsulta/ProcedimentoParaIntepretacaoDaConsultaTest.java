@@ -1,4 +1,4 @@
-package br.com.aexo.mafale.anvisa;
+package br.com.aexo.mafale.anvisa.procedimentoparaconsulta;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;
@@ -15,9 +15,9 @@ import org.junit.Before;
 import org.junit.Test;
 
 import br.com.aexo.Contexto;
-import br.com.aexo.mafale.anvisa.PassoInterpretacaoDoResultadoDaConsulta;
 import br.com.aexo.mafale.anvisa.PeticaoNaAnvisa;
 import br.com.aexo.mafale.anvisa.ProcessoNaAnvisa;
+import br.com.aexo.mafale.anvisa.procedimentoparaconsulta.PassoInterpretacaoDoResultadoDaConsulta;
 
 public class ProcedimentoParaIntepretacaoDaConsultaTest {
 

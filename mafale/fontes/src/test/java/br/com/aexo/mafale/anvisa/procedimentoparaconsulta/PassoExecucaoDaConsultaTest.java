@@ -1,4 +1,4 @@
-package br.com.aexo.mafale.anvisa;
+package br.com.aexo.mafale.anvisa.procedimentoparaconsulta;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;
@@ -10,7 +10,7 @@ import junit.framework.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
-import br.com.aexo.mafale.anvisa.PassoExecucaoDaConsulta;
+import br.com.aexo.mafale.anvisa.procedimentoparaconsulta.PassoExecucaoDaConsulta;
 
 public class PassoExecucaoDaConsultaTest {
 

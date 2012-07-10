@@ -1,4 +1,4 @@
-package br.com.aexo.mafale.anvisa;
+package br.com.aexo.mafale.anvisa.procedimentoparaconsulta;
 
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
@@ -7,9 +7,9 @@ import org.junit.Test;
 import org.mockito.Mockito;
 
 import br.com.aexo.Contexto;
-import br.com.aexo.mafale.anvisa.PassoExecucaoDaConsulta;
-import br.com.aexo.mafale.anvisa.PassoInterpretacaoDoResultadoDaConsulta;
-import br.com.aexo.mafale.anvisa.ProcedimentoParaConsultaNaAnvisa;
+import br.com.aexo.mafale.anvisa.procedimentoparaconsulta.PassoExecucaoDaConsulta;
+import br.com.aexo.mafale.anvisa.procedimentoparaconsulta.PassoInterpretacaoDoResultadoDaConsulta;
+import br.com.aexo.mafale.anvisa.procedimentoparaconsulta.ProcedimentoParaConsultaNaAnvisa;
 
 public class ProcedimentoParaConsultaNaAnvisaTest {
 
