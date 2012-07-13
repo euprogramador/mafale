@@ -31,7 +31,7 @@ h1, h2, h3, h4, h5, h6 {
                 }
 
 h1            { font-family: Calibri, Helvetica, Arial, sans-serif; font-size: 31px; font-weight: bold; color: #fff; 
-				  position: absolute; top: -1000px;  /* Remove this line and delete the logo (in the HTML) if you don't want an image as a logo */
+				/*  position: absolute; top: -1000px;*/  /* Remove this line and delete the logo (in the HTML) if you don't want an image as a logo */
 				}
 				
 h2            { font-size: 26px; padding: 0 0 10px 0; }
@@ -126,6 +126,7 @@ a.remove-link:hover {
 
 #sidebar #sidebar-title {
                 margin: 40px 0 40px 15px;
+                text-align:center;
                 }
 
 #sidebar #logo {
