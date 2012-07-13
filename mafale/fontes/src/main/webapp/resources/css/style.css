@@ -18,7 +18,7 @@ body {
                 }
 
 #body-wrapper {
-	background: #f0f0f0;
+	background: #f0f0f0 url("../images/bg-body.gif") top left repeat-y;
                 /*background:  url('../images/bg-radial-gradient.gif') fixed 230px top no-repeat;*/
                 }                
 
@@ -41,7 +41,7 @@ h5            { font-size: 14px; padding: 0 0 5px 0; }
 h6            { font-size: 12px; padding: 0 0 5px 0; }
 
 
-a              { color: #57a000; text-decoration: none; }
+a              { color: green; text-decoration: none; }
 a:hover     { color: #000; }
 a:active     { color: #777; }
 a:focus     { outline: 1px; }
@@ -102,7 +102,7 @@ a.remove-link:hover {
 /********************************      Sidebar      ********************************/
 
 #sidebar {
-                background: #222; url('../images/bg-sidebar.gif') top left no-repeat;
+                /*background: #222; url('../images/bg-sidebar.gif') top left no-repeat;*/
                 width: 230px;
                 height: 100%;
                 position: absolute;
