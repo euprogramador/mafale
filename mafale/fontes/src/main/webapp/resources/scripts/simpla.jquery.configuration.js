@@ -7,13 +7,23 @@ $(document).ready(function(){
 		
 		$("#main-nav li a.nav-top-item").click( // When a top menu item is clicked...
 			function () {
+				$("#main-nav .nav-top-item").removeClass("current");
 				$(this).parent().siblings().find("ul").slideUp("normal"); // Slide up all sub menus except the one clicked
 				$(this).next().slideToggle("normal"); // Slide down the clicked sub menu
+				$(this).addClass('current');
 			}
 		);
 		
+		$("#main-nav li ul li a").click(function(){
+			$("#main-nav li ul li a").removeClass("current");
+			$(this).parent().siblings().find("ul").slideUp("normal");
+			$(this).addClass('current');
+		});
+		
+		
 
 
+		
     // Sidebar Accordion Menu Hover Effect:
 		
 		$("#main-nav li .nav-top-item").hover(

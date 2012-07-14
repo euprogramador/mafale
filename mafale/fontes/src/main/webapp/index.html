@@ -1,68 +1,34 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
-"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-
-<html xmlns="http://www.w3.org/1999/xhtml">
- 
-	
-<!-- Mirrored from demo.ponjoh.com/Simpla-Admin/index.html? by HTTrack Website Copier/3.x [XR&CO'2010], Thu, 12 Jul 2012 20:20:15 GMT -->
+<!doctype html>
+<html lang="pt-br" ng-app="mafale">
 <head>
-		
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-		
 		<title>Mafale</title>
-		
 		<!--CSS-->
-	  
 		<!-- Reset Stylesheet -->
 		<link rel="stylesheet" href="resources/css/reset.css" type="text/css" media="screen" />
-	  
 		<!-- Main Stylesheet -->
 		<link rel="stylesheet" href="resources/css/style.css" type="text/css" media="screen" />
-		
 		<!-- Invalid Stylesheet. This makes stuff look pretty. Remove it if you want the CSS completely valid -->
 		<link rel="stylesheet" href="resources/css/invalid.css" type="text/css" media="screen" />	
-		
 		<!-- Colour Schemes
-	  
 		Default colour scheme is green. Uncomment prefered stylesheet to use it.
-		
 		<link rel="stylesheet" href="resources/css/blue.css" type="text/css" media="screen" />
-		
 		<link rel="stylesheet" href="resources/css/red.css" type="text/css" media="screen" />  
-	 
 		-->
-		
 		<!-- Internet Explorer Fixes Stylesheet -->
-		
 		<!--[if lte IE 7]>
 			<link rel="stylesheet" href="resources/css/ie.css" type="text/css" media="screen" />
 		<![endif]-->
-		
 		<!--                       Javascripts                       -->
-  
 		<!-- jQuery -->
 		<script type="text/javascript" src="resources/scripts/jquery-1.3.2.min.js"></script>
-		
 		<!-- jQuery Configuration -->
 		<script type="text/javascript" src="resources/scripts/simpla.jquery.configuration.js"></script>
-
-		<!-- jQuery Configuration -->
-		<script type="text/javascript" src="resources/scripts/simpla.app.configuration.js"></script>
-		
 		<!-- Facebox jQuery Plugin -->
 		<script type="text/javascript" src="resources/scripts/facebox.js"></script>
-		
 		<!-- jQuery WYSIWYG Plugin -->
 		<script type="text/javascript" src="resources/scripts/jquery.wysiwyg.js"></script>
-		
-		<!-- jQuery Datepicker Plugin -->
-<!-- 		<script type="text/javascript" src="resources/scripts/jquery.datePicker.html"></script> -->
 		<script type="text/javascript" src="resources/scripts/jquery.date.js"></script>
-		
-		<!-- history -->
-		<script type="text/javascript" src="resources/scripts/jquery.history.js"></script>
-		
-		
 		<!--[if IE]><script type="text/javascript" src="resources/scripts/jquery.bgiframe.js"></script><![endif]-->
 
 		
@@ -74,6 +40,18 @@
 				DD_belatedPNG.fix('.png_bg, img, li');
 			</script>
 		<![endif]-->
+	
+		<script type="text/javascript">
+			emptyFn = function(){}
+		</script>
+
+		<script type="text/javascript" src="resources/scripts/app/lib/angular.js"></script>
+		<script type="text/javascript" src="resources/scripts/app/lib/angular-resource.js"></script>
+		<script type="text/javascript" src="resources/scripts/app/controllers/HomeController.js"></script>
+		<script type="text/javascript" src="resources/scripts/app/services.js"></script>
+		<script type="text/javascript" src="resources/scripts/app/app.js"></script>
+		
+
 		
 	</head>
   
@@ -132,12 +110,12 @@
 						Cadastros
 					</a>
 					<ul>
-						<li><a href="#">Visualizar clientes</a></li>
+						<li><a id="menu-visualizarClientes">Visualizar clientes</a></li>
 						<li><a id="menu-cadastroCliente" >Registrar novo cliente</a></li>
-						<li><a href="#">Visualizar tipos de cliente</a></li>
-						<li><a href="#">Registrar novo tipo de cliente</a></li>
-						<li><a href="#">Visualizar portes de cliente</a></li>
-						<li><a href="#">Registrar novo porte de cliente</a></li>
+						<li><a id="menu-visualizarTiposCliente">Visualizar tipos de cliente</a></li>
+						<li><a id="menu-cadastroTipoCliente">Registrar novo tipo de cliente</a></li>
+						<li><a id="menu-visualizarPortes">Visualizar portes de cliente</a></li>
+						<li><a id="menu-cadastroPorte">Registrar novo porte de cliente</a></li>
 						
 					</ul>
 				</li>
@@ -218,7 +196,7 @@
 		
 		<div id="main-content"> <!-- Main Content Section with everything -->
 			
-			<div id="content">
+			<div id="content" ng-view>
 			
 			
 			
