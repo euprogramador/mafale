@@ -1,0 +1,40 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE hibernate-configuration PUBLIC
+"-//Hibernate/Hibernate Configuration DTD//EN"
+"http://hibernate.sourceforge.net/hibernate-configuration-3.0.dtd">
+
+<hibernate-configuration>
+	<session-factory>
+		<property name="connection.datasource">java:comp/env/jdbc/mafale</property>
+		<property name="hibernate.dialect">org.hibernate.dialect.PostgreSQLDialect</property>
+		<property name="hibernate.show_sql">true</property>
+		<property name="hibernate.format_sql">true</property>
+		<property name="hibernate.hbm2ddl.auto">update</property>
+		<property name="hibernate.validator.apply_to_ddl">false</property>
+		<property name="hibernate.connection.autocommit">false</property>
+
+		<property name="hibernate.validator.autoregister_listeners">false</property>
+		<property name="javax.persistence.validation.mode">none</property>
+
+		<!-- envers -->
+<!-- 		<property name="org.hibernate.envers.store_data_at_delete">true</property> -->
+<!-- 		<property name="org.hibernate.envers.default_schema">auditoria</property> -->
+
+<!-- 		<listener class="org.hibernate.envers.event.AuditEventListener" -->
+<!-- 			type="post-insert" /> -->
+<!-- 		<listener class="org.hibernate.envers.event.AuditEventListener" -->
+<!-- 			type="post-update" /> -->
+<!-- 		<listener class="org.hibernate.envers.event.AuditEventListener" -->
+<!-- 			type="post-delete" /> -->
+<!-- 		<listener class="org.hibernate.envers.event.AuditEventListener" -->
+<!-- 			type="pre-collection-update" /> -->
+<!-- 		<listener class="org.hibernate.envers.event.AuditEventListener" -->
+<!-- 			type="pre-collection-remove" /> -->
+<!-- 		<listener class="org.hibernate.envers.event.AuditEventListener" -->
+<!-- 			type="post-collection-recreate" /> -->
+
+
+		<!-- Não é necessário mapear as entidades pois as mesmas serão carregadas 
+			em tempo de execução pelo EntityScanner no SessionCreator -->
+	</session-factory>
+</hibernate-configuration>
