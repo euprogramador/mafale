@@ -17,10 +17,10 @@ import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.util.EntityUtils;
 
-import br.com.aexo.Contexto;
-import br.com.aexo.Passo;
 import br.com.aexo.mafale.DominioException;
 import br.com.aexo.mafale.anvisa.ProcessoNaAnvisa;
+import br.com.aexo.util.procedimentos.Contexto;
+import br.com.aexo.util.procedimentos.Passo;
 
 public class PassoExecucaoDaConsulta implements Passo {
 	protected Properties config = new Properties();

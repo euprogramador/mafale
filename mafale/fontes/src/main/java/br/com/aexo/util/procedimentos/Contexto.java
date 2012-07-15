@@ -1,4 +1,4 @@
-package br.com.aexo;
+package br.com.aexo.util.procedimentos;
 
 import java.util.HashMap;
 import java.util.Map;

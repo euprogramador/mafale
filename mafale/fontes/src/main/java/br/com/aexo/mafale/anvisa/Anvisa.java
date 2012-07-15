@@ -1,7 +1,7 @@
 package br.com.aexo.mafale.anvisa;
 
-import br.com.aexo.Contexto;
 import br.com.aexo.mafale.anvisa.procedimentoparaconsulta.ProcedimentoParaConsultaNaAnvisa;
+import br.com.aexo.util.procedimentos.Contexto;
 
 /**
  * interface que executa o procedimento de consulta na anvisa coletando dados

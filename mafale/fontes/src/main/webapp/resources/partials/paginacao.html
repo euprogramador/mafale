@@ -1,0 +1,15 @@
+<div class="pagination">
+	<a ng-click="paginacao.primeiro()">&laquo; Primeiro</a> <a
+		ng-click="paginacao.anterior()">&laquo; Anterior</a> <span
+		ng-repeat="pagina in paginacao.paginas"> <a
+		class="number {{pagina.atual}}"
+		ng-click="paginacao.paginar(pagina.numero)"> {{pagina.numero}}</a>
+	</span> <a ng-click="paginacao.proximo()">Próximo &raquo;</a> <a
+		ng-click="paginacao.ultimo()">Último &raquo;</a> <select
+		ng-model="paginacao.numRegistros" ng-change="paginacao.paginar(1)">
+		<option>5</option>
+		<option>10</option>
+		<option>20</option>
+	</select> Exibindo {{paginacao.contagemRegistros}} de
+	{{paginacao.totalRegistros}}
+</div>

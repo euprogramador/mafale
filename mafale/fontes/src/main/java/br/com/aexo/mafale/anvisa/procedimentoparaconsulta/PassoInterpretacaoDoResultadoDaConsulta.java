@@ -13,13 +13,13 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.xml.sax.SAXException;
 
-import br.com.aexo.Contexto;
-import br.com.aexo.Passo;
 import br.com.aexo.mafale.DominioException;
 import br.com.aexo.mafale.anvisa.PeticaoNaAnvisa;
 import br.com.aexo.mafale.anvisa.ProcessoNaAnvisa;
 import br.com.aexo.mafale.anvisa.procedimentoparaconsulta.sax.ProcessadorPeticaoRaiz;
 import br.com.aexo.mafale.anvisa.procedimentoparaconsulta.sax.ProcessadorPeticoes;
+import br.com.aexo.util.procedimentos.Contexto;
+import br.com.aexo.util.procedimentos.Passo;
 
 public class PassoInterpretacaoDoResultadoDaConsulta implements Passo {
 

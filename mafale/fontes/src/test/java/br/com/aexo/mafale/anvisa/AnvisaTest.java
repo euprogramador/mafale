@@ -8,10 +8,10 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 
-import br.com.aexo.Contexto;
 import br.com.aexo.mafale.anvisa.Anvisa;
 import br.com.aexo.mafale.anvisa.ProcessoNaAnvisa;
 import br.com.aexo.mafale.anvisa.procedimentoparaconsulta.ProcedimentoParaConsultaNaAnvisa;
+import br.com.aexo.util.procedimentos.Contexto;
 
 public class AnvisaTest {
 

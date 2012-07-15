@@ -14,10 +14,10 @@ import org.joda.time.LocalDate;
 import org.junit.Before;
 import org.junit.Test;
 
-import br.com.aexo.Contexto;
 import br.com.aexo.mafale.anvisa.PeticaoNaAnvisa;
 import br.com.aexo.mafale.anvisa.ProcessoNaAnvisa;
 import br.com.aexo.mafale.anvisa.procedimentoparaconsulta.PassoInterpretacaoDoResultadoDaConsulta;
+import br.com.aexo.util.procedimentos.Contexto;
 
 public class ProcedimentoParaIntepretacaoDaConsultaTest {
 

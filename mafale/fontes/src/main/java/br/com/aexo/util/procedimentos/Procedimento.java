@@ -1,4 +1,4 @@
-package br.com.aexo;
+package br.com.aexo.util.procedimentos;
 
 /**
  * classe que executa diversos passos juntos

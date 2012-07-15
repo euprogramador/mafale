@@ -13,7 +13,7 @@
 	</context-param>
 	<context-param>
 		<param-name>br.com.caelum.vraptor.packages</param-name>
-		<param-value>br.com.aexo</param-value>
+		<param-value>br.com.aexo,br.com.caelum.vraptor.restfulie</param-value>
 	</context-param>
 	<filter>
 		<filter-name>vraptor</filter-name>

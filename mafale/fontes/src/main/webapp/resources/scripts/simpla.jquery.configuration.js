@@ -6,7 +6,7 @@ $(document).ready(function(){
 		$("#main-nav li a.current").parent().find("ul").slideToggle("slow"); // Slide down the current menu item's sub menu
 		
 		$("#main-nav li a.nav-top-item").click( // When a top menu item is clicked...
-			function () {
+			function (e) {
 				$("#main-nav .nav-top-item").removeClass("current");
 				$(this).parent().siblings().find("ul").slideUp("normal"); // Slide up all sub menus except the one clicked
 				$(this).next().slideToggle("normal"); // Slide down the clicked sub menu
@@ -14,7 +14,7 @@ $(document).ready(function(){
 			}
 		);
 		
-		$("#main-nav li ul li a").click(function(){
+		$("#main-nav li ul li a").click(function(e){
 			$("#main-nav li ul li a").removeClass("current");
 			$(this).parent().siblings().find("ul").slideUp("normal");
 			$(this).addClass('current');
@@ -99,5 +99,24 @@ $(document).ready(function(){
 
 });
   
-  
-  
+function showModal(){
+	 $.blockUI({
+	   message: $("<img src='resources/images/loading.gif'></img>"),
+	   css: { 
+         border: 'none',  
+         padding: '15px', 
+         backgroundColor: '#000', 
+         '-webkit-border-radius': '10px', 
+         '-moz-border-radius': '10px', 
+         opacity: .5, 
+         color: '#fff' 
+     } }); 
+}
+function hideModal(){
+	$.unblockUI();
+}
+
+ 
+
+
+

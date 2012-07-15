@@ -1,4 +1,4 @@
-package br.com.aexo;
+package br.com.aexo.util.procedimentos;
 
 
 public interface Passo {
