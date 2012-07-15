@@ -1,10 +1,11 @@
-package br.com.aexo.mafale.administrativo;
+package br.com.aexo.util.resources;
 
 import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Projections;
 
+import br.com.aexo.mafale.administrativo.cliente.TipoCliente;
 import br.com.aexo.util.ajax.Data;
 import br.com.caelum.vraptor.Result;
 import br.com.caelum.vraptor.Validator;
@@ -53,17 +54,17 @@ public abstract class DefaultResource<E> {
 				.serialize();
 	}
 
-	public void recuperar(TipoCliente tipoCliente) {
-		result.use(Results.json()).withoutRoot().from(tipoCliente).serialize();
+	public void recuperar(E entidade) {
+		result.use(Results.json()).withoutRoot().from(entidade).serialize();
 	}
 
-	public void salvar(E entidade) {
+	public boolean valido(E entidade){
 		validator.validate(entidade);
 		validator.onErrorSendBadRequest();
-		if (validator.hasErrors())
-			return;
-
-		session.saveOrUpdate(entidade);
+		return !validator.hasErrors();
+	}
+	
+	public void salvar(E entidade) {
 		result.use(Results.json()).withoutRoot().from(entidade).serialize();
 	}
 

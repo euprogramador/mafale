@@ -1,16 +1,18 @@
-package br.com.aexo.mafale.administrativo;
+package br.com.aexo.mafale.administrativo.cliente;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Transient;
 
+import org.hibernate.Session;
 import org.hibernate.validator.constraints.NotBlank;
 
 import br.com.aexo.util.dominio.Entidade;
 
 @Entity
-public class TipoCliente extends Entidade {
+public class PorteCliente extends Entidade {
 
 	private static final long serialVersionUID = 1L;
 
@@ -18,8 +20,27 @@ public class TipoCliente extends Entidade {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
-	@NotBlank(message="Informe a descrição")
+	@NotBlank(message = "Informe a descrição")
 	private String descricao;
+
+	@Transient
+	private transient final Session session;
+
+	public PorteCliente(Session session) {
+		this.session = session;
+	}
+
+	public void salvar() {
+		session.saveOrUpdate(this);
+	}
+
+	public void remover() {
+		session.delete(this);
+	}
+
+	public PorteCliente carregar() {
+		return (PorteCliente) session.get(PorteCliente.class, id);
+	}
 
 	public Long getId() {
 		return id;

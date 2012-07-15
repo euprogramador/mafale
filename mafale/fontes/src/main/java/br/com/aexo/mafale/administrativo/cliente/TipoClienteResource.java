@@ -1,9 +1,10 @@
-package br.com.aexo.mafale.administrativo;
+package br.com.aexo.mafale.administrativo.cliente;
 
 import org.hibernate.Session;
 import org.hibernate.criterion.Order;
 
 import br.com.aexo.util.hibernate.Load;
+import br.com.aexo.util.resources.DefaultResource;
 import br.com.caelum.vraptor.Consumes;
 import br.com.caelum.vraptor.Delete;
 import br.com.caelum.vraptor.Get;
@@ -28,6 +29,18 @@ public class TipoClienteResource extends DefaultResource<TipoCliente> {
 	@Post({ "/data/tiposcliente/{tipoCliente.id}", "/data/tiposcliente" })
 	@Consumes
 	public void salvar(TipoCliente tipoCliente) {
+		if (!valido(tipoCliente))
+			return;
+
+		if (tipoCliente.getId() == null) {
+			tipoCliente.salvar();
+			super.salvar(tipoCliente);
+			return;
+		}
+
+		TipoCliente db = tipoCliente.carregar();
+		db.setDescricao(tipoCliente.getDescricao());
+		db.salvar();
 		super.salvar(tipoCliente);
 	}
 

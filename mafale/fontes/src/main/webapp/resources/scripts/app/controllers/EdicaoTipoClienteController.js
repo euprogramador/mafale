@@ -1,4 +1,4 @@
-function EdicaoTipoClienteController($scope,TiposCliente, $routeParams){
+function EdicaoTipoClienteController($scope,TiposCliente, $routeParams,$route){
 
 	$scope.tipo = {};
 	
@@ -6,7 +6,6 @@ function EdicaoTipoClienteController($scope,TiposCliente, $routeParams){
 		showModal();
 		TiposCliente.get({id:$routeParams.id},function(data){
 			$scope.tipo = data;
-			console.log(data);
 			hideModal();
 		},errorHandler);
 	}
@@ -16,6 +15,7 @@ function EdicaoTipoClienteController($scope,TiposCliente, $routeParams){
 		TiposCliente.save({tipoCliente:$scope.tipo},function(){
 			hideModal();
 			alert("Tipo salvo com sucesso");
+			console.log($route);
 		},errorHandler);
 	};
 }
