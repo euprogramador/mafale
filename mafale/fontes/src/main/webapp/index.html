@@ -2,6 +2,7 @@
 <html ng-app="mafale">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+
 <title>Mafale</title>
 <!--CSS-->
 <!-- Reset Stylesheet -->
@@ -13,6 +14,8 @@
 <!-- Invalid Stylesheet. This makes stuff look pretty. Remove it if you want the CSS completely valid -->
 <link rel="stylesheet" href="resources/css/invalid.css" type="text/css"
 	media="screen" />
+
+
 <!-- Colour Schemes
 		Default colour scheme is green. Uncomment prefered stylesheet to use it.
 		<link rel="stylesheet" href="resources/css/blue.css" type="text/css" media="screen" />
@@ -48,24 +51,6 @@
 				DD_belatedPNG.fix('.png_bg, img, li');
 			</script>
 		<![endif]-->
-
-<script type="text/javascript">
-			emptyFn = function(){}
-			errorHandler = function(error){
- 				
-				if (error.status == 400 && error.data.errors){
-					var msg = '';
-					for(var i=0; i<error.data.errors.length;i++){
-						msg += error.data.errors[i].message + '\r\n';
-					}
-					alert(msg);
-				}else {
-					alert('Ocorreu um erro de comunicação com o servidor execute a operação novamente');
-				}
-				
-				hideModal();
-			}
-		</script>
 
 <script type="text/javascript" src="resources/scripts/app/lib/angular.js"></script>
 <script type="text/javascript" src="resources/scripts/app/lib/angular-resource.js"></script>

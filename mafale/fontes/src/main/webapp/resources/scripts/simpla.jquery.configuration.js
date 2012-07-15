@@ -98,9 +98,12 @@ $(document).ready(function(){
 		$(".wysiwyg").wysiwyg(); // Applies WYSIWYG editor to any textarea with the class "wysiwyg"
 
 });
-  
+
+
 function showModal(){
 	 $.blockUI({
+	   fadeIn:0, 
+	   fadeOut:0, 
 	   message: $("<img src='resources/images/loading.gif'></img>"),
 	   css: { 
          border: 'none',  
@@ -112,6 +115,7 @@ function showModal(){
          color: '#fff' 
      } }); 
 }
+
 function hideModal(){
 	$.unblockUI();
 }

@@ -6,6 +6,31 @@ factory('TiposCliente', function($resource){
 });
 
 
+emptyFn = function(){}
+errorHandler = function(error){
+	if (error.status == 400 && error.data.errors){
+		for(var i=0; i<error.data.errors.length;i++){
+			var el = $("#"+error.data.errors[i].category);
+			if (el.length==0){
+				alert("campo para mensagem não encontrado "+error.data.errors[i].category);
+				continue;
+			}
+			el.removeClass("hidden");
+			el.html(error.data.errors[i].message);
+			$("#"+el.attr('for'))
+			.addClass("inputError")
+			.keyup(function(element){
+				el.addClass('hidden');
+				$(this).removeClass("inputError");
+			});
+		}
+	}else {
+		alert('Ocorreu um erro de comunicação com o servidor execute a operação novamente');
+	}
+	
+	hideModal();
+};
+
 function montarPaginador(aoPaginarHandler){
 	var paginacao = {};
 	paginacao.numRegistros = 10;

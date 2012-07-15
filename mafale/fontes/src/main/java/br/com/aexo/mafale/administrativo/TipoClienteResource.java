@@ -39,10 +39,10 @@ public class TipoClienteResource {
 	@Consumes
 	public void salvar(TipoCliente tipoCliente){
 		validator.validate(tipoCliente);
-		if (validator.hasErrors()){
-			result.use(Results.status()).badRequest(validator.getErrors());
+		validator.onErrorSendBadRequest();
+		if (validator.hasErrors())
 			return;
-		}
+		
 		session.saveOrUpdate(tipoCliente);
 		result.use(Results.json()).withoutRoot().from(tipoCliente).serialize();
 	}

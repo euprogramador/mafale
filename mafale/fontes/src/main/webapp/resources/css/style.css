@@ -547,6 +547,14 @@ form input[type="radio"] {
                 color: #556652;
                 }
 
+.hidden {
+				display:none;
+}
+
+.inputError {
+			border:1px red dotted !important;
+}
+
 .error {
                 background: #ffcece url('../images/icons/cross_circle.png');
                 border-color: #df8f8f;
