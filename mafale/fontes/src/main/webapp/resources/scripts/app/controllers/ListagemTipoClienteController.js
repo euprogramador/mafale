@@ -11,14 +11,14 @@ function ListagemTipoClienteController($scope, TiposCliente, $routeParams){
 	$scope.paginacao.paginar($routeParams.pagina);
 
 	$scope.remover = function(tipo){
-		if (!confirm('Confirma remoção?')) return;
-		
-		showModal();
-		TiposCliente.remove({id:tipo.id},function(){
-			alert('Tipo removido com sucesso');
-			hideModal();
-			$scope.paginacao.atualizar();
-		},errorHandler);
+		confirm('Confirma remoção?',function(){
+			showModal();
+			TiposCliente.remove({id:tipo.id},function(){
+				alert('Tipo removido com sucesso');
+				hideModal();
+				$scope.paginacao.atualizar();
+			},errorHandler);
+		});
 	};
 	
 } 

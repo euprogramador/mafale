@@ -5,8 +5,32 @@ factory('TiposCliente', function($resource){
 	});
 });
 
+function alert(msg){
+	$( "<div title='Sistema'><p>"+msg+"</p></div>" ).dialog({
+		modal: true,
+		buttons: {
+			Ok: function() {
+				$( this ).dialog( "close" );
+			}
+		}
+	});
+}
 
-emptyFn = function(){}
+function confirm(msg,handler){
+	$( "<div title='Sistema'><p>"+msg+"</p></div>" ).dialog({
+		modal: true,
+		buttons: {
+			Sim: function() {
+				handler();
+				$( this ).dialog( "close" );
+			},
+			'Não': function(){
+				$( this ).dialog( "close" );
+			}
+		}
+	});
+}
+emptyFn = function(){};
 errorHandler = function(error){
 	if (error.status == 400 && error.data.errors){
 		for(var i=0; i<error.data.errors.length;i++){

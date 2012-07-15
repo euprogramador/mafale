@@ -16,6 +16,8 @@
 	media="screen" />
 
 
+
+
 <!-- Colour Schemes
 		Default colour scheme is green. Uncomment prefered stylesheet to use it.
 		<link rel="stylesheet" href="resources/css/blue.css" type="text/css" media="screen" />
@@ -29,9 +31,13 @@
 <!-- jQuery -->
 <script type="text/javascript"
 	src="resources/scripts/jquery-1.7.2.min.js"></script>
-	<script type="text/javascript"
-	src="resources/scripts/jquery.blockUI.js"></script>
-	
+<script type="text/javascript" src="resources/scripts/jquery.blockUI.js"></script>
+<link type="text/css"
+	href="resources/css/smoothness/jquery-ui-1.8.21.custom.css"
+	rel="stylesheet" />
+<script type="text/javascript"
+	src="resources/scripts/jquery-ui-1.8.21.custom.min.js"></script>
+
 <!-- jQuery Configuration -->
 <script type="text/javascript"
 	src="resources/scripts/simpla.jquery.configuration.js"></script>
@@ -52,11 +58,16 @@
 			</script>
 		<![endif]-->
 
-<script type="text/javascript" src="resources/scripts/app/lib/angular.js"></script>
-<script type="text/javascript" src="resources/scripts/app/lib/angular-resource.js"></script>
-<script type="text/javascript" src="resources/scripts/app/controllers/HomeController.js"></script>
-<script type="text/javascript" src="resources/scripts/app/controllers/ListagemTipoClienteController.js"></script>
-<script type="text/javascript" src="resources/scripts/app/controllers/EdicaoTipoClienteController.js"></script>
+<script type="text/javascript"
+	src="resources/scripts/app/lib/angular.js"></script>
+<script type="text/javascript"
+	src="resources/scripts/app/lib/angular-resource.js"></script>
+<script type="text/javascript"
+	src="resources/scripts/app/controllers/HomeController.js"></script>
+<script type="text/javascript"
+	src="resources/scripts/app/controllers/ListagemTipoClienteController.js"></script>
+<script type="text/javascript"
+	src="resources/scripts/app/controllers/EdicaoTipoClienteController.js"></script>
 <script type="text/javascript" src="resources/scripts/app/services.js"></script>
 <script type="text/javascript" src="resources/scripts/app/app.js"></script>
 
@@ -90,8 +101,8 @@
 
 				<ul id="main-nav">
 
-					<li><a href="#/home"
-						class="nav-top-item no-submenu current"> Dashboard </a></li>
+					<li><a href="#/home" class="nav-top-item no-submenu current">
+							Dashboard </a></li>
 
 					<li><a class="nav-top-item "> Serviços </a>
 						<ul>
@@ -110,15 +121,15 @@
 							<li><a href="#">Emitir recibo avulso</a></li>
 						</ul></li>
 
-					<li><a id="menu-cadastro" class="nav-top-item">
-							Cadastros </a>
+					<li><a id="menu-cadastro" class="nav-top-item"> Cadastros
+					</a>
 						<ul>
 							<li><a id="menu-visualizarClientes">Visualizar clientes</a></li>
 							<li><a id="menu-cadastroCliente">Registrar novo cliente</a></li>
-							<li><a href="#/listagemTipoCliente/1">Visualizar tipos de
-									cliente</a></li>
-							<li><a href="#/edicaoTipoCliente/novo">Registrar novo tipo
+							<li><a href="#/listagemTipoCliente/1">Visualizar tipos
 									de cliente</a></li>
+							<li><a href="#/edicaoTipoCliente/novo">Registrar novo
+									tipo de cliente</a></li>
 							<li><a id="menu-visualizarPortes">Visualizar portes de
 									cliente</a></li>
 							<li><a id="menu-cadastroPorte">Registrar novo porte de
@@ -149,8 +160,7 @@
 		<div id="main-content">
 			<!-- Main Content Section with everything -->
 
-			<div id="content" ng-view>
-			</div>
+			<div id="content" ng-view></div>
 
 			<!-- End Notifications -->
 
