@@ -19,6 +19,13 @@ public abstract class Entidade implements Serializable {
 	 */
 	public abstract Long getId();
 
+	
+	public abstract void remover();
+	
+	public abstract void salvar();
+	
+	public abstract Entidade carregar();
+	
 	/**
 	 * hashcode pelo id
 	 */

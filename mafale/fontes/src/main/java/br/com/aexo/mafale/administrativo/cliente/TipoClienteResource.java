@@ -6,6 +6,7 @@ import org.hibernate.criterion.Order;
 import br.com.aexo.util.exceptions.DominioException;
 import br.com.aexo.util.hibernate.Load;
 import br.com.aexo.util.resources.DefaultResource;
+import br.com.aexo.util.vraptor.view.Status;
 import br.com.caelum.vraptor.Consumes;
 import br.com.caelum.vraptor.Delete;
 import br.com.caelum.vraptor.Get;
@@ -20,8 +21,7 @@ public class TipoClienteResource extends DefaultResource<TipoCliente> {
 
 	private final Result result;
 
-	public TipoClienteResource(Session session, Result result,
-			Validator validator) {
+	public TipoClienteResource(Session session, Result result, Validator validator) {
 		super(TipoCliente.class, session, result, validator);
 		this.result = result;
 	}
@@ -31,8 +31,8 @@ public class TipoClienteResource extends DefaultResource<TipoCliente> {
 		try {
 			tipoCliente.remover();
 			result.use(Results.status()).ok();
-		} catch(DominioException e){
-			result.use(Results.status()).badRequest(e.getMessage());
+		} catch (DominioException e) {
+			result.use(Status.class).badRequest(e.getMessage());
 		}
 	}
 
@@ -44,14 +44,14 @@ public class TipoClienteResource extends DefaultResource<TipoCliente> {
 
 		if (tipoCliente.getId() == null) {
 			tipoCliente.salvar();
-			super.salvar(tipoCliente);
+			result.use(Results.json()).withoutRoot().from(tipoCliente).serialize();
 			return;
 		}
 
 		TipoCliente db = tipoCliente.carregar();
 		db.setDescricao(tipoCliente.getDescricao());
 		db.salvar();
-		super.salvar(tipoCliente);
+		result.use(Results.json()).withoutRoot().from(tipoCliente).serialize();
 	}
 
 	@Get("/data/tiposcliente")
@@ -61,7 +61,7 @@ public class TipoClienteResource extends DefaultResource<TipoCliente> {
 
 	@Get("/data/tiposcliente/{tipoCliente.id}")
 	public void recuperar(@Load TipoCliente tipoCliente) {
-		super.recuperar(tipoCliente);
+		result.use(Results.json()).withoutRoot().from(tipoCliente).serialize();
 	}
 
 	@Override

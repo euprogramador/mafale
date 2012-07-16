@@ -53,9 +53,6 @@ public abstract class DefaultResource<E> {
 		result.use(Json.class).withoutRoot().from(data).include("listagem").serialize();
 	}
 
-	public void recuperar(E entidade) {
-		result.use(Results.json()).withoutRoot().from(entidade).serialize();
-	}
 
 	public boolean valido(E entidade){
 		validator.validate(entidade);
@@ -63,8 +60,5 @@ public abstract class DefaultResource<E> {
 		return !validator.hasErrors();
 	}
 	
-	public void salvar(E entidade) {
-		result.use(Results.json()).withoutRoot().from(entidade).serialize();
-	}
 
 }

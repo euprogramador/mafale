@@ -56,9 +56,13 @@ errorHandler = function(error){
 			});
 		}
 	}else {
-		alert('Ocorreu um erro de comunicação com o servidor execute a operação novamente');
+		var msg = error.headers("mensagem");
+		if (msg){
+			alert(msg);
+		} else {
+			alert('Ocorreu um erro de comunicação com o servidor execute a operação novamente');
+		}
 	}
-	
 	hideModal();
 };
 

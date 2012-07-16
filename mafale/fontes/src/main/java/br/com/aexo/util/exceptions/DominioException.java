@@ -1,5 +1,6 @@
 package br.com.aexo.util.exceptions;
 
+
 /**
  * representa os erros de dominio em que o message pode ser apresentado para o
  * usuário final
@@ -7,7 +8,7 @@ package br.com.aexo.util.exceptions;
  * @author carlosr
  * 
  */
-public class DominioException extends RuntimeException {
+public class DominioException extends RuntimeException  {
 
 	private static final long serialVersionUID = 1L;
 

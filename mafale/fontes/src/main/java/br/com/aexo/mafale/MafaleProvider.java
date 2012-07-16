@@ -29,6 +29,7 @@ public class MafaleProvider extends SpringProvider {
 		registry.register(ParameterNamesProvider.class, VRaptorParameterNamesProvider.class);
 		registry.register(Instantiator.class, VRaptorInstantiator.class);
 		registry.register(HibernateInterceptors.class, MafaleHibernateInterceptors.class);
+		
 	}
 
 }
