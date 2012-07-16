@@ -3,7 +3,7 @@
 
 	<div class="content-box-header">
 
-		<h3>Listagem de Tipos de cliente</h3>
+		<h3>Listagem de porte de cliente</h3>
 		
 		<div class="clear"></div>
 
@@ -29,13 +29,13 @@
 						<td colspan="6">
 							
 							<div class="pagination">
-								<a href="#/listagemTipoCliente/{{paginacao.primeiro}}">&laquo; Primeiro</a> 
-								<a href="#/listagemTipoCliente/{{paginacao.anterior}}">&laquo; Anterior</a> 
+								<a href="#/listagemPorteCliente/{{paginacao.primeiro}}">&laquo; Primeiro</a> 
+								<a href="#/listagemPorteCliente/{{paginacao.anterior}}">&laquo; Anterior</a> 
 								<span ng-repeat="pagina in paginacao.paginas"> 
-									<a class="number {{pagina.atual}}" href="#/listagemTipoCliente/{{pagina.numero}}"> {{pagina.numero}}</a>
+									<a class="number {{pagina.atual}}" href="#/listagemPorteCliente/{{pagina.numero}}"> {{pagina.numero}}</a>
 								</span> 
-								<a href="#/listagemTipoCliente/{{paginacao.proximo}}">Próximo &raquo;</a>
-								<a href="#/listagemTipoCliente/{{paginacao.ultimo}}">Último &raquo;</a> 
+								<a href="#/listagemPorteCliente/{{paginacao.proximo}}">Próximo &raquo;</a>
+								<a href="#/listagemPorteCliente/{{paginacao.ultimo}}">Último &raquo;</a> 
 								Exibindo {{paginacao.contagemRegistros}} de {{paginacao.totalRegistros}}
 							</div>
 							
@@ -49,7 +49,7 @@
 						<td>{{tipo.descricao}}</td>
 						<td>
 							<!-- Icons --> 
-							<a href="#/edicaoTipoCliente/{{tipo.id}}" title="Editar"><img src="resources/images/icons/pencil.png" alt="Editar" /></a> 
+							<a href="#/edicaoPorteCliente/{{tipo.id}}" title="Editar"><img src="resources/images/icons/pencil.png" alt="Editar" /></a> 
 							<a ng-click="remover(tipo)" title="Remover"><img src="resources/images/icons/cross.png" alt="Remover" /></a>
 						</td>
 					</tr>

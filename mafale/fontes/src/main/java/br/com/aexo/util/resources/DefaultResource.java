@@ -5,7 +5,6 @@ import org.hibernate.Session;
 import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Projections;
 
-import br.com.aexo.mafale.administrativo.cliente.TipoCliente;
 import br.com.aexo.util.ajax.Data;
 import br.com.caelum.vraptor.Result;
 import br.com.caelum.vraptor.Validator;
@@ -43,7 +42,7 @@ public abstract class DefaultResource<E> {
 
 		data.setListagem(criteria.list());
 
-		criteria = session.createCriteria(TipoCliente.class);
+		criteria = session.createCriteria(classe);
 		criteria.setProjection(Projections.rowCount());
 		data.setContagem((Long) criteria.uniqueResult());
 

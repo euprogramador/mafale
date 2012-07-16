@@ -3,7 +3,14 @@ factory('TiposCliente', function($resource){
 	return $resource('data/tiposcliente/:id', {}, {
  		query: {url:'data/tiposcliente?inicio=:inicio&numRegistros=:numRegistros',method:'GET', params:{inicio:0,numRegistros:10}}
 	});
+}).
+factory('PortesCliente', function($resource){
+	return $resource('data/portescliente/:id', {}, {
+ 		query: {url:'data/portescliente?inicio=:inicio&numRegistros=:numRegistros',method:'GET', params:{inicio:0,numRegistros:10}}
+	});
 });
+
+
 
 function alert(msg){
 	$( "<div title='Sistema'><p>"+msg+"</p></div>" ).dialog({
