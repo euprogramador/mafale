@@ -23,7 +23,7 @@ public class PorteClienteResource extends DefaultResource<PorteCliente> {
 
 	@Delete("/data/portescliente/{porteCliente.id}")
 	public void remove(@Load PorteCliente porteCliente) {
-		super.remove(porteCliente);
+//		super.remove(porteCliente);
 	}
 
 	@Post({ "/data/portescliente/{porteCliente.id}", "/data/portescliente" })

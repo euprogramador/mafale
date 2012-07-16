@@ -1,15 +1,21 @@
 package br.com.aexo.mafale.administrativo.cliente;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
 import javax.persistence.Transient;
 
 import org.hibernate.Session;
 import org.hibernate.validator.constraints.NotBlank;
 
 import br.com.aexo.util.dominio.Entidade;
+import br.com.aexo.util.exceptions.DominioException;
 
 @Entity
 public class PorteCliente extends Entidade {
@@ -26,6 +32,10 @@ public class PorteCliente extends Entidade {
 	@Transient
 	private transient final Session session;
 
+	@OneToMany
+	@JoinColumn(name="porte_id")
+	private List<Cliente> clientes = new ArrayList<Cliente>();
+	
 	public PorteCliente(Session session) {
 		this.session = session;
 	}
@@ -35,6 +45,9 @@ public class PorteCliente extends Entidade {
 	}
 
 	public void remover() {
+		if (!clientes.isEmpty())
+			throw new DominioException("Há Clientes vinculados ao porte, não é possivel remover");
+		
 		session.delete(this);
 	}
 

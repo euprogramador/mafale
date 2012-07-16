@@ -6,6 +6,7 @@ import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Projections;
 
 import br.com.aexo.util.ajax.Data;
+import br.com.aexo.util.vraptor.view.Json;
 import br.com.caelum.vraptor.Result;
 import br.com.caelum.vraptor.Validator;
 import br.com.caelum.vraptor.view.Results;
@@ -49,8 +50,7 @@ public abstract class DefaultResource<E> {
 		data.setInicio(inicio);
 		data.setNumRegistros(numRegistros);
 
-		result.use(Results.json()).withoutRoot().from(data).include("listagem")
-				.serialize();
+		result.use(Json.class).withoutRoot().from(data).include("listagem").serialize();
 	}
 
 	public void recuperar(E entidade) {
@@ -65,11 +65,6 @@ public abstract class DefaultResource<E> {
 	
 	public void salvar(E entidade) {
 		result.use(Results.json()).withoutRoot().from(entidade).serialize();
-	}
-
-	public void remove(E entidade) {
-		session.delete(entidade);
-		result.use(Results.status()).ok();
 	}
 
 }

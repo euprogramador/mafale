@@ -87,6 +87,7 @@ public class JsonDeserializer implements Deserializer{
 	 */
 	protected XStream getXStream() {
 		ReflectionProvider reflectionProvider = new Sun14ReflectionProvider(){
+			@SuppressWarnings("rawtypes")
 			@Override
 			public Object newInstance(Class type) {
 				return instatiator.instantiate(new Target(new Mirror().reflectClass(type.getName()), ""), new Parameters());

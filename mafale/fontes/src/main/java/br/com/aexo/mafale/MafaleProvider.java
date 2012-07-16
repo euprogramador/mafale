@@ -12,7 +12,6 @@ import br.com.caelum.vraptor.http.iogi.VRaptorDependencyProvider;
 import br.com.caelum.vraptor.http.iogi.VRaptorInstantiator;
 import br.com.caelum.vraptor.http.iogi.VRaptorParameterNamesProvider;
 import br.com.caelum.vraptor.ioc.spring.SpringProvider;
-import br.com.caelum.vraptor.serialization.xstream.XStreamBuilder;
 
 /**
  * Configura o sistema

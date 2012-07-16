@@ -15,8 +15,7 @@ function EdicaoTipoClienteController($scope,TiposCliente, $routeParams,$location
 		TiposCliente.save({tipoCliente:$scope.tipo},function(){
 			hideModal();
 			alert("Tipo salvo com sucesso");
-			//$location.path('/listagemTipoCliente/1');
-			$("#menu-visualizarTipoCliente").click();
+			$location.path('/listagemTipoCliente/1');
 		},errorHandler);
 	};
 }

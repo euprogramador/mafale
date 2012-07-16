@@ -13,9 +13,9 @@
 	<div class="content-box-content">
 
 		<div class="tab-content default-tab" id="tab1">
-			<!-- This is the target div. id must match the href of this div's tab -->
+			
+		<a href="#/edicaoTipoCliente/novo" class="button">Novo</a>
 			<table>
-
 				<thead>
 					<tr>
 						<th>Descrição</th>
@@ -27,7 +27,9 @@
 				<tfoot>
 					<tr>
 						<td colspan="6">
-							
+							<div ng-show="paginacao.totalRegistros == 0">
+								Nenhum registro encontrado
+							</div>
 							<div class="pagination">
 								<a href="#/listagemTipoCliente/{{paginacao.primeiro}}">&laquo; Primeiro</a> 
 								<a href="#/listagemTipoCliente/{{paginacao.anterior}}">&laquo; Anterior</a> 

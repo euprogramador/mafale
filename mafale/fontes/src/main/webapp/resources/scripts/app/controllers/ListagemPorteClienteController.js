@@ -1,4 +1,5 @@
 function ListagemPorteClienteController($scope, PortesCliente, $routeParams){
+	
 	$scope.paginacao = montarPaginador(function(inicio,numRegistros){
 		showModal();
 		PortesCliente.query({'inicio':inicio,'numRegistros':numRegistros},function(data){

@@ -17,7 +17,7 @@ $(document).ready(function(){
 		$("#main-nav li ul li a").click(function(e){
 			$("#main-nav li ul li a").removeClass("current");
 			$(this).parent().siblings().find("ul").slideUp("normal");
-			$(this).addClass('current');
+//			$(this).addClass('current');
 		});
 		
 		

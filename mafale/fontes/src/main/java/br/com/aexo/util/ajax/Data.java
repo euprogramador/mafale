@@ -2,8 +2,15 @@ package br.com.aexo.util.ajax;
 
 import java.util.List;
 
-public class Data<E> {
+import br.com.aexo.util.vraptor.xstream.XstreamProcessAnnotation;
 
+public class Data<E> {
+	
+	/**
+	 * criado apenas para fazer a recursão das anotações da listagem
+	 */
+	
+	@XstreamProcessAnnotation
 	private List<E> listagem;
 	private Long contagem;
 	private Integer inicio;
@@ -11,6 +18,7 @@ public class Data<E> {
 	public List<E> getListagem() {
 		return listagem;
 	}
+	
 	public void setListagem(List<E> listagem) {
 		this.listagem = listagem;
 	}
