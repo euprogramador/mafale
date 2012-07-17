@@ -49,6 +49,8 @@ function EdicaoClienteController($scope,Clientes,PortesCliente,TiposCliente, $ro
 }
 
 function configureValue(field,target,list){
+	if (!target)
+		return null;
 	for (t in list){
 		if (list[t][field]==target[field])
 			return list[t];

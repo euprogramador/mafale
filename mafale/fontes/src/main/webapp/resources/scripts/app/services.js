@@ -1,3 +1,4 @@
+
 angular.module('mafaleServices', ['ngResource']).
 factory('TiposCliente', function($resource){
 	return $resource('data/tiposcliente/:id', {}, {
@@ -14,6 +15,8 @@ factory('Clientes', function($resource){
  		query: {url:'data/clientes?inicio=:inicio&numRegistros=:numRegistros',method:'GET', params:{inicio:0,numRegistros:10}}
 	});
 });
+
+
 
 
 
@@ -135,3 +138,5 @@ function montarPaginador(aoPaginarHandler){
 	
 	return paginacao;
 }
+
+

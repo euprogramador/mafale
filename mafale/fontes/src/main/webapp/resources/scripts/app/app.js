@@ -10,4 +10,3 @@ angular.module('mafale', ['mafaleServices']).
       when('/edicaoCliente/:id', {templateUrl: 'resources/partials/edicaoCliente.html',   controller: EdicaoClienteController}).
       otherwise({redirectTo: '/home'});
 }]);
-
