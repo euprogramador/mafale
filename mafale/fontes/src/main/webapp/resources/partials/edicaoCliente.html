@@ -1,0 +1,88 @@
+<div class="content-box">
+	<div class="content-box-header">
+		<h3>Porte do Cliente</h3>
+		<div class="clear"></div>
+	</div>
+	<div class="content-box-content">
+		<form>
+			<fieldset>
+				<p>
+					<label>CNPJ</label> 
+					<input class="text-input small-input cnpj" type="text" ng-model="cliente.cnpj" id="inputCNPJ"/> 
+					<span class="input-notification error hidden png_bg" for="inputCNPJ" id="cnpj"></span>
+				</p>
+				<p>
+					<label>Razão Social</label> 
+					<input class="text-input large-input" type="text" ng-model="cliente.razaoSocial" id="inputRazaoSocial"/> 
+					<span class="input-notification error hidden png_bg" for="inputRazaoSocial" id="razaoSocial"></span>
+				</p>
+				<p>
+					<label>Endereço</label> 
+					<input class="text-input large-input" type="text" ng-model="cliente.endereco" id="inputEndereco"/> 
+					<span class="input-notification error hidden png_bg" for="inputEndereco" id="endereco"></span>
+				</p>
+				<p class="column-left">
+					<label>Bairro</label> 
+					<input class="text-input medium-input" type="text" ng-model="cliente.bairro" id="inputBairro"/> 
+					<span class="input-notification error hidden png_bg" for="inputBairro" id="bairro"></span>
+				</p>
+				<p class="column-left">
+					<label>Cidade</label> 
+					<input class="text-input medium-input" type="text" ng-model="cliente.cidade" id="inputCidade"/> 
+					<span class="input-notification error hidden png_bg" for="inputCidade" id="cidade"></span>
+				</p>
+				<p class="column-left">
+					<label>Estado</label> 
+					<input class="text-input medium-input" type="text" ng-model="cliente.estado" id="inputEstado"/> 
+					<span class="input-notification error hidden png_bg" for="inputEstado" id="estado"></span>
+				</p>
+				<p class="column-left">
+					<label>CEP</label> 
+					<input class="text-input medium-input" type="text" ng-model="cliente.cep" id="inputCEP"/> 
+					<span class="input-notification error hidden png_bg" for="inputCEP" id="cep"></span>
+				</p>
+				<p>
+					<label>Contato</label> 
+					<input class="text-input large-input" type="text" ng-model="cliente.contato" id="inputContato"/> 
+					<span class="input-notification error hidden png_bg" for="inputContato" id="contato"></span>
+				</p>
+				<p class="column-left">
+					<label>Telefone 1</label> 
+					<input class="text-input medium-input" type="text" ng-model="cliente.telefone1" id="inputTelefone1"/> 
+					<span class="input-notification error hidden png_bg" for="inputTelefone1" id="telefone1"></span>
+				</p>
+				<p class="column-left">
+					<label>Telefone 2</label> 
+					<input class="text-input medium-input" type="text" ng-model="cliente.telefone2" id="inputTelefone2"/> 
+					<span class="input-notification error hidden png_bg" for="inputTelefone2" id="telefone2"></span>
+				</p>
+				<p>
+					<label>Endereço e-mail</label> 
+					<input class="text-input large-input" type="text" ng-model="cliente.email" id="inputEmail"/> 
+					<span class="input-notification error hidden png_bg" for="inputEmail" id="email"></span>
+				</p>
+				
+				<p  class="column-left">
+					<label>Porte</label>
+					<select ng-model="cliente.porte" ng-options="p.descricao for p in portes" id="inputPorte">
+          				<option value=""></option>
+        			</select>
+					<span class="input-notification error hidden png_bg" for="inputPorte" id="porte"></span>
+				</p>
+				<p>
+					<label>Tipo</label>
+					<select ng-model="cliente.tipo" ng-options="t.descricao for t in tipos" id="inputTipo">
+          				<option value=""></option>
+        			</select>
+					<span class="input-notification error hidden png_bg" for="inputTipo" id="tipo"></span>
+				</p>
+				
+				<p>
+					<a href="#/listagemCliente/1" class="button">Voltar</a> 
+					<a class="button" ng-click="salvar()">Salvar</a>
+				</p>
+			</fieldset>
+			<div class="clear"></div>
+		</form>
+	</div>
+</div>

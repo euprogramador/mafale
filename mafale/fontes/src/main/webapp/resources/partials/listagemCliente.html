@@ -1,0 +1,71 @@
+<div class="content-box">
+	<!-- Start Content Box -->
+
+	<div class="content-box-header">
+
+		<h3>Listagem de clientes</h3>
+		
+		<div class="clear"></div>
+
+	</div>
+	<!-- End .content-box-header -->
+
+	<div class="content-box-content">
+
+		<div class="tab-content default-tab" id="tab1">
+			
+			<a href="#/edicaoCliente/novo" class="button">Novo</a>
+			
+			<table>
+
+				<thead>
+					<tr>
+						<th>Razão Social</th>
+						<th>Contato</th>
+						<th>Telefones</th>
+						<th>Opções</th>
+					</tr>
+
+				</thead>
+
+				<tfoot>
+					<tr>
+						<td colspan="4">
+							<div ng-show="paginacao.totalRegistros == 0">
+								Nenhum registro encontrado
+							</div>
+							<div class="pagination">
+								<a href="#/listagemCliente/{{paginacao.primeiro}}">&laquo; Primeiro</a> 
+								<a href="#/listagemCliente/{{paginacao.anterior}}">&laquo; Anterior</a> 
+								<span ng-repeat="pagina in paginacao.paginas"> 
+									<a class="number {{pagina.atual}}" href="#/listagemCliente/{{pagina.numero}}"> {{pagina.numero}}</a>
+								</span> 
+								<a href="#/listagemCliente/{{paginacao.proximo}}">Próximo &raquo;</a>
+								<a href="#/listagemCliente/{{paginacao.ultimo}}">Último &raquo;</a> 
+								Exibindo {{paginacao.contagemRegistros}} de {{paginacao.totalRegistros}}
+							</div>
+							
+							<div class="clear"></div>
+						</td>
+					</tr>
+				</tfoot>
+
+				<tbody>
+					<tr ng-repeat="cliente in resultado.listagem">
+						<td>{{cliente.razaoSocial}}</td>
+						<td>{{cliente.contato}}</td>
+						<td>{{cliente.telefone1}} {{cliente.telefone2}}</td>
+						<td>
+							<!-- Icons --> 
+							<a href="#/edicaoCliente/{{cliente.id}}" title="Editar"><img src="resources/images/icons/pencil.png" alt="Editar" /></a> 
+							<a ng-click="remover(cliente)" title="Remover"><img src="resources/images/icons/cross.png" alt="Remover" /></a>
+						</td>
+					</tr>
+				</tbody>
+
+			</table>
+
+		</div>
+		<!-- End #tab1 -->
+	</div>
+</div>

@@ -8,6 +8,11 @@ factory('PortesCliente', function($resource){
 	return $resource('data/portescliente/:id', {}, {
  		query: {url:'data/portescliente?inicio=:inicio&numRegistros=:numRegistros',method:'GET', params:{inicio:0,numRegistros:10}}
 	});
+}).
+factory('Clientes', function($resource){
+	return $resource('data/clientes/:id', {}, {
+ 		query: {url:'data/clientes?inicio=:inicio&numRegistros=:numRegistros',method:'GET', params:{inicio:0,numRegistros:10}}
+	});
 });
 
 

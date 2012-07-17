@@ -37,6 +37,7 @@ import com.thoughtworks.xstream.io.HierarchicalStreamWriter;
 
 /**
  * A SerializerBuilder based on XStream
+ * 
  * @author Lucas Cavalcanti
  * @since 3.0.2
  */
@@ -59,14 +60,8 @@ public class XStreamSerializer implements SerializerBuilder {
 	}
 
 	private boolean isPrimitive(Class<?> type) {
-		return type.isPrimitive()
-			|| type.isEnum()
-			|| Number.class.isAssignableFrom(type)
-			|| type.equals(String.class)
-			|| Date.class.isAssignableFrom(type)
-			|| Calendar.class.isAssignableFrom(type)
-			|| Boolean.class.equals(type)
-			|| Character.class.equals(type);
+		return type.isPrimitive() || type.isEnum() || Number.class.isAssignableFrom(type) || type.equals(String.class) || Date.class.isAssignableFrom(type) || Calendar.class.isAssignableFrom(type)
+				|| Boolean.class.equals(type) || Character.class.equals(type);
 	}
 
 	public Serializer exclude(String... names) {
@@ -81,7 +76,7 @@ public class XStreamSerializer implements SerializerBuilder {
 
 	private String getNameFor(String name) {
 		String[] path = name.split("\\.");
-		return path[path.length-1];
+		return path[path.length - 1];
 	}
 
 	private Set<Class<?>> getParentTypesFor(String name) {
@@ -103,20 +98,20 @@ public class XStreamSerializer implements SerializerBuilder {
 			type = getActualType(new Mirror().on(type).reflect().field(path[i]).getGenericType());
 		}
 		Set<Class<?>> types = Sets.newHashSet();
-		while(type != Object.class) {
+		while (type != Object.class) {
 			types.add(type);
 			type = type.getSuperclass();
 		}
 		return types;
 	}
 
-	private void preConfigure(Object obj,String alias) {
+	private void preConfigure(Object obj, String alias) {
 		checkNotNull(obj, "You can't serialize null objects");
 
 		xstream.processAnnotations(obj.getClass());
 
 		processRecursiveAnnotations(obj);
-		
+
 		rootClass = initializer.getActualClass(obj);
 		if (alias == null && initializer.isProxy(obj.getClass())) {
 			alias = extractor.nameFor(rootClass);
@@ -130,26 +125,26 @@ public class XStreamSerializer implements SerializerBuilder {
 	private void processRecursiveAnnotations(Object obj) {
 
 		List<Field> fields = new Mirror().on(obj.getClass()).reflectAll().fieldsMatching(new Matcher<Field>() {
-			
+
 			@Override
 			public boolean accepts(Field field) {
 				return field.isAnnotationPresent(XstreamProcessAnnotation.class);
 			}
 		});
-		
-		for (Field field : fields){
+
+		for (Field field : fields) {
 			Class type = field.getType();
-			if (Collection.class.isAssignableFrom(field.getType())){
+			if (Collection.class.isAssignableFrom(field.getType())) {
 				Object value = new Mirror().on(obj).get().field(field);
-				List list = new ArrayList((Collection)value);
-				if (!list.isEmpty()){
+				List list = new ArrayList((Collection) value);
+				if (!list.isEmpty()) {
 					type = list.get(0).getClass();
 				}
 			}
 			xstream.processAnnotations(type);
 			processRecursiveAnnotations(type);
 		}
-	
+
 	}
 
 	private void setRoot(Object obj) {
@@ -166,7 +161,7 @@ public class XStreamSerializer implements SerializerBuilder {
 	private Collection<Object> normalizeList(Object obj) {
 		Collection<Object> list;
 		if (hasDefaultConverter()) {
-			list = new ArrayList<Object>((Collection<?>)obj);
+			list = new ArrayList<Object>((Collection<?>) obj);
 		} else {
 			list = (Collection<Object>) obj;
 		}
@@ -195,7 +190,6 @@ public class XStreamSerializer implements SerializerBuilder {
 		return this;
 	}
 
-	
 	public <T> Serializer from(T object) {
 		preConfigure(object, null);
 		return this;
@@ -225,7 +219,10 @@ public class XStreamSerializer implements SerializerBuilder {
 				Set<Class<?>> parentTypes = getParentTypesFor(field);
 				String fieldName = getNameFor(field);
 				for (Class<?> parentType : parentTypes) {
-					Type genericType = new Mirror().on(parentType).reflect().field(fieldName).getGenericType();
+					Field fld = new Mirror().on(parentType).reflect().field(fieldName);
+					if (fld== null)
+						continue;
+					Type genericType = fld.getGenericType();
 					Class<?> fieldType = getActualType(genericType);
 
 					if (!excludes.containsKey(fieldType)) {
@@ -261,16 +258,19 @@ public class XStreamSerializer implements SerializerBuilder {
 	private boolean isCollection(Type type) {
 		if (type instanceof ParameterizedType) {
 			ParameterizedType ptype = (ParameterizedType) type;
-			return Collection.class.isAssignableFrom((Class<?>) ptype.getRawType())
-			  || Map.class.isAssignableFrom((Class<?>) ptype.getRawType());
+			return Collection.class.isAssignableFrom((Class<?>) ptype.getRawType()) || Map.class.isAssignableFrom((Class<?>) ptype.getRawType());
 		}
 		return Collection.class.isAssignableFrom((Class<?>) type);
 	}
 
 	public void serialize() {
+		recursive();
 		for (Entry<Class<?>, String> exclude : excludes.entries()) {
 			xstream.omitField(exclude.getKey(), exclude.getValue());
 		}
+		
+		
+		
 		registerProxyInitializer();
 		xstream.toXML(root, writer);
 	}
@@ -287,13 +287,11 @@ public class XStreamSerializer implements SerializerBuilder {
 				return initializer.isProxy(clazz);
 			}
 
-			public Object unmarshal(HierarchicalStreamReader reader,
-					UnmarshallingContext context) {
+			public Object unmarshal(HierarchicalStreamReader reader, UnmarshallingContext context) {
 				throw new AssertionError();
 			}
 
-			public void marshal(Object value, HierarchicalStreamWriter writer,
-					MarshallingContext context) {
+			public void marshal(Object value, HierarchicalStreamWriter writer, MarshallingContext context) {
 				Converter converter = xstream.getConverterLookup().lookupConverterForType(initializer.getActualClass(value));
 				initializer.initialize(value);
 				converter.marshal(value, writer, context);

@@ -6,8 +6,14 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.Transient;
+
+import org.hibernate.Session;
+import org.hibernate.validator.constraints.Email;
+import org.hibernate.validator.constraints.NotBlank;
 
 import br.com.aexo.util.dominio.Entidade;
+import br.com.caelum.stella.bean.validation.CNPJ;
 
 @Entity
 public class Cliente extends Entidade {
@@ -18,7 +24,30 @@ public class Cliente extends Entidade {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
+	@NotBlank(message = "Informe a razão Social")
 	private String razaoSocial;
+	@NotBlank(message = "Informe o CNPJ")
+	@CNPJ(formatted=true, message = "CNPJ inválido")
+	private String cnpj;
+	@NotBlank(message = "Informe o endereço")
+	private String endereco;
+	@NotBlank(message = "Informe o bairro")
+	private String bairro;
+	@NotBlank(message = "Informe a cidade")
+	private String cidade;
+	@NotBlank(message = "Informe o estado")
+	private String estado;
+	@NotBlank(message = "Informe o cep")
+	private String cep;
+	@NotBlank(message = "Informe o contato")
+	private String contato;
+	@NotBlank(message = "Informe o telefone")
+	private String telefone1;
+	private String telefone2;
+
+	@NotBlank(message = "Informe o email")
+	@Email(message = "Email informado está inválido")
+	private String email;
 
 	@ManyToOne
 	@JoinColumn(name = "porte_id")
@@ -27,6 +56,45 @@ public class Cliente extends Entidade {
 	@ManyToOne
 	@JoinColumn(name = "tipo_id")
 	private TipoCliente tipo;
+
+	@Transient
+	private transient final Session session;
+
+	public Cliente(Session session) {
+		this.session = session;
+	}
+
+	@Override
+	public void remover() {
+		session.delete(this);
+	}
+
+	@Override
+	public void salvar() {
+		session.saveOrUpdate(this);
+	}
+
+	@Override
+	public Entidade carregar() {
+		return (Entidade) session.get(Cliente.class, id);
+	}
+
+	public void preencherCom(Entidade entidade) {
+		Cliente me = (Cliente) entidade;
+		razaoSocial = me.getRazaoSocial();
+		cnpj = me.getCnpj();
+		endereco = me.getEndereco();
+		bairro = me.getBairro();
+		cidade = me.getCidade();
+		estado = me.getEstado();
+		cep = me.getCep();
+		contato = me.getContato();
+		telefone1 = me.getTelefone1();
+		telefone2 = me.getTelefone2();
+		email = me.getEmail();
+		porte = me.getPorte()!=null && me.getPorte().getId()!=null ? me.getPorte() : null;
+		tipo = me.getTipo()!=null && me.getTipo().getId()!=null ? me.getTipo() : null;
+	}
 
 	public Long getId() {
 		return id;
@@ -60,26 +128,84 @@ public class Cliente extends Entidade {
 		this.tipo = tipo;
 	}
 
-	@Override
-	public void remover() {
-		// TODO Auto-generated method stub
-
+	public String getCnpj() {
+		return cnpj;
 	}
 
-	@Override
-	public void salvar() {
-		// TODO Auto-generated method stub
-
+	public void setCnpj(String cnpj) {
+		this.cnpj = cnpj;
 	}
 
-	@Override
-	public Entidade carregar() {
-		// TODO Auto-generated method stub
-		return null;
+	public String getEndereco() {
+		return endereco;
 	}
 
-	public void preencherCom(Entidade entidade) {
+	public void setEndereco(String endereco) {
+		this.endereco = endereco;
+	}
 
+	public String getBairro() {
+		return bairro;
+	}
+
+	public void setBairro(String bairro) {
+		this.bairro = bairro;
+	}
+
+	public String getCidade() {
+		return cidade;
+	}
+
+	public void setCidade(String cidade) {
+		this.cidade = cidade;
+	}
+
+	public String getEstado() {
+		return estado;
+	}
+
+	public void setEstado(String estado) {
+		this.estado = estado;
+	}
+
+	public String getCep() {
+		return cep;
+	}
+
+	public void setCep(String cep) {
+		this.cep = cep;
+	}
+
+	public String getContato() {
+		return contato;
+	}
+
+	public void setContato(String contato) {
+		this.contato = contato;
+	}
+
+	public String getTelefone1() {
+		return telefone1;
+	}
+
+	public void setTelefone1(String telefone1) {
+		this.telefone1 = telefone1;
+	}
+
+	public String getTelefone2() {
+		return telefone2;
+	}
+
+	public void setTelefone2(String telefone2) {
+		this.telefone2 = telefone2;
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
 	}
 
 }

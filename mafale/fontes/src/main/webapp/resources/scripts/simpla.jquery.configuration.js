@@ -1,5 +1,9 @@
 $(document).ready(function(){
 	
+	
+//	$('.cnpj').mask('99.999.999/9999-99');
+	
+	
 	//Sidebar Accordion Menu:
 		
 		$("#main-nav li ul").hide(); // Hide all sub menus

@@ -6,6 +6,8 @@ angular.module('mafale', ['mafaleServices']).
       when('/edicaoTipoCliente/:id', {templateUrl: 'resources/partials/edicaoTipoCliente.html',   controller: EdicaoTipoClienteController}).
       when('/listagemPorteCliente/:pagina', {templateUrl: 'resources/partials/listagemPorteCliente.html',   controller: ListagemPorteClienteController}).
       when('/edicaoPorteCliente/:id', {templateUrl: 'resources/partials/edicaoPorteCliente.html',   controller: EdicaoPorteClienteController}).
+      when('/listagemCliente/:pagina', {templateUrl: 'resources/partials/listagemCliente.html',   controller: ListagemClienteController}).
+      when('/edicaoCliente/:id', {templateUrl: 'resources/partials/edicaoCliente.html',   controller: EdicaoClienteController}).
       otherwise({redirectTo: '/home'});
 }]);
 
