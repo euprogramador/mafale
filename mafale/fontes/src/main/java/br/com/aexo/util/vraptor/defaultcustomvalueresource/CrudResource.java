@@ -5,61 +5,70 @@ import org.hibernate.Session;
 import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Projections;
 
-import br.com.aexo.mafale.administrativo.cliente.TipoCliente;
 import br.com.aexo.util.ajax.Data;
 import br.com.aexo.util.dominio.Entidade;
 import br.com.aexo.util.exceptions.DominioException;
-import br.com.aexo.util.hibernate.Load;
 import br.com.aexo.util.vraptor.view.Json;
 import br.com.aexo.util.vraptor.view.Status;
-import br.com.caelum.vraptor.Consumes;
 import br.com.caelum.vraptor.Result;
 import br.com.caelum.vraptor.Validator;
-import br.com.caelum.vraptor.ioc.Component;
 import br.com.caelum.vraptor.view.Results;
 
-@Component
 public class CrudResource<E extends Entidade> {
 
 	private final Result result;
 	private final Validator validator;
 	private final Session session;
+	private final Class<? extends Entidade> classe;
 
-	public CrudResource(Session session, Result result, Validator validator) {
+	public CrudResource(Session session, Result result, Validator validator, Class<? extends Entidade> classe) {
 		this.session = session;
 		this.result = result;
 		this.validator = validator;
+		this.classe = classe;
 	}
 
-	public void remove(@Load E entity) {
+	@SuppressWarnings("unchecked")
+	public void remover(E entidade) {
+		entidade = (E) entidade.carregar();
+		if (entidade==null){
+			result.notFound();
+			return;
+		}
+		
 		try {
-			entity.remover();
+			entidade.remover();
 			result.use(Results.status()).ok();
 		} catch (DominioException e) {
 			result.use(Status.class).badRequest(e.getMessage());
 		}
 	}
 
-	@Consumes
-	public void salvar(E entity) {
-		validator.validate(entity);
-		validator.onErrorSendBadRequest();
-		if (validator.hasErrors())
-			return;
 
-		if (entity.getId() == null) {
-			entity.salvar();
-			result.use(Results.json()).withoutRoot().from(entity).serialize();
-			return;
+	public void salvar(E entidade) {
+		try {
+			validator.validate(entidade);
+			validator.onErrorSendBadRequest();
+			if (validator.hasErrors())
+				return;
+
+			if (entidade.getId() == null) {
+				entidade.salvar();
+				result.use(Results.json()).withoutRoot().from(entidade).serialize();
+				return;
+			}
+
+			Entidade db = entidade.carregar();
+			db.preencherCom(entidade);
+			db.salvar();
+			result.use(Results.json()).withoutRoot().from(db).serialize();
+		} catch (DominioException e) {
+			result.use(Status.class).badRequest(e.getMessage());
 		}
-
-		Entidade db = entity.carregar();
-		db.salvar();
-		result.use(Results.json()).withoutRoot().from(db).serialize();
 	}
 
 	@SuppressWarnings("unchecked")
-	public void listar(String classe,Order order,Integer inicio, Integer numRegistros) {
+	public void listar(Order order, Integer inicio, Integer numRegistros) {
 		Data<E> data = new Data<E>();
 
 		Criteria criteria = session.createCriteria(classe);
@@ -83,8 +92,14 @@ public class CrudResource<E extends Entidade> {
 		result.use(Json.class).withoutRoot().from(data).include("listagem").serialize();
 	}
 
-	public void recuperar(@Load TipoCliente tipoCliente) {
-		result.use(Results.json()).withoutRoot().from(tipoCliente).serialize();
+	@SuppressWarnings("unchecked")
+	public void recuperar(Long id) {
+		E entidade = (E) session.get(classe, id);
+		if (entidade == null) {
+			result.notFound();
+			return;
+		}
+		result.use(Json.class).withoutRoot().from(entidade).serialize();
 	}
 
 }

@@ -2,6 +2,7 @@ package br.com.aexo.mafale;
 
 import br.com.aexo.util.hibernate.interceptors.HibernateInterceptors;
 import br.com.aexo.util.vraptor.SessionFactoryCreator;
+import br.com.aexo.util.vraptor.defaultcustomvalueresource.CrudService;
 import br.com.caelum.iogi.Instantiator;
 import br.com.caelum.iogi.spi.DependencyProvider;
 import br.com.caelum.iogi.spi.ParameterNamesProvider;
@@ -29,7 +30,7 @@ public class MafaleProvider extends SpringProvider {
 		registry.register(ParameterNamesProvider.class, VRaptorParameterNamesProvider.class);
 		registry.register(Instantiator.class, VRaptorInstantiator.class);
 		registry.register(HibernateInterceptors.class, MafaleHibernateInterceptors.class);
-		
+		registry.register(CrudService.class, CustomCrudService.class);
 	}
 
 }

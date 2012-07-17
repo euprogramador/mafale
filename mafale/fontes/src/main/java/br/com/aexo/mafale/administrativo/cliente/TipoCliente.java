@@ -59,6 +59,11 @@ public class TipoCliente extends Entidade {
 		return (TipoCliente) session.get(TipoCliente.class, id);
 	}
 
+	public void preencherCom(Entidade entidade) {
+		TipoCliente me = (TipoCliente) entidade;
+		descricao = me.getDescricao();
+	}
+	
 	public Long getId() {
 		return id;
 	}

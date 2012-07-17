@@ -25,6 +25,8 @@ public abstract class Entidade implements Serializable {
 	public abstract void salvar();
 	
 	public abstract Entidade carregar();
+
+	public abstract void preencherCom(Entidade entidade);
 	
 	/**
 	 * hashcode pelo id

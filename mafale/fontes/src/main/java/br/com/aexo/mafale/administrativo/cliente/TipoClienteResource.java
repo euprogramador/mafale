@@ -16,7 +16,7 @@ import br.com.caelum.vraptor.Result;
 import br.com.caelum.vraptor.Validator;
 import br.com.caelum.vraptor.view.Results;
 
-@Resource
+//@Resource
 public class TipoClienteResource extends DefaultResource<TipoCliente> {
 
 	private final Result result;
@@ -26,7 +26,7 @@ public class TipoClienteResource extends DefaultResource<TipoCliente> {
 		this.result = result;
 	}
 
-	@Delete("/data/tiposcliente/{tipoCliente.id}")
+//	@Delete("/data/tiposcliente/{tipoCliente.id}")
 	public void remove(@Load TipoCliente tipoCliente) {
 		try {
 			tipoCliente.remover();

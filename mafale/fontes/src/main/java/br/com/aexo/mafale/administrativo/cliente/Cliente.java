@@ -63,19 +63,23 @@ public class Cliente extends Entidade {
 	@Override
 	public void remover() {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void salvar() {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public Entidade carregar() {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+	public void preencherCom(Entidade entidade) {
+
 	}
 
 }

@@ -28,6 +28,13 @@
 	</build>
 
 	<dependencies>
+		<dependency>
+			<groupId>javax.inject</groupId>
+			<artifactId>javax.inject</artifactId>
+			<version>1</version>
+		</dependency>
+
+
 		<!-- componente utilizado para fazer request na anvisa -->
 		<dependency>
 			<groupId>org.apache.httpcomponents</groupId>

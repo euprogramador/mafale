@@ -14,6 +14,8 @@ import javax.persistence.Transient;
 import org.hibernate.Session;
 import org.hibernate.validator.constraints.NotBlank;
 
+import com.thoughtworks.xstream.annotations.XStreamOmitField;
+
 import br.com.aexo.util.dominio.Entidade;
 import br.com.aexo.util.exceptions.DominioException;
 
@@ -32,10 +34,11 @@ public class PorteCliente extends Entidade {
 	@Transient
 	private transient final Session session;
 
+	@XStreamOmitField
 	@OneToMany
-	@JoinColumn(name="porte_id")
+	@JoinColumn(name = "porte_id")
 	private List<Cliente> clientes = new ArrayList<Cliente>();
-	
+
 	public PorteCliente(Session session) {
 		this.session = session;
 	}
@@ -47,8 +50,13 @@ public class PorteCliente extends Entidade {
 	public void remover() {
 		if (!clientes.isEmpty())
 			throw new DominioException("Há Clientes vinculados ao porte, não é possivel remover");
-		
+
 		session.delete(this);
+	}
+
+	public void preencherCom(Entidade entidade) {
+		PorteCliente me  = (PorteCliente) entidade;
+		descricao = me.getDescricao();
 	}
 
 	public PorteCliente carregar() {

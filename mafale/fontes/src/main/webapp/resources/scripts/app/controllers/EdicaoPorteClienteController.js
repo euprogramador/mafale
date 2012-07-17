@@ -12,7 +12,7 @@ function EdicaoPorteClienteController($scope,PortesCliente, $routeParams,$locati
 		
 	$scope.salvar = function(){
 		showModal();
-		PortesCliente.save({porteCliente:$scope.porte},function(){
+		PortesCliente.save({entidade:$scope.porte},function(){
 			hideModal();
 			alert("Porte do cliente salvo com sucesso");
 			$location.path('/listagemPorteCliente/1');

@@ -12,7 +12,7 @@ function EdicaoTipoClienteController($scope,TiposCliente, $routeParams,$location
 		
 	$scope.salvar = function(){
 		showModal();
-		TiposCliente.save({tipoCliente:$scope.tipo},function(){
+		TiposCliente.save({entidade:$scope.tipo},function(){
 			hideModal();
 			alert("Tipo salvo com sucesso");
 			$location.path('/listagemTipoCliente/1');
