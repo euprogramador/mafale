@@ -27,7 +27,7 @@ public class Cliente extends Entidade {
 	@NotBlank(message = "Informe a razão Social")
 	private String razaoSocial;
 	@NotBlank(message = "Informe o CNPJ")
-	@CNPJ(formatted=true, message = "CNPJ inválido")
+	@CNPJ( message = "CNPJ inválido")
 	private String cnpj;
 	@NotBlank(message = "Informe o endereço")
 	private String endereco;
