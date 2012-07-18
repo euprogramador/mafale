@@ -8,9 +8,14 @@ angular.module('mafale', ['mafaleServices']).
       when('/edicaoPorteCliente/:id', {templateUrl: 'resources/partials/edicaoPorteCliente.html',   controller: EdicaoPorteClienteController}).
       when('/listagemCliente/:pagina', {templateUrl: 'resources/partials/listagemCliente.html',   controller: ListagemClienteController}).
       when('/edicaoCliente/:id', {templateUrl: 'resources/partials/edicaoCliente.html',   controller: EdicaoClienteController}).
+      when('/listagemTipoServico/:pagina', {templateUrl: 'resources/partials/listagemTipoServico.html',   controller: ListagemTipoServicoController}).
+      when('/edicaoTipoServico/:id', {templateUrl: 'resources/partials/edicaoTipoServico.html',   controller: EdicaoTipoServicoController}).
+      when('/listagemAssuntoPeticao/:pagina', {templateUrl: 'resources/partials/listagemAssuntoPeticao.html',   controller: ListagemAssuntoPeticaoController}).
+      when('/edicaoAssuntoPeticao/:id', {templateUrl: 'resources/partials/edicaoAssuntoPeticao.html',   controller: EdicaoAssuntoPeticaoController}).
       otherwise({redirectTo: '/home'});
 }])
 
+//directiva para mascaras
 .directive('uiMask', function() {
     return {
         require: 'ngModel',
@@ -63,20 +68,3 @@ angular.module('mafale', ['mafaleServices']).
         }
     };
 });
-
-
-
-//
-//
-//
-//function (value) { this.$viewValue = value; 
-//// change to dirty 
-//if (this.$pristine) { this.$dirty = true; this.$pristine = false;
-//$element.removeClass(PRISTINE_CLASS).addClass(DIRTY_CLASS); parentForm.$setDirty(); } 
-//forEach(this.$parsers, function(fn) { value = fn(value); }); if (this.$modelValue !== value) 
-//{ this.$modelValue = value; 
-//ngModelSet($scope, value); 
-//forEach(this.$viewChangeListeners, function(listener) { try { listener(); }
-//catch(e) { $exceptionHandler(e); } }) 
-//} }
-//}

@@ -6,17 +6,13 @@
 <title>Mafale</title>
 <!--CSS-->
 <!-- Reset Stylesheet -->
-<link rel="stylesheet" href="resources/css/reset.css" type="text/css"
-	media="screen" />
+<link rel="stylesheet" href="resources/css/reset.css" type="text/css" media="screen" />
 <!-- Main Stylesheet -->
-<link rel="stylesheet" href="resources/css/style.css" type="text/css"
-	media="screen" />
+<link rel="stylesheet" href="resources/css/style.css" type="text/css" media="screen" />
 <!-- Invalid Stylesheet. This makes stuff look pretty. Remove it if you want the CSS completely valid -->
-<link rel="stylesheet" href="resources/css/invalid.css" type="text/css"
-	media="screen" />
-	
-	<link rel="stylesheet" href="resources/css/angular-ui.css" type="text/css"
-	media="screen" />
+<link rel="stylesheet" href="resources/css/invalid.css" type="text/css" media="screen" />
+
+<link rel="stylesheet" href="resources/css/angular-ui.css" type="text/css" media="screen" />
 
 
 
@@ -32,18 +28,13 @@
 		<![endif]-->
 <!--                       Javascripts                       -->
 <!-- jQuery -->
-<script type="text/javascript"
-	src="resources/scripts/jquery-1.7.2.min.js"></script>
+<script type="text/javascript" src="resources/scripts/jquery-1.7.2.min.js"></script>
 <script type="text/javascript" src="resources/scripts/jquery.blockUI.js"></script>
-<link type="text/css"
-	href="resources/css/smoothness/jquery-ui-1.8.21.custom.css"
-	rel="stylesheet" />
-<script type="text/javascript"
-	src="resources/scripts/jquery-ui-1.8.21.custom.min.js"></script>
+<link type="text/css" href="resources/css/smoothness/jquery-ui-1.8.21.custom.css" rel="stylesheet" />
+<script type="text/javascript" src="resources/scripts/jquery-ui-1.8.21.custom.min.js"></script>
 
 <!-- jQuery Configuration -->
-<script type="text/javascript"
-	src="resources/scripts/simpla.jquery.configuration.js"></script>
+<script type="text/javascript" src="resources/scripts/simpla.jquery.configuration.js"></script>
 <!-- Facebox jQuery Plugin -->
 <script type="text/javascript" src="resources/scripts/facebox.js"></script>
 <!-- jQuery WYSIWYG Plugin -->
@@ -62,14 +53,14 @@
 			</script>
 		<![endif]-->
 
-<script type="text/javascript"
-	src="resources/scripts/app/lib/angular.js"></script>
-	<script type="text/javascript"
-	src="resources/scripts/angular-ui.js"></script>
-<script type="text/javascript"
-	src="resources/scripts/app/lib/angular-resource.js"></script>
-<script type="text/javascript"
-	src="resources/scripts/app/controllers/HomeController.js"></script>
+<script type="text/javascript" src="resources/scripts/app/lib/angular.js"></script>
+<script type="text/javascript" src="resources/scripts/angular-ui.js"></script>
+<script type="text/javascript" src="resources/scripts/app/lib/angular-resource.js"></script>
+<script type="text/javascript" src="resources/scripts/app/controllers/HomeController.js"></script>
+<script type="text/javascript" src="resources/scripts/app/controllers/ListagemTipoServicoController.js"></script>
+<script type="text/javascript" src="resources/scripts/app/controllers/EdicaoTipoServicoController.js"></script>
+<script type="text/javascript" src="resources/scripts/app/controllers/ListagemAssuntoPeticaoController.js"></script>
+<script type="text/javascript" src="resources/scripts/app/controllers/EdicaoAssuntoPeticaoController.js"></script>
 <script type="text/javascript" src="resources/scripts/app/controllers/ListagemTipoClienteController.js"></script>
 <script type="text/javascript" src="resources/scripts/app/controllers/EdicaoTipoClienteController.js"></script>
 <script type="text/javascript" src="resources/scripts/app/controllers/ListagemPorteClienteController.js"></script>
@@ -101,23 +92,15 @@
 
 				<!-- Sidebar Profile links -->
 				<div id="profile-links">
-					Olá, <a href="#" title="Editar minhas preferências">Paulo</a>, você
-					tem <a href="#messages" rel="modal" title="3 Messages">3
-						lembretes</a><br /> <br /> <a href="#" title="Logout do sistema">Sair
+					Olá, <a href="#" title="Editar minhas preferências">Paulo</a>, você tem <a href="#messages" rel="modal" title="3 Messages">3 lembretes</a><br /> <br /> <a href="#" title="Logout do sistema">Sair
 						do Sistema</a>
 				</div>
 
 				<ul id="main-nav">
 
-					<li><a href="#/home" class="nav-top-item no-submenu current">
-							Dashboard </a></li>
+					<li><a href="#/home" class="nav-top-item no-submenu current"> Dashboard </a></li>
 
-					<li><a class="nav-top-item "> Serviços </a>
-						<ul>
-							<li><a href="#">Visualizar Serviços</a></li>
-							<li><a href="#">Registrar novo serviço</a></li>
-							<li><a href="#">Manage Categories</a></li>
-						</ul></li>
+					<li><a class="nav-top-item no-submenu"> Serviços </a></li>
 
 					<li><a class="nav-top-item"> Financeiro </a>
 						<ul>
@@ -129,15 +112,13 @@
 							<li><a href="#">Emitir recibo avulso</a></li>
 						</ul></li>
 
-					<li><a id="menu-cadastro" class="nav-top-item"> Cadastros
-					</a>
+					<li><a id="menu-cadastro" class="nav-top-item"> Cadastros </a>
 						<ul>
 							<li><a href="#/listagemCliente/1">Visualizar clientes</a></li>
-							<li><a href="#/listagemTipoCliente/1">Visualizar tipos
-									de cliente</a></li>
-							<li><a href="#/listagemPorteCliente/1">Visualizar portes de
-									cliente</a></li>
-
+							<li><a href="#/listagemTipoCliente/1">Visualizar tipos de cliente</a></li>
+							<li><a href="#/listagemPorteCliente/1">Visualizar portes de cliente</a></li>
+							<li><a href="#/listagemTipoServico/1">Visualizar tipos de serviço</a></li>
+							<li><a href="#/listagemAssuntoPeticao/1">Visualizar Assuntos de petições</a></li>
 						</ul></li>
 
 					<li><a href="#" class="nav-top-item"> Lembretes </a>
@@ -168,9 +149,7 @@
 			<!-- End Notifications -->
 
 			<div id="footer">
-				<small> <!-- Remove this notice or replace it with whatever you want -->
-					&#169; Copyright 2012 Mafale | Powered by <a href="#">AEXO
-						Sistemas</a> | <a href="#">Topo</a>
+				<small> <!-- Remove this notice or replace it with whatever you want --> &#169; Copyright 2012 Mafale | Powered by <a href="#">AEXO Sistemas</a> | <a href="#">Topo</a>
 				</small>
 			</div>
 			<!-- End #footer -->

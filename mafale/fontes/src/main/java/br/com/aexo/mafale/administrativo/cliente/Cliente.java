@@ -1,18 +1,26 @@
 package br.com.aexo.mafale.administrativo.cliente;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Transient;
 
 import org.hibernate.Session;
 import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.NotBlank;
 
+import com.thoughtworks.xstream.annotations.XStreamOmitField;
+
+import br.com.aexo.mafale.administrativo.servicos.Servico;
 import br.com.aexo.util.dominio.Entidade;
+import br.com.aexo.util.exceptions.DominioException;
 import br.com.caelum.stella.bean.validation.CNPJ;
 
 @Entity
@@ -27,7 +35,7 @@ public class Cliente extends Entidade {
 	@NotBlank(message = "Informe a razão Social")
 	private String razaoSocial;
 	@NotBlank(message = "Informe o CNPJ")
-	@CNPJ( message = "CNPJ inválido")
+	@CNPJ(message = "CNPJ inválido")
 	private String cnpj;
 	@NotBlank(message = "Informe o endereço")
 	private String endereco;
@@ -57,6 +65,11 @@ public class Cliente extends Entidade {
 	@JoinColumn(name = "tipo_id")
 	private TipoCliente tipo;
 
+	@XStreamOmitField
+	@OneToMany
+	@JoinColumn(name = "cliente_id")
+	private List<Servico> servicos = new ArrayList<Servico>();
+
 	@Transient
 	private transient final Session session;
 
@@ -66,6 +79,9 @@ public class Cliente extends Entidade {
 
 	@Override
 	public void remover() {
+		if (!servicos.isEmpty())
+			throw new DominioException("Há serviços vinculados a este client, não sendo possível remover");
+		
 		session.delete(this);
 	}
 
@@ -92,8 +108,8 @@ public class Cliente extends Entidade {
 		telefone1 = me.getTelefone1();
 		telefone2 = me.getTelefone2();
 		email = me.getEmail();
-		porte = me.getPorte()!=null && me.getPorte().getId()!=null ? me.getPorte() : null;
-		tipo = me.getTipo()!=null && me.getTipo().getId()!=null ? me.getTipo() : null;
+		porte = me.getPorte() != null && me.getPorte().getId() != null ? me.getPorte() : null;
+		tipo = me.getTipo() != null && me.getTipo().getId() != null ? me.getTipo() : null;
 	}
 
 	public Long getId() {

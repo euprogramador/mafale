@@ -1,5 +1,15 @@
 
 angular.module('mafaleServices', ['ngResource']).
+factory('AssuntosPeticao', function($resource){
+	return $resource('data/assuntospeticao/:id', {}, {
+ 		query: {url:'data/assuntospeticao?inicio=:inicio&numRegistros=:numRegistros',method:'GET', params:{inicio:0,numRegistros:10}}
+	});
+}).
+factory('TiposServico', function($resource){
+	return $resource('data/tiposservico/:id', {}, {
+ 		query: {url:'data/tiposservico?inicio=:inicio&numRegistros=:numRegistros',method:'GET', params:{inicio:0,numRegistros:10}}
+	});
+}).
 factory('TiposCliente', function($resource){
 	return $resource('data/tiposcliente/:id', {}, {
  		query: {url:'data/tiposcliente?inicio=:inicio&numRegistros=:numRegistros',method:'GET', params:{inicio:0,numRegistros:10}}
