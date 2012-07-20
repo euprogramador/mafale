@@ -14,6 +14,7 @@ angular.module('mafale', ['mafaleServices']).
       when('/edicaoAssuntoPeticao/:id', {templateUrl: 'resources/partials/edicaoAssuntoPeticao.html',   controller: EdicaoAssuntoPeticaoController}).
       when('/listagemServico/:pagina', {templateUrl: 'resources/partials/listagemServico.html',   controller: ListagemServicoController}).
       when('/edicaoServico/:id', {templateUrl: 'resources/partials/edicaoServico.html',   controller: EdicaoServicoController}).
+      when('/listagemPeticao/:servicoId', {templateUrl: 'resources/partials/listagemPeticao.html',   controller: ListagemPeticaoController}).
       otherwise({redirectTo: '/home'});
 }])
 

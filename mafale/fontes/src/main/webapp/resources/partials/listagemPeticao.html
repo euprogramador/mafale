@@ -1,0 +1,71 @@
+<div class="content-box">
+	<!-- Start Content Box -->
+
+	<div class="content-box-header">
+
+		<h3>Listagem de Petições</h3>
+		
+		<div class="clear"></div>
+
+	</div>
+	<!-- End .content-box-header -->
+
+	<div class="content-box-content">
+
+		<div class="tab-content default-tab" id="tab1">
+				<a href="#/listagemServico/1" class="button">Voltar</a>
+		<a href="#/edicaoPeticao/novo" class="button">Nova</a>
+			<table class="data">
+				<thead>
+					<tr>
+						<th>Expediente</th>
+						<th>Assunto</th>
+						<th>Entrada em</th>
+						<th>Protocolo</th>
+						<th>Opções</th>
+					</tr>
+
+				</thead>
+
+				<tfoot>
+					<tr>
+						<td colspan="5">
+							<div ng-show="paginacao.totalRegistros == 0">
+								Nenhum registro encontrado
+							</div>
+							<div class="pagination">
+								<a href="#/listagemPeticao/{{paginacao.primeiro}}">&laquo; Primeiro</a> 
+								<a href="#/listagemPeticao/{{paginacao.anterior}}">&laquo; Anterior</a> 
+								<span ng-repeat="pagina in paginacao.paginas"> 
+									<a class="number {{pagina.atual}}" href="#/listagemPeticao/{{pagina.numero}}"> {{pagina.numero}}</a>
+								</span> 
+								<a href="#/listagemPeticao/{{paginacao.proximo}}">Próximo &raquo;</a>
+								<a href="#/listagemPeticao/{{paginacao.ultimo}}">Último &raquo;</a> 
+								Exibindo {{paginacao.contagemRegistros}} de {{paginacao.totalRegistros}}
+							</div>
+							
+							<div class="clear"></div>
+						</td>
+					</tr>
+				</tfoot>
+
+				<tbody>
+					<tr ng-repeat="peticao in resultado.listagem">
+						<td>{{peticao.expediente}}</td>
+						<td>{{peticao.assunto.descricao}}</td>
+						<td>{{peticao.dataEntrada}}</td>
+						<td>{{peticao.protocolo}}</td>
+						<td>
+							<!-- Icons --> 
+							<a href="#/edicaoPeticao/{{peticao.id}}" title="Editar"><img src="resources/images/icons/pencil.png" alt="Editar" /></a> 
+							<a ng-click="remover(peticao)" title="Remover"><img src="resources/images/icons/cross.png" alt="Remover" /></a>
+						</td>
+					</tr>
+				</tbody>
+
+			</table>
+
+		</div>
+		<!-- End #tab1 -->
+	</div>
+</div>

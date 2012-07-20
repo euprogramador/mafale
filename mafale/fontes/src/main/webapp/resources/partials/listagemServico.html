@@ -13,6 +13,7 @@
 	<div class="content-box-content">
 
 		<div class="tab-content default-tab" id="tab1">
+		
 			<a href="#/edicaoServico/novo" class="button">Novo</a>
 			<p/>
 			<form>
@@ -73,7 +74,7 @@
 							<!-- Icons --> 
 							<a href="#/edicaoServico/{{servico.id}}" title="Editar"><img src="resources/images/icons/pencil.png" alt="Editar" /></a> 
 							<a ng-click="remover(cliente)" title="Remover"><img src="resources/images/icons/cross.png" alt="Remover" /></a>
-							<a  title="Petições"><img src="resources/images/icons/peticoes.png" alt="Petições" /></a>
+							<a href="#/listagemPeticao/{{servico.id}}"  title="Petições"><img src="resources/images/icons/peticoes.png" alt="Petições" /></a>
 						</td>
 					</tr>
 				</tbody>

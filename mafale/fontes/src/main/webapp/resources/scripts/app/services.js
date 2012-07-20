@@ -9,6 +9,11 @@ factory('Servicos', function($resource){
  		query: {url:'data/servicos?inicio=:inicio&numRegistros=:numRegistros&filtro=:filtro',method:'GET', params:{inicio:0,numRegistros:10}}
 	});
 }).
+factory('Peticoes', function($resource){
+	return $resource('data/peticoes/:id', {}, {
+ 		query: {url:'data/peticoes?filtro=:filtro',method:'GET'}
+	});
+}).
 factory('TiposServico', function($resource){
 	return $resource('data/tiposservico/:id', {}, {
  		query: {url:'data/tiposservico?inicio=:inicio&numRegistros=:numRegistros',method:'GET', params:{inicio:0,numRegistros:10}}
