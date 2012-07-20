@@ -1,0 +1,86 @@
+<div class="content-box">
+	<!-- Start Content Box -->
+
+	<div class="content-box-header">
+
+		<h3>Listagem de Serviços</h3>
+		
+		<div class="clear"></div>
+
+	</div>
+	<!-- End .content-box-header -->
+
+	<div class="content-box-content">
+
+		<div class="tab-content default-tab" id="tab1">
+			<a href="#/edicaoServico/novo" class="button">Novo</a>
+			<p/>
+			<form>
+			<select class="text-input small-input" ng-model="filtro[0].alvo"> 
+				<option value="cliente.razaoSocial|like|string" >Razão Social</option>
+				<option value="processo|eq|string">Nº Processo</option>
+				<option value="nomeProduto|like|string">Nome do Produto</option>
+				<option value="peticoes.protocolo|like|string">Nº Protocolo</option>
+				<option value="peticoes.expediente|like|string">Nº Expediente</option>
+				<option value="peticoes.assunto.descricao|like|string">Assunto</option>
+			</select>
+			<input placeholder="Informe o filtro" class="text-input medium-input" ng-model="filtro[0].valor" size="60" />
+			<a class="button" ng-click="paginacao.paginar(1)">Buscar</a>
+			<br/>
+			</form>
+			<table class="data">
+				<thead>
+					<tr>
+						<th>Cliente/Produto</th>
+						<th>Processo</th>
+						<th>Tipo</th>
+						<th>Opções</th>
+					</tr>
+
+				</thead>
+
+				<tfoot>
+					<tr>
+						<td colspan="4">
+							<div ng-show="paginacao.totalRegistros == 0">
+								Nenhum registro encontrado
+							</div>
+							<div class="pagination">
+								<a href="#/listagemServico/{{paginacao.primeiro}}">&laquo; Primeiro</a> 
+								<a href="#/listagemServico/{{paginacao.anterior}}">&laquo; Anterior</a> 
+								<span ng-repeat="pagina in paginacao.paginas"> 
+									<a class="number {{pagina.atual}}" href="#/listagemServico/{{pagina.numero}}"> {{pagina.numero}}</a>
+								</span> 
+								<a href="#/listagemServico/{{paginacao.proximo}}">Próximo &raquo;</a>
+								<a href="#/listagemServico/{{paginacao.ultimo}}">Último &raquo;</a> 
+								Exibindo {{paginacao.contagemRegistros}} de {{paginacao.totalRegistros}}
+							</div>
+							
+							<div class="clear"></div>
+						</td>
+					</tr>
+				</tfoot>
+
+				<tbody>
+					<tr ng-repeat="servico in resultado.listagem">
+						<td>
+						{{servico.cliente.razaoSocial}}<br/>
+						{{servico.nomeProduto}}
+						</td>
+						<td>{{servico.processo}}</td>
+						<td>{{servico.tipoServico.descricao}}</td>
+						<td>
+							<!-- Icons --> 
+							<a href="#/edicaoServico/{{servico.id}}" title="Editar"><img src="resources/images/icons/pencil.png" alt="Editar" /></a> 
+							<a ng-click="remover(cliente)" title="Remover"><img src="resources/images/icons/cross.png" alt="Remover" /></a>
+							<a  title="Petições"><img src="resources/images/icons/peticoes.png" alt="Petições" /></a>
+						</td>
+					</tr>
+				</tbody>
+
+			</table>
+
+		</div>
+		<!-- End #tab1 -->
+	</div>
+</div>

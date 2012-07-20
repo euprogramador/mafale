@@ -79,8 +79,8 @@ public abstract class CrudService {
 		sb.append("super.salvar(entidade);\r\n");
 		sb.append("}\r\n");
 		sb.append("\r\n");
-		sb.append("public void listar(@javax.inject.Named(\"order\")Order order, @javax.inject.Named(\"inicio\")Integer inicio, @javax.inject.Named(\"numRegistros\")Integer numRegistros) {\r\n");
-		sb.append("super.listar(order, inicio, numRegistros);\r\n");
+		sb.append("public void listar(@javax.inject.Named(\"order\")Order order, @javax.inject.Named(\"inicio\")Integer inicio, @javax.inject.Named(\"numRegistros\")Integer numRegistros,@javax.inject.Named(\"filtro\")String filtro) {\r\n");
+		sb.append("super.listar(order, inicio, numRegistros,filtro);\r\n");
 		sb.append("}\r\n");
 		sb.append("\r\n");
 		sb.append("public void recuperar( @javax.inject.Named(\"id\")Long id) {\r\n");

@@ -32,7 +32,7 @@ public class CrudRoutes implements RoutesConfiguration {
 
 					routeFor(crud.getUriBase() + "/{entidade.id}").with(HttpMethod.DELETE).is(resource).remover(null);
 
-					routeFor(crud.getUriBase()).with(HttpMethod.GET).is(resource).listar(crud.getOrdenacaoDefault(), null, null);
+					routeFor(crud.getUriBase()).with(HttpMethod.GET).is(resource).listar(crud.getOrdenacaoDefault(), null, null, null);
 
 					routeFor(crud.getUriBase() + "/{id}").with(HttpMethod.GET).is(resource).recuperar(null);
 

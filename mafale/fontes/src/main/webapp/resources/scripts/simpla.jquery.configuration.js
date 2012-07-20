@@ -116,7 +116,8 @@ function showModal(){
          '-webkit-border-radius': '10px', 
          '-moz-border-radius': '10px', 
          opacity: .5, 
-         color: '#fff' 
+         color: '#fff' ,
+         'z-index':1003
      } }); 
 }
 

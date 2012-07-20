@@ -104,7 +104,8 @@ $.blockUI.defaults = {
 	overlayCSS:  {
 		backgroundColor: '#000',
 		opacity:	  	 0.6,
-		cursor:		  	 'wait'
+		cursor:		  	 'wait',
+		'z-index':1003
 	},
 
 	// styles applied when using $.growlUI

@@ -1,0 +1,108 @@
+<div class="content-box">
+	<div class="content-box-header">
+		<h3>Tipo de serviço</h3>
+		<div class="clear"></div>
+	</div>
+	<div class="content-box-content">
+		<form>
+			<fieldset>
+				<p>
+					<label>Cliente</label> 
+					<a class="button" ng-click="alterarCliente()" >Alterar</a> ({{servico.cliente.cnpj}}) - {{servico.cliente.razaoSocial}}
+					
+					<span class="input-notification error hidden png_bg" for="inputDescricao" id="descricao"></span>
+				</p>
+				<p>
+					<label>Tipo</label>
+					<select ng-model="servico.tipoServico" ng-options="t.descricao for t in tipos" id="inputTipo">
+          				<option value=""></option>
+        			</select>
+					<span class="input-notification error hidden png_bg" for="inputTipo" id="tipo"></span>
+				</p>
+				
+				<p>
+					<label>Nº Processo</label> 
+					<input class="text-input large-input" type="text" ng-model="servico.processo" id="inputProcesso"/> 
+					<span class="input-notification error hidden png_bg" for="inputProcesso" id="processo"></span>
+				</p>
+				
+				<p>
+					<label>Nome do Produto</label> 
+					<input class="text-input large-input" type="text" ng-model="servico.nomeProduto" id="inputnomeProduto"/> 
+					<span class="input-notification error hidden png_bg" for="inputnomeProduto" id="nomeProduto"></span>
+				</p>
+				
+				
+				<p>
+					<a href="#/listagemServico/1" class="button">Voltar</a>
+					<a class="button" ng-click="salvar()">Salvar</a>
+				</p>
+			</fieldset>
+			<div class="clear"></div>
+		</form>
+	</div>
+</div>
+<script type="text/javascript">
+function alterarCliente(){
+	
+	$( "#SelecionadorDeClientes" ).dialog({
+		title: 'Clientes', 
+		
+		width:800,
+		modal: true
+	});
+	
+}
+</script>
+<div style="display:none"> 
+<div id="SelecionadorDeClientes">
+	<form>	
+			<input placeholder="Informe a razão social" class="text-input medium-input" ng-model="filtro[0].valor" size="60" />
+			<a class="button" ng-click="paginacaoClientes.paginar(1)">Buscar</a>
+	</form>
+	<table width="100%" class="data">
+				<thead>
+					<tr>
+						<th>Razão Social</th>
+						<th>Opções</th>
+					</tr>
+
+				</thead>
+
+				<tfoot>
+					<tr>
+						<td colspan="2">
+							<div ng-show="paginacaoClientes.totalRegistros == 0">
+								Nenhum registro encontrado
+							</div>
+							
+							<div class="pagination">
+								<a ng-click="paginacaoClientes.$primeiro()">&laquo; Primeiro</a> 
+								<a ng-click="paginacaoClientes.$anterior()">&laquo; Anterior</a> 
+								<span ng-repeat="pagina in paginacaoClientes.paginas"> 
+									<a class="number {{pagina.atual}}"  ng-click="paginacaoClientes.paginar(pagina.numero)"> {{pagina.numero}}</a>
+								</span> 
+								<a ng-click="paginacaoClientes.$proximo()">Próximo &raquo;</a>
+								<a ng-click="paginacaoClientes.$ultimo()">Último &raquo;</a> 
+								Exibindo {{paginacaoClientes.contagemRegistros}} de {{paginacaoClientes.totalRegistros}}
+							</div>
+							
+							<div class="clear"></div>
+						</td>
+					</tr>
+				</tfoot>
+
+				<tbody>
+					<tr ng-repeat="cliente in clientes.listagem">
+						<td>{{cliente.razaoSocial}}</td>
+						<td>
+							<!-- Icons --> 
+							<a ng-click="associar(cliente)" title="Remover"><img src="resources/images/icons/target.png" alt="Selecionar" /></a>
+						</td>
+					</tr>
+				</tbody>
+
+			</table>
+
+</div>
+</div>

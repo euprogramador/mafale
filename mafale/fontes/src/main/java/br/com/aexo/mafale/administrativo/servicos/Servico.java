@@ -33,25 +33,25 @@ public class Servico extends Entidade {
 
 	@NotNull
 	@ManyToOne
-	@JoinColumn(name="cliente_id")
+	@JoinColumn(name = "cliente_id")
 	private Cliente cliente;
 
-	@NotBlank(message = "Informe o protocolo")
-	private String protocolo;
-	
+	@NotBlank(message = "Informe o numero do processo")
+	private String processo;
+
 	@ManyToOne
-	@JoinColumn(name="tiposervico_id")
+	@JoinColumn(name = "tiposervico_id")
 	private TipoServico tipoServico;
-	
+
 	private String nomeProduto;
 
 	@XStreamOmitField
 	@OneToMany
-	@JoinColumn(name="servico_id")
+	@JoinColumn(name = "servico_id")
 	private List<Peticao> peticoes = new ArrayList<Peticao>();
 
 	@Transient
-	private transient final Session session;
+	private final transient Session session;
 
 	public Servico(Session session) {
 		this.session = session;
@@ -61,7 +61,7 @@ public class Servico extends Entidade {
 	public void remover() {
 		if (!peticoes.isEmpty())
 			throw new DominioException("Há Petições vinculadas a este serviço, não sendo possível remover");
-		
+
 		session.delete(this);
 	}
 
@@ -78,8 +78,8 @@ public class Servico extends Entidade {
 	@Override
 	public void preencherCom(Entidade entidade) {
 		Servico me = (Servico) entidade;
-		cliente = me.getCliente()!=null && me.getCliente().getId()!=null ? me.getCliente() : null;
-		protocolo = me.getProtocolo();
+		cliente = me.getCliente() != null && me.getCliente().getId() != null ? me.getCliente() : null;
+		processo = me.getProcesso();
 	}
 
 	public Long getId() {
@@ -98,14 +98,6 @@ public class Servico extends Entidade {
 		this.cliente = cliente;
 	}
 
-	public String getProtocolo() {
-		return protocolo;
-	}
-
-	public void setProtocolo(String protocolo) {
-		this.protocolo = protocolo;
-	}
-
 	public TipoServico getTipoServico() {
 		return tipoServico;
 	}
@@ -122,4 +114,14 @@ public class Servico extends Entidade {
 		this.nomeProduto = nomeProduto;
 	}
 
+	public String getProcesso() {
+		return processo;
+	}
+
+	public void setProcesso(String processo) {
+		this.processo = processo;
+	}
+
+	
+	
 }

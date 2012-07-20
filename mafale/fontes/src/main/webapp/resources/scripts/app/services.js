@@ -1,8 +1,12 @@
-
 angular.module('mafaleServices', ['ngResource']).
 factory('AssuntosPeticao', function($resource){
 	return $resource('data/assuntospeticao/:id', {}, {
  		query: {url:'data/assuntospeticao?inicio=:inicio&numRegistros=:numRegistros',method:'GET', params:{inicio:0,numRegistros:10}}
+	});
+}).
+factory('Servicos', function($resource){
+	return $resource('data/servicos/:id', {}, {
+ 		query: {url:'data/servicos?inicio=:inicio&numRegistros=:numRegistros&filtro=:filtro',method:'GET', params:{inicio:0,numRegistros:10}}
 	});
 }).
 factory('TiposServico', function($resource){
@@ -27,55 +31,92 @@ factory('Clientes', function($resource){
 });
 
 
+/**
+ * transforma um objeto em string para passar para o controller no servidor
+ * 
+ * @param filtro
+ * @returns
+ */
+function montarFiltro(filtro) {
+	return JSON.stringify(filtro);
+}
 
+/**
+ * função usada para linkar um valor de uma lista com o campo e resultado de uma
+ * combo
+ * 
+ * @param field
+ * @param target
+ * @param list
+ * @returns
+ */
+function configureValue(field, target, list) {
+	if (!target)
+		return null;
+	for (t in list) {
+		if (list[t][field] == target[field])
+			return list[t];
+	}
+	return null;
+}
 
-
-function alert(msg){
-	$( "<div title='Sistema'><p>"+msg+"</p></div>" ).dialog({
-		modal: true,
-		buttons: {
-			Ok: function() {
-				$( this ).dialog( "close" );
+/**
+ * alert customizado com jquery
+ * 
+ * @param msg
+ */
+function alert(msg) {
+	$("<div title='Sistema'><p>" + msg + "</p></div>").dialog({
+		modal : true,
+		buttons : {
+			Ok : function() {
+				$(this).dialog("close");
 			}
 		}
 	});
 }
-
-function confirm(msg,handler){
-	$( "<div title='Sistema'><p>"+msg+"</p></div>" ).dialog({
-		modal: true,
-		buttons: {
-			Sim: function() {
+/**
+ * função para efetuar a confirmação de uma ação
+ * 
+ * @param msg
+ * @param handler
+ */
+function confirm(msg, handler) {
+	$("<div title='Sistema'><p>" + msg + "</p></div>").dialog({
+		modal : true,
+		buttons : {
+			Sim : function() {
 				handler();
-				$( this ).dialog( "close" );
+				$(this).dialog("close");
 			},
-			'Não': function(){
-				$( this ).dialog( "close" );
+			'Não' : function() {
+				$(this).dialog("close");
 			}
 		}
 	});
 }
-emptyFn = function(){};
-errorHandler = function(error){
-	if (error.status == 400 && error.data.errors){
-		for(var i=0; i<error.data.errors.length;i++){
-			var el = $("#"+error.data.errors[i].category);
-			if (el.length==0){
-				alert("campo para mensagem não encontrado "+error.data.errors[i].category);
+emptyFn = function() {
+};
+errorHandler = function(error) {
+	if (error.status == 400 && error.data.errors) {
+		for ( var i = 0; i < error.data.errors.length; i++) {
+			var el = $("#" + error.data.errors[i].category);
+			if (el.length == 0) {
+				alert("campo para mensagem não encontrado "
+						+ error.data.errors[i].category);
 				continue;
 			}
 			el.removeClass("hidden");
 			el.html(error.data.errors[i].message);
-			$("#"+el.attr('for'))
-			.addClass("inputError")
-			.keyup(function(element){
-				el.addClass('hidden');
-				$(this).removeClass("inputError");
-			});
+			$("#" + el.attr('for')).addClass("inputError").keyup(
+					function(element) {
+						el.addClass('hidden');
+						$(this).removeClass("inputError");
+					});
 		}
-	}else {
+	} else {
 		var msg = error.headers("mensagem");
-		if (msg){
+		if (msg) {
 			alert(msg);
 		} else {
 			alert('Ocorreu um erro de comunicação com o servidor execute a operação novamente');
@@ -84,69 +125,72 @@ errorHandler = function(error){
 	hideModal();
 };
 
-function montarPaginador(aoPaginarHandler){
+function montarPaginador(aoPaginarHandler) {
 	var paginacao = {};
 	paginacao.numRegistros = 10;
 
-	paginacao.atualizar = function(){
+	paginacao.atualizar = function() {
 		paginacao.paginar(paginacao.paginaAtual);
 	};
 
 	paginacao.aoPaginar = aoPaginarHandler;
-	
-	paginacao.paginar = function(pagina){
+
+	paginacao.paginar = function(pagina) {
 		var inicio = (paginacao.numRegistros * pagina) - paginacao.numRegistros;
-		paginacao.aoPaginar(inicio,paginacao.numRegistros);
+		paginacao.aoPaginar(inicio, paginacao.numRegistros);
 	};
-	
-	paginacao.montarPaginacao = function(resultado){
-		var numPaginas = parseInt(resultado.contagem/resultado.numRegistros);
-		numPaginas = resultado.contagem % resultado.numRegistros == 0 ? numPaginas : numPaginas+1;
-		
+
+	paginacao.montarPaginacao = function(resultado) {
+		var numPaginas = parseInt(resultado.contagem / resultado.numRegistros);
+		numPaginas = resultado.contagem % resultado.numRegistros == 0 ? numPaginas
+				: numPaginas + 1;
+
 		paginacao.paginas = [];
-		for (var i = 1; i<=numPaginas;i++){
-			
+		for ( var i = 1; i <= numPaginas; i++) {
+
 			var numRegistros = resultado.numRegistros;
 			var inicio = (numRegistros * i) - numRegistros;
-		
-	
+
 			if (inicio == resultado.inicio)
 				paginacao.paginaAtual = i;
-			
-			paginacao.paginas.push({numero:i,atual:(inicio == resultado.inicio ? 'current':'')});
+
+			paginacao.paginas.push({
+				numero : i,
+				atual : (inicio == resultado.inicio ? 'current' : '')
+			});
 		}
 		paginacao.primeiro = 1;
-		paginacao.anterior = paginacao.paginaAtual == 1 ? 1 : paginacao.paginaAtual - 1;
-		paginacao.proximo = paginacao.paginaAtual == numPaginas ? numPaginas : paginacao.paginaAtual + 1;
+		paginacao.anterior = paginacao.paginaAtual == 1 ? 1
+				: paginacao.paginaAtual - 1;
+		paginacao.proximo = paginacao.paginaAtual == numPaginas ? numPaginas
+				: paginacao.paginaAtual + 1;
 		paginacao.ultimo = numPaginas;
 		paginacao.totalRegistros = resultado.contagem;
 		paginacao.contagemRegistros = resultado.listagem.length;
-		
+
 	};
-	
-	paginacao.$primeiro = function(){
+
+	paginacao.$primeiro = function() {
 		paginacao.paginar(1);
 	};
-	
-	paginacao.$anterior = function(){
-		var anterior = paginacao.paginaAtual-1;
+
+	paginacao.$anterior = function() {
+		var anterior = paginacao.paginaAtual - 1;
 		if (anterior < 1)
 			anterior = 1;
 		paginacao.paginar(anterior);
 	};
-	
-	paginacao.$proximo = function(){
-		var proximaPagina = paginacao.paginaAtual+1;
-		if (proximaPagina > paginacao.ultimp)
+
+	paginacao.$proximo = function() {
+		var proximaPagina = paginacao.paginaAtual + 1;
+		if (proximaPagina > paginacao.ultimo)
 			proximaPagina = paginacao.ultimo;
 		paginacao.paginar(proximaPagina);
 	};
-	
-	paginacao.$ultimo = function(){
-		paginacao.paginar(paginacao.ultima);
+
+	paginacao.$ultimo = function() {
+		paginacao.paginar(paginacao.ultimo);
 	};
-	
+
 	return paginacao;
 }
-
-

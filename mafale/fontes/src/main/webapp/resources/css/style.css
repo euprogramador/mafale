@@ -348,47 +348,47 @@ ul.content-box-tabs li a.current {
                 
 /************ Table ************/
 
-#main-content table {
+table.data{
                 width: 100%;
                 border-collapse: collapse;
                 }
                 
-#main-content table thead th {
+table.data thead th {
                 font-weight: bold;
                 font-size: 15px;
                 border-bottom: 1px solid #ddd;
                 }
                 
-#main-content tbody {
+table.data tbody {
                 border-bottom: 1px solid #ddd;
                 }
                 
-#main-content tbody tr {
+table.data  tbody tr {
                 background: #fff;
                 }
               
-#main-content tbody tr.alt-row {
+table.data  tbody tr.alt-row {
                 background: #f3f3f3;
                 }
                 
-#main-content table td,
-#main-content table th {
+table.data td,
+table.data th {
                 padding: 10px;
                 line-height: 1.3em;
                 }        
 				
-#main-content table tfoot td .bulk-actions {
+table .data tfoot td .bulk-actions {
                 padding: 15px 0 5px 0;
                 } 
 				
-#main-content table tfoot td .bulk-actions select {
+table.data tfoot td .bulk-actions select {
                 padding: 4px;
 				border: 1px solid #ccc;
                 }      
 				
 /*************** Pagination ***************/
 
-#main-content .pagination {
+.pagination {
                 text-align: right;
                 padding: 20px 0 5px 0;
                 font-family: Verdana, Arial, Helvetica, sans-serif;
