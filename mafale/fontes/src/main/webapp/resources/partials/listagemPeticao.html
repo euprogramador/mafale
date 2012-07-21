@@ -15,8 +15,41 @@
 		<div class="tab-content default-tab" id="tab1">
 				<a href="#/listagemServico/1" class="button">Voltar</a>
 		<a href="#/edicaoPeticao/novo" class="button">Nova</a>
-			<table class="data">
+
+		<table class="data">
 				<thead>
+					<tr>
+						<th colspan="3">Serviço</th>
+					</tr>
+					<tr>
+						<th>Cliente/Produto</th>
+						<th>Processo</th>
+						<th>Tipo</th>
+					</tr>
+
+				</thead>
+
+				
+
+				<tbody>
+					<tr>
+						<td>
+						{{servico.cliente.razaoSocial}}<br/>
+						{{servico.nomeProduto}}
+						</td>
+						<td>{{servico.processo}}</td>
+						<td>{{servico.tipoServico.descricao}}</td>
+					</tr>
+				</tbody>
+
+			</table>
+			<br/>
+		
+			<table class="data">
+				<thead>	
+				<tr>
+						<th colspan="5">Expedientes do serviço</th>
+					</tr>
 					<tr>
 						<th>Expediente</th>
 						<th>Assunto</th>

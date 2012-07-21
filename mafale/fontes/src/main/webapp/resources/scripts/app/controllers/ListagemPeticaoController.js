@@ -1,8 +1,13 @@
-function ListagemPeticaoController($scope, Peticoes, $routeParams){
+function ListagemPeticaoController($scope, Peticoes,Servicos, $routeParams){
+	
+	
+	Servicos.get({id:$routeParams.servicoId},function(servico){
+		$scope.servico = servico;
+	},errorHandler);
 	
 	$scope.paginacao = montarPaginador(function(inicio,numRegistros){
 		showModal();
-		
+
 		var filtros = [{alvo:'servico.id|eq|long',valor:$routeParams.servicoId}];
 		
 		Peticoes.query({filtro:montarFiltro(filtros)},function(data){
