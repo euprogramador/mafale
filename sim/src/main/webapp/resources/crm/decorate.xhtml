@@ -1,0 +1,31 @@
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+   xmlns:ui="http://java.sun.com/jsf/facelets"
+   xmlns:f="http://java.sun.com/jsf/core"
+   xmlns:h="http://java.sun.com/jsf/html"
+   xmlns:rich="http://richfaces.org/rich"  
+   xmlns:c="http://java.sun.com/jsp/jstl/core"
+   xmlns:cc="http://java.sun.com/jsf/composite">
+
+	<cc:interface componentType="org.jboss.seam.faces.InputContainer">
+		<cc:attribute name="label" required="true" />
+		<cc:attribute name="divId" required="false" />
+		<cc:attribute name="id" required="false" />	
+	</cc:interface>
+	<cc:implementation>
+		<ui:fragment id="frag">
+			<h:panelGroup id="#{not empty cc.attrs.divId ? cc.attrs.divId : 'inputPanel'}" layout="block" styleClass="inputPanel">
+				<div class="label" style="width:#{cc.parent.attrs.labelWidth};">
+					<h:outputLabel id="label" value="#{cc.attrs.label}:" style="padding-right:10px;">
+						<h:outputText styleClass="required" rendered="#{cc.attrs.required}" value="*" />
+					</h:outputLabel>
+				</div>
+				<h:panelGroup layout="block" styleClass="input" style="width:#{cc.parent.attrs.inputWidth};">
+					<cc:insertChildren />
+				</h:panelGroup>
+				<rich:message rendered="#{cc.attrs.invalid}" styleClass="message" style="width:#{cc.parent.attrs.messageWidth};"/>
+			</h:panelGroup>
+		</ui:fragment>
+	</cc:implementation>
+</ui:composition>

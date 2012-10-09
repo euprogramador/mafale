@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:rich="http://richfaces.org/rich"
+	xmlns:a4j="http://richfaces.org/a4j"
+	xmlns:s="http://jboss.org/seam/faces"
+	xmlns:aexo="http://java.sun.com/jsf/composite/aexo"
+	xmlns:p="http://primefaces.prime.com.tr/ui"
+	template="/WEB-INF/templates/template.xhtml">
+	<ui:define name="conteudo">
+		<f:metadata>
+			<f:viewParam name="cliente" />
+			<f:viewParam name="produto" />
+			<f:viewParam name="statusPendente" />
+			<f:viewParam name="dataInicialPendente" />
+			<f:viewParam name="dataFinalPendente" />
+			<f:viewParam name="statusTramitacao" />
+			<f:viewParam name="dataInicialTramitacao" />
+			<f:viewParam name="dataFinalTramitacao" />
+			<f:viewParam name="statusConcluidoComRenovacao" />
+			<f:viewParam name="dataInicialConcluidoComRenovacao" />
+			<f:viewParam name="dataFinalConcluidoComRenovacao" />
+			<f:viewParam name="statusConcluidoSemRenovacao" />
+			<f:viewParam name="dataInicialConcluidoSemRenovacao" />
+			<f:viewParam name="dataFinalConcluidoSemRenovacao" />
+			<f:viewParam name="pagina" />
+			<f:viewParam name="registrosPorPagina" />
+			<f:viewParam name="id" />
+			<s:viewAction action="#{conversationManagement.begin()}" />
+		</f:metadata>
+		<legend>Observação</legend>
+		<h:form>
+			<div class="row">
+				<h:outputLabel for="form_data" value="Data" />
+				<p:inputMask mask="99/99/9999 99:99:99" id="form_data"
+					value="#{observacao.data}" />
+				<h:message for="form_data" styleClass="red" />
+
+			</div>
+			<div class="row">
+				<div class="span4">
+					<h:outputLabel for="form_descricao" value="Descrição" />
+					<h:inputTextarea value="#{observacao.mensagem}" />
+					<h:message for="form_descricao" styleClass="red" />
+				</div>
+			</div>
+
+			<div class="control-group">
+				<div class="form-actions">
+
+					<h:button outcome="#{nav.detalheServico.includeViewParams().s()}"
+						value="Cancelar" styleClass="btn">
+					</h:button>
+
+
+					<h:commandLink styleClass="btn btn-primary" style="margin:5px"
+						value="Salvar Alterações" action="#{observacaoHome.salvar()}">
+						<f:param name="id" value="#{param.id}"/>
+					</h:commandLink>
+				</div>
+			</div>
+		</h:form>
+	</ui:define>
+</ui:composition>

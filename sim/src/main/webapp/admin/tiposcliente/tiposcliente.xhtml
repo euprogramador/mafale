@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:rich="http://richfaces.org/rich"
+	xmlns:a4j="http://richfaces.org/a4j"
+	xmlns:aexo="http://java.sun.com/jsf/composite/aexo"
+	xmlns:p="http://primefaces.prime.com.tr/ui"
+	template="/WEB-INF/templates/template.xhtml">
+	<ui:define name="conteudo">
+		<legend>Listagem de tipos de clientes</legend>
+
+		<h:messages errorClass="alert alert-error"
+			infoClass="alert alert-success" id="messages" globalOnly="true" />
+
+
+		<h:link class="btn"
+			outcome="/admin/tiposcliente/tipoclienteedita.xhtml"
+			includeViewParams="true">
+			<b class="icon-plus"></b> Novo
+					</h:link>
+
+		<p />
+		<h:dataTable value="#{listagemDeTiposDeClientes}" var="c"
+			rendered="#{not empty listagemDeTiposDeClientes}"
+			styleClass="table table-bordered table-hover">
+			<h:column>
+				<f:facet name="header">Descrição</f:facet>
+				<h:outputText value="#{c.descricao} " />
+			</h:column>
+			<h:column>
+				<f:facet name="header">Opções</f:facet>
+
+				<h:link class="btn"
+					outcome="/admin/tiposcliente/tipoclienteedita.xhtml"
+					includeViewParams="true">
+					<b class="icon-edit"></b>
+					<f:param name="id" value="#{c.id}" />
+				</h:link>
+
+
+				<h:link class="btn" style="margin-left:5px"
+					outcome="/admin/tiposcliente/tipoclienteremove.xhtml"
+					includeViewParams="true">
+					<b class="icon-trash"></b>
+					<f:param name="id" value="#{c.id}" />
+				</h:link>
+			</h:column>
+		</h:dataTable>
+
+		<h:outputText value="Nenhum registro encontrado"
+			rendered="#{empty listagemDeTiposDeClientes}" />
+
+	</ui:define>
+</ui:composition>

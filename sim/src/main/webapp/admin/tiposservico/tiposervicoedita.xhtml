@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:rich="http://richfaces.org/rich"
+	xmlns:a4j="http://richfaces.org/a4j"
+	xmlns:s="http://jboss.org/seam/faces"
+	xmlns:aexo="http://java.sun.com/jsf/composite/aexo"
+	xmlns:p="http://primefaces.prime.com.tr/ui"
+	template="/WEB-INF/templates/template.xhtml">
+	<ui:define name="conteudo">
+	<f:metadata>
+			<s:viewAction action="#{conversationManagement.begin()}" />
+		</f:metadata>
+		<h:form>
+			<legend>Tipo de serviço</legend>
+			<div class="row">
+				<div class="span0">
+					<h:outputLabel value="Código" for="form_id" />
+					<h:outputText id="form_id" value="#{tipoServico.id}" />
+				</div>
+			</div>
+			<div class="row">
+				<div class="span4">
+					<h:outputLabel for="form_descricao" value="Descrição" />
+					<h:inputText id="form_descricao" styleClass="input-medio"
+						value="#{tipoServico.descricao}" />
+					<h:message for="form_descricao" styleClass="red" />
+				</div>
+			</div>
+
+			<div class="control-group">
+				<div class="form-actions">
+
+					<h:button outcome="/admin/tiposservico/tiposservico.xhtml" includeViewParams="true"
+						value="Cancelar" styleClass="btn" />
+
+
+					<h:commandLink styleClass="btn btn-primary" style="margin:5px"
+						value="Salvar Alterações" action="#{tipoServicoHome.salvar()}" />
+				</div>
+			</div>
+		</h:form>
+
+
+	</ui:define>
+</ui:composition>

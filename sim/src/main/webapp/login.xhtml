@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+		xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:s="http://jboss.org/seam/faces"
+	xmlns:rich="http://richfaces.org/rich"
+	template="/WEB-INF/templates/template.xhtml">
+	<ui:define name="metadata">
+		<f:metadata>
+			<s:viewAction action="#{usuarioJaLogado.verificaSeUsuarioJaLogado}" />
+		</f:metadata>
+		teste
+	</ui:define>
+	<ui:define name="conteudo">
+		
+		<h:form styleClass="form-horizontal">
+			<legend>Acesso ao sistema</legend>
+			<h:messages errorClass="alert alert-error"/>
+			<div class="control-group">
+				<label class="control-label" for="inputLogin">Login</label>
+				<div class="controls">
+					<h:inputText value="#{credentials.username}" required="true" requiredMessage="Informe o login" />
+				</div>
+			</div>
+			<div class="control-group">
+				<label class="control-label" for="inputPassword">Senha</label>
+				<div class="controls">
+					<h:inputSecret value="#{credentials.password}" required="true" requiredMessage="Informe a senha" />
+				</div>
+			</div>
+			<div class="control-group">
+				<div class="controls">
+					<h:commandButton styleClass="btn btn-primary" value="Login" action="#{servicoDeLogin.login()}" />
+				</div>
+			</div>
+		</h:form>
+
+	</ui:define>
+</ui:composition>

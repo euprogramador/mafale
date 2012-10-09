@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:rich="http://richfaces.org/rich"
+	xmlns:a4j="http://richfaces.org/a4j"
+	xmlns:aexo="http://java.sun.com/jsf/composite/aexo"
+	xmlns:s="http://jboss.org/seam/faces"
+	xmlns:p="http://primefaces.prime.com.tr/ui"
+	template="/WEB-INF/templates/template.xhtml">
+	<ui:define name="conteudo">
+		<f:metadata>
+			<f:viewParam name="cliente" />
+			<f:viewParam name="produto" />
+			<f:viewParam name="statusPendente" />
+			<f:viewParam name="dataInicialPendente" />
+			<f:viewParam name="dataFinalPendente" />
+			<f:viewParam name="statusTramitacao" />
+			<f:viewParam name="dataInicialTramitacao" />
+			<f:viewParam name="dataFinalTramitacao" />
+			<f:viewParam name="statusConcluidoComRenovacao" />
+			<f:viewParam name="dataInicialConcluidoComRenovacao" />
+			<f:viewParam name="dataFinalConcluidoComRenovacao" />
+			<f:viewParam name="statusConcluidoSemRenovacao" />
+			<f:viewParam name="dataInicialConcluidoSemRenovacao" />
+			<f:viewParam name="dataFinalConcluidoSemRenovacao" />
+			<f:viewParam name="pagina" />
+			<f:viewParam name="registrosPorPagina" />
+			<s:viewAction action="#{conversationManagement.begin()}" />
+		</f:metadata>
+
+
+		<style>
+</style>
+		<h:form>
+			<legend>Confirmação</legend>
+			<h:messages errorClass="alert alert-error"
+				infoClass="alert alert-success" id="messages" globalOnly="true" />
+
+			<p>Confirma a remoção do serviço: #{servico.expediente}?</p>
+
+			<div class="control-group">
+				<div class="form-actions">
+
+					<h:button outcome="#{nav.listagemServicos.includeViewParams().s()}"
+						value="Cancelar" styleClass="btn">
+					</h:button>
+
+					<h:commandLink styleClass="btn btn-primary" style="margin:5px"
+						value="Remover" action="#{servicoHome.remover()}">
+					</h:commandLink>
+				</div>
+			</div>
+
+		</h:form>
+
+	</ui:define>
+</ui:composition>

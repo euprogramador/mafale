@@ -1,0 +1,40 @@
+<!DOCTYPE html PUBLIC
+            "-//W3C//DTD XHTML 1.0 Transitional//EN"
+            "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:composite="http://java.sun.com/jsf/composite">
+<composite:interface>
+	<composite:attribute name="list" />
+	<composite:attribute name="requestAttributePage" />
+	<composite:attribute name="requestAttributeMaxResults" />
+</composite:interface>
+<composite:implementation>
+	<div class="pagination pagination-centered">
+		<ul>
+			<li><h:link includeViewParams="true" value="&lt;&lt;">
+					<f:param name="#{cc.attributes.requestAttributePage}" value="1" />
+				</h:link></li>
+			<ui:repeat var="pagina" value="#{cc.attributes.list.getPages()}">
+				<li
+					class="#{param[cc.attributes.requestAttributePage] eq pagina.toString() ? 'active' : ''}"><h:link
+						includeViewParams="true" value="#{pagina}">
+						<f:param name="#{cc.attributes.requestAttributePage}"
+							value="#{pagina}" />
+					</h:link></li>
+			</ui:repeat>
+			<li><h:link includeViewParams="true" value="&gt;&gt;">
+					<f:param name="#{cc.attributes.requestAttributePage}"
+						value="#{cc.attributes.list.getTotalPaginas()}" />
+				</h:link></li>
+		</ul>
+		<ul class="pager">
+			<li class="disabled"><a href="#" onclick="return false">Exibindo
+					#{cc.attributes.list.size()} de
+					#{cc.attributes.list.getTotalRegistros()} registros</a></li>
+		</ul>
+	</div>
+</composite:implementation>
+</html>

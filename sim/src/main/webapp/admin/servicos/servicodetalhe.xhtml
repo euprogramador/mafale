@@ -1,0 +1,274 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:rich="http://richfaces.org/rich"
+	xmlns:a4j="http://richfaces.org/a4j"
+	xmlns:aexo="http://java.sun.com/jsf/composite/aexo"
+	xmlns:s="http://jboss.org/seam/faces"
+	xmlns:p="http://primefaces.prime.com.tr/ui"
+	template="/WEB-INF/templates/template.xhtml">
+	<f:metadata>
+		<f:viewParam name="cliente" />
+		<f:viewParam name="produto" />
+		<f:viewParam name="statusPendente" />
+		<f:viewParam name="dataInicialPendente" />
+		<f:viewParam name="dataFinalPendente" />
+		<f:viewParam name="statusTramitacao" />
+		<f:viewParam name="dataInicialTramitacao" />
+		<f:viewParam name="dataFinalTramitacao" />
+		<f:viewParam name="statusConcluidoComRenovacao" />
+		<f:viewParam name="dataInicialConcluidoComRenovacao" />
+		<f:viewParam name="dataFinalConcluidoComRenovacao" />
+		<f:viewParam name="statusConcluidoSemRenovacao" />
+		<f:viewParam name="dataInicialConcluidoSemRenovacao" />
+		<f:viewParam name="dataFinalConcluidoSemRenovacao" />
+		<f:viewParam name="pagina" />
+		<f:viewParam name="registrosPorPagina" />
+		<f:viewParam name="id" />
+	</f:metadata>
+	<ui:define name="conteudo">
+
+
+		<style>
+.input-zlarge {
+	width: 561px !important;
+}
+</style>
+		<h:form id="formulario">
+			<legend>Serviço</legend>
+
+			<h:messages errorClass="alert alert-error"
+				infoClass="alert alert-success" id="messages" globalOnly="true" />
+
+			<div class="row">
+				<div class="span2" style="width: 100px">
+					<h:outputLabel value="Id" />
+					<h:outputText value="#{servico.id}" />
+				</div>
+				<div class="span2" style="width: 200px">
+					<h:outputLabel for="form_status" value="status" />
+					<h:outputText value="#{servico.status.descricao}" />
+				</div>
+				<div class="span2" style="width: 100px">
+					<h:outputLabel value="data status" />
+					<h:outputText value="#{servico.dataStatus}" />
+				</div>
+			</div>
+
+			<h:outputLabel value="Cliente" />
+			<h:outputText value="#{servico.cliente.razaoSocial}" />
+			<div class="row">
+				<div class="span2" style="width: 150px">
+					<h:outputLabel value="Processo" />
+					<h:outputText value="#{servico.numeroProcesso}" />
+				</div>
+				<div class="span2" style="width: 80px">
+					<h:outputLabel value="Expediente" />
+					<h:outputText value="#{servico.expediente}" />
+				</div>
+				<div class="span2" style="width: 80px">
+					<h:outputLabel value="DataEntrada" />
+					<h:outputText value="#{servico.dataEntrada}" />
+				</div>
+				<div class="span2" style="width: 150px">
+					<h:outputLabel value="Protocolo" />
+					<h:outputText value="#{servico.protocolo}" />
+				</div>
+
+			</div>
+			<h:outputLabel value="assunto" />
+			<h:outputText value="#{servico.assunto.descricao}" />
+
+			<h:outputLabel value="Produto" />
+			<h:outputText value="#{servico.nomeProduto}" />
+			<div class="row">
+				<div class="span2" style="width: 260px;">
+					<h:outputLabel value="Situação" />
+					<h:outputText value="#{servico.situacao}" />
+				</div>
+				<div class="span2" style="width: 260px;">
+					<h:outputLabel value="tipo" />
+					<h:outputText value="#{servico.tipoServico.descricao}" />
+				</div>
+			</div>
+
+			<div class="row">
+				<div class="span2" style="width: 140px">
+					<h:outputLabel value="Encontra-se" />
+					<h:outputText value="#{servico.encontraSeNa}" />
+				</div>
+				<div class="span2" style="width: 80px">
+					<h:outputLabel value="Desde" />
+					<h:outputText value="#{servico.encontraSeDesde}" />
+				</div>
+				<div class="span2" style="width: 80px">
+					<h:outputLabel value="Publicação" />
+					<h:outputText value="#{servico.dataPublicacao}" />
+				</div>
+				<div class="span2" style="width: 100px">
+					<h:outputLabel value="Resolução" />
+					<h:outputText value="#{servico.resolucao}" />
+				</div>
+			</div>
+			<p />
+			<p />
+
+			<div class="tabbable" style="margin-bottom: 18px;">
+				<ul class="nav nav-tabs">
+					<li class="active"><a href="#tab1" data-toggle="tab">Movimentações
+							na anvisa</a></li>
+					<li class=""><a href="#tab2" data-toggle="tab">Observações</a></li>
+					<li class=""><a href="#tab3" data-toggle="tab">10 últimas
+							consultas </a></li>
+				</ul>
+				<div class="tab-content"
+					style="padding-bottom: 9px; border-bottom: 1px solid #ddd;">
+					
+					<div class="tab-pane active" id="tab1">
+						<br/>
+						<h:dataTable value="#{movimentacoesEfetuadas}" var="m"
+							styleClass="table table-bordered table-hover">
+
+							<h:column>
+								<f:facet name="header">
+									<h:outputText value="Leitura Em" />
+								</f:facet>
+								<h:outputText value="#{m.data}" />
+							</h:column>
+							<h:column>
+								<f:facet name="header">
+									<h:outputText value="Situação Anterior" />
+								</f:facet>
+								<h:outputText value="#{m.situacaoAnterior}" />
+							</h:column>
+							<h:column>
+								<f:facet name="header">
+									<h:outputText value="Encontra-se Na anterior" />
+								</f:facet>
+								<h:outputText value="#{m.encontraSeNaAnterior}" />
+							</h:column>
+							<h:column>
+								<f:facet name="header">
+									<h:outputText value="Encontra-se Desde anterior" />
+								</f:facet>
+								<h:outputText value="#{m.encontraSeDesdeAnterior}" />
+							</h:column>
+							<h:column>
+								<f:facet name="header">
+									<h:outputText value="Publicação" />
+								</f:facet>
+								<h:outputText value="#{m.dataPublicacaoAnterior}" />
+							</h:column>
+							<h:column>
+								<f:facet name="header">
+									<h:outputText value="Resolução Anterior" />
+								</f:facet>
+								<h:outputText value="#{m.resolucaoAnterior}" />
+							</h:column>
+
+							<h:column>
+								<f:facet name="header">
+									<h:outputText value="Situação Atual" />
+								</f:facet>
+								<h:outputText value="#{m.situacaoAtual}" />
+							</h:column>
+							<h:column>
+								<f:facet name="header">
+									<h:outputText value="Encontra-se Na Atual" />
+								</f:facet>
+								<h:outputText value="#{m.encontraSeNaAtual}" />
+							</h:column>
+							<h:column>
+								<f:facet name="header">
+									<h:outputText value="Encontra-se Desde Atual" />
+								</f:facet>
+								<h:outputText value="#{m.encontraSeDesdeAtual}" />
+							</h:column>
+							<h:column>
+								<f:facet name="header">
+									<h:outputText value="Publicação Atual" />
+								</f:facet>
+								<h:outputText value="#{m.dataPublicacaoAtual}" />
+							</h:column>
+							<h:column>
+								<f:facet name="header">
+									<h:outputText value="Resolução Atual" />
+								</f:facet>
+								<h:outputText value="#{m.resolucaoAtual}" />
+							</h:column>
+
+						</h:dataTable>
+
+
+					</div>
+					<div class="tab-pane" id="tab2">
+					<br/>	
+						<h:link class="btn" style="margin-left: 5px"
+							outcome="#{nav.novaObservacao.includeViewParams().s()}">
+							<b class="icon-plus"></b> Nova Observação
+						</h:link>
+						<p />
+						<h:dataTable value="#{observacoes}" var="m"
+							styleClass="table table-bordered table-hover">
+
+							<h:column>
+								<f:facet name="header">
+									<h:outputText value="Data" />
+								</f:facet>
+								<h:outputText value="#{m.data}" />
+							</h:column>
+							<h:column>
+								<f:facet name="header">
+									<h:outputText value="Usuário" />
+								</f:facet>
+								<h:outputText value="#{m.usuario}" />
+							</h:column>
+							<h:column>
+								<f:facet name="header">
+									<h:outputText value="Observação" />
+								</f:facet>
+								<h:outputText value="#{m.mensagem}" />
+							</h:column>
+
+						</h:dataTable>
+
+
+					</div>
+					<div class="tab-pane" id="tab3">
+
+						<h:dataTable value="#{consultasEfetuadas}" var="m"
+							styleClass="table table-bordered table-hover">
+							<h:column>
+								<f:facet name="header">
+									<h:outputText value="Data" />
+								</f:facet>
+								<h:outputText value="#{m.data}" />
+							</h:column>
+
+							<h:column>
+								<f:facet name="header">
+									<h:outputText value="Houve Modificação" />
+								</f:facet>
+								<h:outputText value="#{m.houveModificacao}" />
+							</h:column>
+
+						</h:dataTable>
+					</div>
+				</div>
+			</div>
+
+
+			<div class="control-group">
+				<div class="form-actions">
+					<h:button outcome="#{nav.listagemServicos.includeViewParams().s()}"
+						value="Voltar" styleClass="btn">
+					</h:button>
+
+				</div>
+			</div>
+		</h:form>
+
+	</ui:define>
+</ui:composition>

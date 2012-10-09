@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:rich="http://richfaces.org/rich"
+	xmlns:p="http://primefaces.prime.com.tr/ui"
+	xmlns:a="http://richfaces.org/a4j">
+<h:head>
+	<title>Mafale</title>
+	<f:view contentType="text/html" encoding="UTF-8" />
+	<h:outputStylesheet name="bootstrap/css/bootstrap.min.css" />
+	<h:outputStylesheet name="bootstrap/css/bootstrap-responsive.min.css" />
+	<style>
+body {
+	padding-top: 60px;
+	/* 60px to make the container go all the way to the bottom of the topbar */
+}
+
+ul {
+	margin: 0px !important
+}
+
+.input-medio {
+	width: 500px !important;
+}
+
+.alert {
+	list-style-type: none;
+	margin: 0px;
+	padding: 0px;
+}
+
+.modal {
+	top: 45% !important;
+}
+
+.modal-body {
+	max-height: 480px !important;
+}
+
+.span0 {
+	width: 30px;
+}
+
+.span2col {
+	width: 220px;
+}
+
+.red {
+	color: red
+}
+</style>
+</h:head>
+
+<h:body>
+
+	<h:form>
+		<div class="navbar navbar-fixed-top">
+			<div class="navbar-inner">
+				<div class="container">
+					<a class="btn btn-navbar" data-toggle="collapse"
+						data-target=".nav-collapse"> <span class="icon-bar"></span> <span
+						class="icon-bar"></span> <span class="icon-bar"></span>
+					</a> <a class="brand" href="#">Mafale</a>
+					<div class="nav-collapse collapse">
+						<h:panelGroup rendered="#{identity.loggedIn}">
+							<div class="btn-group pull-right">
+								<a class="btn dropdown-toggle" data-toggle="dropdown" href="#">
+									#{usuarioLogado.usuario.nome} <span class="caret"></span>
+								</a>
+								<ul class="dropdown-menu">
+									<li><h:commandLink action="#{servicoDeLogin.logout()}"
+											value="Sair" /></li>
+								</ul>
+							</div>
+						</h:panelGroup>
+						<ul class="nav">
+
+							<li class="dropdown"><a href="#" class="dropdown-toggle"
+								data-toggle="dropdown"> Manutenção <b class="caret"></b></a>
+								<ul class="dropdown-menu">
+									<li><h:link outcome="/admin/clientes/clientes.xhtml"
+											value="Clientes" /></li>
+									<li><h:link
+											outcome="/admin/tiposcliente/tiposcliente.xhtml"
+											value="Tipos cliente" /></li>
+									<li class="divider"></li>
+									<li><h:link outcome="/admin/assuntos/assuntos.xhtml"
+											value="Assuntos" /></li>
+									<li><h:link
+											outcome="/admin/tiposservico/tiposservico.xhtml"
+											value="Tipos serviço" /></li>
+								</ul></li>
+
+							<li class="dropdown"><a href="#" class="dropdown-toggle"
+								data-toggle="dropdown"> Financeiro <b class="caret"></b></a>
+								<ul class="dropdown-menu">
+									<li><a tabindex="-1" href="#">Action</a></li>
+									<li><a tabindex="-1" href="#">Another action</a></li>
+									<li><a tabindex="-1" href="#">Something else here</a></li>
+									<li class="divider"></li>
+									<li><a tabindex="-1" href="#">Separated link</a></li>
+								</ul></li>
+
+							<li class="dropdown"><a href="#" class="dropdown-toggle"
+								data-toggle="dropdown"> Agenda <b class="caret"></b></a>
+								<ul class="dropdown-menu">
+									<li><a tabindex="-1" href="#">Action</a></li>
+									<li><a tabindex="-1" href="#">Another action</a></li>
+									<li><a tabindex="-1" href="#">Something else here</a></li>
+									<li class="divider"></li>
+									<li><a tabindex="-1" href="#">Separated link</a></li>
+								</ul></li>
+
+							<li><h:link outcome="/admin/servicos/servicos.xhtml"
+									value="Serviços" /></li>
+
+							<li class="dropdown"><a href="#" class="dropdown-toggle"
+								data-toggle="dropdown"> Relatórios <b class="caret"></b></a>
+								<ul class="dropdown-menu">
+									<li><a tabindex="-1" href="#">Action</a></li>
+									<li><a tabindex="-1" href="#">Another action</a></li>
+									<li><a tabindex="-1" href="#">Something else here</a></li>
+									<li class="divider"></li>
+									<li><a tabindex="-1" href="#">Separated link</a></li>
+								</ul></li>
+
+							<li class="dropdown"><a href="#" class="dropdown-toggle"
+								data-toggle="dropdown"> Ferramentas <b class="caret"></b></a>
+								<ul class="dropdown-menu">
+									<li><a tabindex="-1" href="#">Action</a></li>
+									<li><a tabindex="-1" href="#">Another action</a></li>
+									<li><a tabindex="-1" href="#">Something else here</a></li>
+									<li class="divider"></li>
+									<li><a tabindex="-1" href="#">Separated link</a></li>
+								</ul></li>
+
+
+						</ul>
+					</div>
+					<!--/.nav-collapse -->
+				</div>
+			</div>
+		</div>
+	</h:form>
+
+	<div class="container">
+
+		<ui:insert name="conteudo" />
+
+	</div>
+	<!-- /container -->
+
+
+
+	<h:form>
+		<a:poll actionListener="#{usuarioLogado.checarSeLogado()}"
+			interval="30000" execute="@this" limitRender="true"
+			bypassUpdates="true" enabled="true" render="@none"
+			rendered="#{identity.loggedIn}" immediate="true" />
+	</h:form>
+</h:body>
+</html>

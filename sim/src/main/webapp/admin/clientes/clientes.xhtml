@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8" ?> 
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:rich="http://richfaces.org/rich"
+	xmlns:a4j="http://richfaces.org/a4j"
+	xmlns:aexo="http://java.sun.com/jsf/composite/aexo"
+	xmlns:p="http://primefaces.prime.com.tr/ui"
+	template="/WEB-INF/templates/template.xhtml">
+	<ui:define name="conteudo">
+
+
+
+			<f:metadata>
+				<f:viewParam name="termo" />
+				<f:viewParam name="pagina" />
+			</f:metadata>
+			<legend>Listagem de clientes</legend>
+			<h:messages errorClass="alert alert-error"
+				infoClass="alert alert-success" id="messages" globalOnly="true" />
+			<form>
+				<div class="input-append">
+					<input class=" input-xxlarge" type="text" name="termo"
+						value="#{param.termo}" placeholder="Informe o termo a ser buscado"></input>
+					<button class="btn" type="submit">
+						<i class="icon-search"></i> Procurar
+					</button>
+
+					<h:link class="btn" outcome="/admin/clientes/clienteedita.xhtml"
+						style="margin-left: 5px" includeViewParams="true">
+						<b class="icon-plus"></b> Novo 
+				</h:link>
+				</div>
+			</form>
+
+
+			<h:dataTable value="#{listagemClientes}" var="c"
+				rendered="#{not empty listagemClientes}"
+				styleClass="table table-bordered table-hover">
+				<h:column>
+					<f:facet name="header">Razão social</f:facet>
+					<h:outputText value="#{c.razaoSocial} " />
+				</h:column>
+				<h:column>
+					<f:facet name="header">Contato</f:facet>
+					<h:outputText value="#{c.contato} " />
+				</h:column>
+
+				<h:column>
+					<f:facet name="header">Telefones</f:facet>
+					<h:outputText value="#{c.telefone1} " />
+					<h:outputText value="#{c.telefone2} " />
+				</h:column>
+				<h:column>
+					<f:facet name="header">E-mail</f:facet>
+					<a href="mailto:#{c.email}">#{c.email}</a>
+				</h:column>
+				<h:column>
+					<f:facet name="header">Opções</f:facet>
+					<h:link class="btn" outcome="/admin/clientes/clienteedita.xhtml"
+						includeViewParams="true">
+						<b class="icon-edit"></b>
+						<f:param name="id" value="#{c.id}" />
+					</h:link>
+
+				
+					<h:link class="btn" style="margin-left:5px" 
+						outcome="/admin/clientes/clienteremove.xhtml"
+						includeViewParams="true">
+						<b class="icon-trash"></b>
+						<f:param name="id" value="#{c.id}" />
+					</h:link>
+
+					<h:link class="btn" style="margin-left:5px"
+						outcome="/admin/clientes/clientevisualiza.xhtml"
+						includeViewParams="true">
+						<b class="icon-eye-open"></b>
+						<f:param name="id" value="#{c.id}" />
+					</h:link>
+
+				</h:column>
+			</h:dataTable>
+
+			<h:outputText value="Nenhum registro encontrado"
+				rendered="#{empty listagemClientes}" />
+
+			<aexo:paginator list="#{listagemClientes}"
+				rendered="#{not empty listagemClientes}"
+				requestAttributePage="pagina" />
+	</ui:define>
+
+</ui:composition>

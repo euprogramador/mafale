@@ -1,0 +1,94 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:rich="http://richfaces.org/rich"
+	xmlns:a="http://richfaces.org/a4j">
+<h:head>
+	<title>SeamCRM</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<h:outputStylesheet name="css/screen.css" />	
+	<h:outputScript library="js" name="jquery-1.6.2.min.js" />
+	<h:outputScript library="js" name="global.js" />	
+	<script type="text/javascript">
+    	var $j = jQuery.noConflict(true);
+    	$j(document).ready(pageLoad);
+    	$j(window).resize(sideBarScreenWidthResize);
+    </script>
+</h:head>
+<h:body>
+	<div id="toolbar">
+		<h:form id="toolbarForm">
+			<rich:toolbar rendered="#{identity.loggedIn}">
+				<rich:toolbarGroup location="left">
+					<h:button value="Home" outcome="/admin/home"/>
+				</rich:toolbarGroup>
+				
+				<rich:toolbarGroup location="right">
+					<h:form id="searchForm">
+						<h:inputText id="searchInput" value="#{search.query}" />
+						<h:commandButton value="Search" action="#{search.search}" />
+					</h:form>
+				</rich:toolbarGroup>
+
+				<rich:toolbarGroup location="right">
+					<h:form>
+						<h:commandButton value="#{sessionUser.user.contact.name}">
+							<rich:componentControl target="sessionUserControls" operation="show" />
+						</h:commandButton>
+					</h:form>
+				</rich:toolbarGroup>
+			</rich:toolbar>
+		</h:form>
+	</div>
+	<div id="container">
+		<rich:notifyStack id="globalStack" position="topRight" styleClass="globalStack" direction="vertical">
+			<rich:notifyMessages ajaxRendered="true" globalOnly="true" stayTime="2000" stack="globalStack"/>
+		</rich:notifyStack>
+		<div id="content">
+			<ui:insert name="content">
+			</ui:insert>
+		</div>
+		<div id="footer">
+	    	<div style="clear: both; margin-bottom: 5px">
+				<a href="http://www.seamframework.org">
+					<h:graphicImage	value="/img/seamCRM.gif" width="200" height="58" />
+				</a>
+			</div>
+			<h:panelGroup id="debugInfo" style="clear: both">
+				<div style="clear: both;">Copyright 2011</div>
+				<div style="clear: both;">
+					<h:outputText value="Your IP Address: #{sessionUser.remoteAddr}" rendered="#{identity.loggedIn}" />
+				</div>
+				<div style="clear: both;">
+					<h:outputText value="Conversation: #{conversation.id}" rendered="#{!conversation.transient}" />
+					<h:outputText value="Conversation: Transient " rendered="#{conversation.transient}" />					
+				</div>
+				<div style="clear: both;">
+					<h:outputText value="View ID: #{facesContext.viewRoot.viewId}" rendered="#{identity.loggedIn}" />
+				</div>
+			</h:panelGroup>
+		</div>
+	</div>
+	<rich:popupPanel id="sessionUserControls" modal="true" autosized="true">
+        <f:facet name="header">
+            <h:outputText value="User Options" />
+        </f:facet>
+        <div class="actionButtons">
+		<h:form>
+			<h:button value="Edit Profile" outcome="/admin/user/profile_edit.xhtml" />
+			<h:commandButton value="Logout" action="#{identity.logout}" />
+			<h:commandButton value="Close">
+				<rich:componentControl target="sessionUserControls" operation="hide" />			
+			</h:commandButton>			
+		</h:form>
+	</div>
+    </rich:popupPanel>
+    
+    <h:form>
+		<a:poll actionListener="#{sessionUser.checkIn()}" interval="30000" execute="@this" limitRender="true" bypassUpdates="true" enabled="true" render="@none" rendered="#{identity.loggedIn}" immediate="true"/>
+	</h:form>
+</h:body>
+</html>

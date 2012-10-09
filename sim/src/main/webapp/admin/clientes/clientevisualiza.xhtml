@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:rich="http://richfaces.org/rich"
+	xmlns:a4j="http://richfaces.org/a4j"
+	xmlns:s="http://jboss.org/seam/faces"
+	xmlns:aexo="http://java.sun.com/jsf/composite/aexo"
+	xmlns:p="http://primefaces.prime.com.tr/ui"
+	template="/WEB-INF/templates/template.xhtml">
+	<ui:define name="conteudo">
+		<f:metadata>
+			<f:viewParam name="termo" />
+			<f:viewParam name="pagina" />
+			<s:viewAction action="#{conversationManagement.begin()}" />
+		</f:metadata>
+		<h:form>
+			<legend>Cliente</legend>
+
+			<div class="row">
+				<div class="span0">
+					<h:outputLabel value="Código" for="form_id" />
+					<h:outputText id="form_id" value="#{cliente.id}" />
+				</div>
+				<div class="span2">
+					<h:outputLabel for="form_cnpj" value="CNPJ" />
+					<p:inputMask mask="99.999.999/9999-99" id="form_cnpj" disabled="true"
+						styleClass="input-medium" value="#{cliente.cnpj}" />
+					<h:message for="form_cnpj" styleClass="red" />
+				</div>
+				<div class="span2">
+					<h:outputLabel for="form_tipo" value="Tipo" />
+					<h:selectOneMenu styleClass="input-medium" id="form_tipo"  disabled="true"
+						value="#{cliente.tipo}"
+						converter="#{converters.create(listagemDeTiposDeClientes)}">
+						<f:selectItems value="#{listagemDeTiposDeClientes}" var="t"
+							itemLabel="#{t.descricao}" itemValue="#{t}" />
+					</h:selectOneMenu>
+					<h:message for="form_tipo" styleClass="red" />
+				</div>
+			</div>
+			<div class="row">
+				<div class="span4">
+					<h:outputLabel for="form_razao" value="Razão Social" />
+					<h:inputText id="form_razao" styleClass="input-medio"  disabled="true"
+						value="#{cliente.razaoSocial}" />
+					<h:message for="form_razao" styleClass="red" />
+				</div>
+			</div>
+			<div class="row">
+				<div class="span4">
+					<h:outputLabel for="form_endereco" value="Endereço" />
+					<h:inputText id="form_endereco" styleClass="input-medio"  disabled="true"
+						value="#{cliente.endereco}" />
+					<h:message for="form_endereco" styleClass="red" />
+				</div>
+			</div>
+			<div class="row">
+				<div class="span2col">
+					<h:outputLabel for="form_bairro" value="Bairro" />
+					<h:inputText id="form_bairro" styleClass="input-large"  disabled="true"
+						value="#{cliente.bairro}" />
+					<h:message for="form_bairro" styleClass="red" />
+				</div>
+				<div class="span2">
+					<h:outputLabel for="form_cidade" value="Cidade" />
+					<h:inputText id="form_cidade" value="#{cliente.cidade}"  disabled="true"/>
+					<h:message for="form_cidade" styleClass="red" />
+				</div>
+			</div>
+			<div class="row">
+				<div class="span2col">
+					<h:outputLabel for="form_estado" value="Estado" />
+					<h:inputText id="form_estado" value="#{cliente.estado}"  disabled="true"/>
+					<h:message for="form_estado" styleClass="red" />
+				</div>
+				<div class="span2col">
+					<h:outputLabel for="form_cep" value="CEP" />
+					<p:inputMask mask="99.999-999" id="form_cep" value="#{cliente.cep}"  disabled="true"/>
+					<h:message for="form_cep" styleClass="red" />
+				</div>
+			</div>
+			<div class="row">
+				<div class="span4">
+					<h:outputLabel for="form_contato" value="Contato" />
+					<h:inputText id="form_contato" styleClass="input-medio" disabled="true"
+						value="#{cliente.contato}" />
+					<h:message for="form_contato" styleClass="red" />
+				</div>
+			</div>
+			<div class="row">
+				<div class="span2col">
+					<h:outputLabel for="form_telefone1" value="Telefone #1" />
+					<h:inputText id="form_telefone1" value="#{cliente.telefone1}"  disabled="true"/>
+					<h:message for="form_telefone1" styleClass="red" />
+				</div>
+				<div class="span2col">
+					<h:outputLabel for="form_telefone2" value="Telefone #2" />
+					<h:inputText id="form_telefone2" value="#{cliente.telefone2}"  disabled="true"/>
+					<h:message for="form_telefone2" styleClass="red" />
+				</div>
+			</div>
+			<h:outputLabel for="form_email" value="E-mail" />
+			<h:inputText id="form_email" styleClass="input-medio"  disabled="true"
+				value="#{cliente.email}" />
+			<h:message for="form_email" styleClass="red" />
+
+
+
+
+			<div class="control-group">
+				<div class="form-actions">
+
+					<h:button outcome="/admin/clientes/clientes.xhtml"
+						 includeViewParams="true" value="Voltar"
+						styleClass="btn" />
+				</div>
+			</div>
+
+		</h:form>
+	</ui:define>
+</ui:composition>

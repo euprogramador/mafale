@@ -1,0 +1,266 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:rich="http://richfaces.org/rich"
+	xmlns:a4j="http://richfaces.org/a4j"
+	xmlns:aexo="http://java.sun.com/jsf/composite/aexo"
+	xmlns:p="http://primefaces.prime.com.tr/ui"
+	xmlns:my="http://my.com/test"
+	template="/WEB-INF/templates/template.xhtml">
+	<f:metadata>
+		<f:viewParam name="cliente" />
+		<f:viewParam name="produto" />
+		<f:viewParam name="statusPendente" />
+		<f:viewParam name="dataInicialPendente" />
+		<f:viewParam name="dataFinalPendente" />
+		<f:viewParam name="statusTramitacao" />
+		<f:viewParam name="dataInicialTramitacao" />
+		<f:viewParam name="dataFinalTramitacao" />
+		<f:viewParam name="statusConcluidoComRenovacao" />
+		<f:viewParam name="dataInicialConcluidoComRenovacao" />
+		<f:viewParam name="dataFinalConcluidoComRenovacao" />
+		<f:viewParam name="statusConcluidoSemRenovacao" />
+		<f:viewParam name="dataInicialConcluidoSemRenovacao" />
+		<f:viewParam name="dataFinalConcluidoSemRenovacao" />
+		<f:viewParam name="pagina" />
+		<f:viewParam name="registrosPorPagina" />
+	</f:metadata>
+	<ui:define name="conteudo">
+
+		<legend>Listagem de Processos</legend>
+		<p:inputMask mask="999999" style="display:none"></p:inputMask>
+		<h:messages errorClass="alert alert-error"
+			infoClass="alert alert-success" id="messages" globalOnly="true" />
+		<form>
+			<div class="input-append">
+				<div class="row">
+					<div class="span6">
+						<label>Cliente</label> <input type="text" name="cliente"
+							value="#{param.cliente}" class="input-xxlarge"
+							placeholder="Informe o nome do cliente ou o cnpj" /> <label>Produto</label>
+						<input type="text" name="produto" class="input-xxlarge"
+							value="#{param.produto}" placeholder="Informe o nome do produto" />
+						<p />
+						<button class="btn" type="submit">
+							<b class="icon-search" /> Procurar
+						</button>
+
+						<h:link class="btn" style="margin-left: 5px"
+							outcome="#{nav.editaServico.includeViewParams().s()}">
+							<b class="icon-plus"></b> Novo
+						</h:link>
+					</div>
+					<div class="span6">
+						<table width="50%">
+							<tr>
+								<td colspan="2" align="center"><label>Situação</label></td>
+								<td align="center"><label>Data Inicial</label></td>
+								<td align="center"><label>Data Final</label></td>
+							</tr>
+							<tr>
+
+
+								<td><input type="checkbox" name="statusPendente"
+									value="true"
+									checked="#{param.statusPendente eq 'true' ? 'checked':''}"
+									style="float: left; margin-top: -3px;" /></td>
+								<td><label>Pendente</label></td>
+								<td><input type="text" name="dataInicialPendente"
+									value="#{param.dataInicialPendente}" class="data"
+									style="width: auto" size="6" /></td>
+								<td><input type="text" name="dataFinalPendente"
+									value="#{param.dataFinalPendente}" class="data"
+									style="width: auto" size="6" /></td>
+							</tr>
+							<tr>
+								<td><input type="checkbox" name="statusTramitacao"
+									checked="#{param.statusTramitacao eq 'true' ? 'checked':''}"
+									value="true" style="float: left; margin-top: -3px;" /></td>
+								<td><label>Em tramitação</label></td>
+								<td><input type="text" name="dataInicialTramitacao"
+									value="#{param.dataInicialTramitacao}" class="data"
+									style="width: auto" size="6" /></td>
+								<td><input type="text" name="dataFinalTramitacao"
+									value="#{param.dataFinalTramitacao}" class="data"
+									style="width: auto" size="6" /></td>
+							</tr>
+							<tr>
+								<td><input type="checkbox"
+									checked="#{param.statusConcluidoComRenovacao eq 'true' ? 'checked':''}"
+									name="statusConcluidoComRenovacao" value="true"
+									style="float: left; margin-top: -3px;" /></td>
+								<td><label>Concluído com renovação</label></td>
+								<td><input type="text" class="data"
+									value="#{param.statusConcluidoComRenovacao}"
+									name="dataInicialConcluidoComRenovacao" style="width: auto"
+									size="6" /></td>
+								<td><input type="text" class="data"
+									value="#{param.dataFinalConcluidoComRenovacao}"
+									name="dataFinalConcluidoComRenovacao" style="width: auto"
+									size="6" /></td>
+							</tr>
+							<tr>
+								<td><input type="checkbox"
+									checked="#{param.statusConcluidoSemRenovacao eq 'true' ? 'checked':''}"
+									name="statusConcluidoSemRenovacao" value="true"
+									style="float: left; margin-top: -3px;" /></td>
+								<td><label>Concluído sem renovação</label></td>
+								<td><input type="text" class="data"
+									value="#{param.dataInicialConcluidoSemRenovacao}"
+									name="dataInicialConcluidoSemRenovacao" style="width: auto"
+									size="6" /></td>
+								<td><input type="text" class="data"
+									value="#{param.dataFinalConcluidoSemRenovacao}"
+									name="dataFinalConcluidoSemRenovacao" style="width: auto"
+									size="6" /></td>
+							</tr>
+						</table>
+					</div>
+					<script type="text/javascript">
+						$(function(){
+							$(".data").mask('99/99/9999');
+						});
+					</script>
+				</div>
+			</div>
+		</form>
+
+		<style>
+.table td {
+	vertical-align: middle !important;
+	text-align: center;
+}
+
+.col1 {
+	text-align: left !important;
+	width: 25%
+}
+
+.col2 {
+	width: 15%
+}
+
+.col3 {
+	width: 10%
+}
+
+.col4 {
+	width: 10%
+}
+
+.col5 {
+	width: 10%
+}
+
+.col6 {
+	width: 5%
+}
+
+.col7 {
+	width: 15%
+}
+</style>
+		<legend>Resultado</legend>
+		<h:dataTable columnClasses="col1,col2,col3,col4,col5,col6,col7"
+			styleClass="table table-bordered table-hover"
+			value="#{listagemServicos}" var="p">
+			<h:column>
+				<f:facet name="header">
+					<h:outputText value="Cliente" />
+					<br />
+					<h:outputText value="Produto ou Assunto" />
+				</f:facet>
+				<h:outputText value="#{p.cliente.razaoSocial}"
+					style="font-weight:bold" />
+				<br />
+				<h:outputText value="#{p.nomeProduto}"
+					rendered="#{not stringTools.isNullOrBlank(p.nomeProduto)}" />
+				<h:outputText value="#{p.assunto.descricao}"
+					rendered="#{stringTools.isNullOrBlank(p.nomeProduto)}" />
+			</h:column>
+			<h:column>
+				<f:facet name="header">
+					<h:outputText value="Processo" />
+					<br />
+					<h:outputText value="(Protocolo)" />
+				</f:facet>
+				<h:outputText value="#{p.numeroProcesso}" />
+				<h:outputText value="(#{p.protocolo})" />
+			</h:column>
+			<h:column>
+				<f:facet name="header">
+					<h:outputText value="Expediente" />
+					<br />
+					<h:outputText value="(Entrada)" />
+				</f:facet>
+				<h:outputText value="#{p.expediente}" />
+				<br />
+				(<h:outputText value="#{p.dataEntrada}" />)
+			</h:column>
+			<h:column>
+				<f:facet name="header">
+					<h:outputText value="Situação" />
+				</f:facet>
+				<h:outputText value="#{p.situacao}" />
+			</h:column>
+			<h:column>
+				<f:facet name="header">
+					<h:outputText value="Encontra-se na" />
+				</f:facet>
+				<h:outputText value="#{p.encontraSeNa}" />
+				<br />
+				<h:outputText value="#{p.encontraSeDesde}" />
+			</h:column>
+
+			<h:column>
+				<f:facet name="header">
+					<h:outputText value="Publicação" />
+					<br />
+					<h:outputText value="(Resolução)" />
+				</f:facet>
+				<h:outputText value="#{p.dataPublicacao}" />
+				<br />
+				<h:outputText value="(#{p.resolucao})" />
+			</h:column>
+			<h:column>
+				<f:facet name="header">
+					<h:outputText value="Status/Opções" />
+				</f:facet>
+				<h:link class="btn"
+					outcome="#{nav.editaServico.includeViewParams().s()}">
+					<b class="icon-edit"></b>
+					<f:param name="id" value="#{p.id}" />
+				</h:link>
+
+				<h:link class="btn" style="margin:5px"
+					outcome="#{nav.removeServico.includeViewParams().s()}">
+					<b class="icon-trash"></b>
+					<f:param name="id" value="#{p.id}" />
+
+				</h:link>
+
+				<h:link class="btn" style="margin:5px"
+					outcome="#{nav.detalheServico.includeViewParams().s()}"
+					includeViewParams="true">
+					<b class="icon-eye-open"></b>
+					<f:param name="id" value="#{p.id}" />
+				</h:link>
+
+				<br />
+				<h:outputText value="#{p.status.descricao}" /> (<h:outputText
+					value="#{p.dataStatus}" />)
+			</h:column>
+		</h:dataTable>
+
+		<h:outputText value="Nenhum registro encontrado"
+			rendered="#{empty listagemServicos}" />
+
+		<aexo:paginator list="#{listagemServicos}"
+			rendered="#{not empty listagemServicos}"
+			requestAttributePage="pagina" />
+
+
+	</ui:define>
+</ui:composition>

@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:rich="http://richfaces.org/rich"
+	xmlns:s="http://jboss.org/seam/faces"
+	xmlns:a4j="http://richfaces.org/a4j"
+	xmlns:aexo="http://java.sun.com/jsf/composite/aexo"
+	xmlns:p="http://primefaces.prime.com.tr/ui"
+	template="/WEB-INF/templates/template.xhtml">
+	<ui:define name="conteudo">
+		<f:metadata>
+			<f:viewParam name="termo" />
+			<f:viewParam name="pagina" />
+			<s:viewAction action="#{conversationManagement.begin()}" />
+		</f:metadata>
+		<h:form>
+			<legend>Confirmação</legend>
+			
+			<h:messages errorClass="alert alert-error"
+			infoClass="alert alert-success" id="messages" globalOnly="true" />
+			
+			<p>Confirma a remoção do cliente ${cliente.razaoSocial}?</p>
+
+			<div class="control-group">
+				<div class="form-actions">
+
+					<h:button outcome="/admin/clientes/clientes.xhtml"
+						includeViewParams="true" value="Cancelar" styleClass="btn" />
+
+					<h:commandButton styleClass="btn btn-primary" value="Remover"
+						style="margin-left: 5px" action="#{clienteHome.remover()}" />
+
+				</div>
+			</div>
+		</h:form>
+	</ui:define>
+</ui:composition>

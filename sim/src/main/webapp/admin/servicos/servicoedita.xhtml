@@ -1,0 +1,186 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:rich="http://richfaces.org/rich"
+	xmlns:a4j="http://richfaces.org/a4j"
+	xmlns:aexo="http://java.sun.com/jsf/composite/aexo"
+	xmlns:s="http://jboss.org/seam/faces"
+	xmlns:p="http://primefaces.prime.com.tr/ui"
+	template="/WEB-INF/templates/template.xhtml">
+	<ui:define name="conteudo">
+		<f:metadata>
+			<f:viewParam name="cliente" />
+			<f:viewParam name="produto" />
+			<f:viewParam name="statusPendente" />
+			<f:viewParam name="dataInicialPendente" />
+			<f:viewParam name="dataFinalPendente" />
+			<f:viewParam name="statusTramitacao" />
+			<f:viewParam name="dataInicialTramitacao" />
+			<f:viewParam name="dataFinalTramitacao" />
+			<f:viewParam name="statusConcluidoComRenovacao" />
+			<f:viewParam name="dataInicialConcluidoComRenovacao" />
+			<f:viewParam name="dataFinalConcluidoComRenovacao" />
+			<f:viewParam name="statusConcluidoSemRenovacao" />
+			<f:viewParam name="dataInicialConcluidoSemRenovacao" />
+			<f:viewParam name="dataFinalConcluidoSemRenovacao" />
+			<f:viewParam name="pagina" />
+			<f:viewParam name="registrosPorPagina" />
+			<s:viewAction action="#{conversationManagement.begin()}" />
+		</f:metadata>
+
+
+		<style>
+.input-zlarge {
+	width: 561px !important;
+}
+</style>
+		<h:form id="formulario">
+			<legend>Serviço</legend>
+
+			<h:messages errorClass="alert alert-error"
+				infoClass="alert alert-success" id="messages" globalOnly="true" />
+
+			<div class="row">
+				<div class="span2" style="width: 100px">
+					<h:outputLabel for="form_id" value="Id" />
+					<h:inputText id="form_id" styleClass="input-small"
+						value="#{servico.id}" disabled="true" />
+					<h:message for="form_id" styleClass="red" />
+				</div>
+				<div class="span2" style="width: 200px">
+					<h:outputLabel for="form_status" value="status" />
+					<h:selectOneMenu styleClass="input-medium" style="width: 210px"
+						id="form_status" value="#{servico.status}"
+						converter="#{converters.create(statusDosServicos)}">
+						<f:selectItems value="#{statusDosServicos}" var="t"
+							itemLabel="#{t.descricao}" itemValue="#{t}" />
+					</h:selectOneMenu>
+					<h:message for="form_status" styleClass="red" />
+				</div>
+				<div class="span2" style="width: 100px">
+					<h:outputLabel for="form_datastatus" value="data status" />
+					<h:inputText id="form_datastatus" styleClass="input-small"
+						value="#{servico.dataStatus}" />
+					<h:message for="form_datastatus" styleClass="red" />
+				</div>
+			</div>
+
+			<h:outputLabel for="form_cliente" value="Cliente" />
+
+			<h:selectOneMenu styleClass="input-zlarge" id="form_cliente"
+				value="#{servico.cliente}"
+				converter="#{converters.create(comboClientes)}">
+				<f:selectItems value="#{comboClientes}" var="t"
+					itemLabel="#{t.razaoSocial}" itemValue="#{t}" />
+			</h:selectOneMenu>
+
+			<h:message for="form_cliente" styleClass="red" />
+
+			<div class="row">
+				<div class="span2" style="width: 140px">
+					<h:outputLabel for="form_processo" value="Processo" />
+					<h:inputText id="form_processo" styleClass="input-medium"
+						value="#{servico.numeroProcesso}" />
+					<h:message for="form_processo" styleClass="red" />
+				</div>
+				<div class="span2" style="width: 80px">
+					<h:outputLabel for="form_expediente" value="Expediente" />
+					<h:inputText id="form_expediente" styleClass="input-small"
+						value="#{servico.expediente}" />
+					<h:message for="form_expediente" styleClass="red" />
+				</div>
+				<div class="span2" style="width: 80px">
+					<h:outputLabel for="form_dataEntrada" value="DataEntrada" />
+					<h:inputText id="form_dataEntrada" styleClass="input-small"
+						value="#{servico.dataEntrada}" />
+					<h:message for="form_dataEntrada" styleClass="red" />
+				</div>
+				<div class="span2" style="width: 100px">
+					<h:outputLabel for="form_protocolo" value="Protocolo" />
+					<h:inputText id="form_protocolo" styleClass="input-medium"
+						value="#{servico.protocolo}" />
+					<h:message for="form_protocolo" styleClass="red" />
+				</div>
+
+			</div>
+			<div class="row">
+
+				<div class="span2">
+					<h:outputLabel for="form_assunto" value="assunto" />
+					<h:selectOneMenu styleClass="input-zlarge" id="form_assunto"
+						value="#{servico.assunto}"
+						converter="#{converters.create(listagemDeAssuntos)}">
+						<f:selectItems value="#{listagemDeAssuntos}" var="t"
+							itemLabel="#{t.descricao}" itemValue="#{t}" />
+					</h:selectOneMenu>
+					<h:message for="form_assunto" styleClass="red" />
+				</div>
+
+			</div>
+
+			<h:outputLabel for="form_produto" value="Produto" />
+			<h:inputText id="form_produto" styleClass="input-zlarge	"
+				value="#{servico.nomeProduto}" />
+			<h:message for="form_produto" styleClass="red" />
+			<div class="row">
+				<div class="span2" style="width: 260px;">
+					<h:outputLabel for="form_situacao" value="Situação" />
+					<h:inputText id="form_situacao" styleClass="input-xlarge"
+						value="#{servico.situacao}" />
+					<h:message for="form_situacao" styleClass="red" />
+				</div>
+				<div class="span2">
+					<h:outputLabel for="form_tipo" value="tipo" />
+					<h:selectOneMenu styleClass="input-xlarge" id="form_tipo"
+						value="#{servico.tipoServico}"
+						converter="#{converters.create(listagemDeTiposDeServicos)}">
+						<f:selectItems value="#{listagemDeTiposDeServicos}" var="t"
+							itemLabel="#{t.descricao}" itemValue="#{t}" />
+					</h:selectOneMenu>
+					<h:message for="form_tipo" styleClass="red" />
+				</div>
+			</div>
+
+			<div class="row">
+				<div class="span2" style="width: 140px">
+					<h:outputLabel for="form_encontraseNa" value="Encontra-se" />
+					<h:inputText id="form_encontraseNa" styleClass="input-medium"
+						value="#{servico.encontraSeNa}" />
+					<h:message for="form_encontraseNa" styleClass="red" />
+				</div>
+				<div class="span2" style="width: 80px">
+					<h:outputLabel for="form_encontraseDesde" value="Desde" />
+					<h:inputText id="form_encontraseDesde" styleClass="input-small"
+						value="#{servico.encontraSeDesde}" />
+					<h:message for="form_encontraseDesde" styleClass="red" />
+				</div>
+				<div class="span2" style="width: 80px">
+					<h:outputLabel for="form_datapublicacao" value="Publicação" />
+					<h:inputText id="form_datapublicacao" styleClass="input-small"
+						value="#{servico.dataPublicacao}" />
+					<h:message for="form_datapublicacao" styleClass="red" />
+				</div>
+				<div class="span2" style="width: 100px">
+					<h:outputLabel for="form_resolucao" value="Resolução" />
+					<h:inputText id="form_resolucao" styleClass="input-small"
+						value="#{servico.resolucao}" />
+					<h:message for="form_resolucao" styleClass="red" />
+				</div>
+			</div>
+			<div class="control-group">
+				<div class="form-actions">
+					<h:button outcome="#{nav.listagemServicos.includeViewParams().s()}"
+						value="Cancelar" styleClass="btn">
+					</h:button>
+
+					<h:commandLink styleClass="btn btn-primary" style="margin:5px"
+						value="Salvar Alterações" action="#{servicoHome.salvar()}">
+					</h:commandLink>
+				</div>
+			</div>
+		</h:form>
+
+	</ui:define>
+</ui:composition>
