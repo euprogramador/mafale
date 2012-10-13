@@ -1,0 +1,266 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:rich="http://richfaces.org/rich"
+	xmlns:a4j="http://richfaces.org/a4j"
+	xmlns:s="http://jboss.org/seam/faces"
+	xmlns:aexo="http://java.sun.com/jsf/composite/aexo"
+	xmlns:p="http://primefaces.prime.com.tr/ui"
+	template="/WEB-INF/templates/template.xhtml">
+	<ui:define name="conteudo">
+
+		<h:form id="form">
+			<legend>Consultador Automático</legend>
+
+			<h:outputText value="Tempo em segundos entre consultas: " />
+			<h:inputText id="intervalo" size="5" style="width:50px" value="#{consultaAutomatica.intervalo}" />
+			
+			<h:inputHidden id="servico" value="#{consultaAutomatica.servico}" />
+			<p>
+			<h:commandLink styleClass="btn" 
+				action="#{consultaAutomatica.iniciarConsultas()}">
+				<b class="icon-play"></b>
+				Iniciar
+				</h:commandLink>
+			<h:commandLink  styleClass="btn" style="margin-left:5px"
+				action="#{consultaAutomatica.pararConsultas()}" onclick="stop();">
+				<b class="icon-stop"></b>
+				Parar
+				
+				</h:commandLink>
+			<a4j:commandLink  immediate="true"  styleClass="btn" style="margin-left:5px"
+				action="#{consultaAutomatica.pararAlerta()}" onclick="stop();">
+				<b class="icon-bell"></b>
+				Parar alerta
+				</a4j:commandLink>
+</p>
+			<a4j:poll actionListener="#{consultaAutomatica.efetuarConsulta()}"
+				interval="#{consultaAutomatica.intervalo * 1000}" execute=":form"
+				enabled="true"
+				oncomplete="if (#{consultaAutomatica.encontradoAlteracao}) document.getElementById('audio').play() "
+				render=":form, servico" immediate="true">
+			</a4j:poll>
+
+			<legend>Consulta atual</legend>
+			<div class="row">
+				<div class="span2" style="width: 100px">
+					<h:outputLabel value="Id" />
+					<h:outputText value="#{consultaAutomatica.consulta.servico.id}" />
+				</div>
+				<div class="span2" style="width: 200px">
+					<h:outputLabel  value="status" />
+					<h:outputText value="#{consultaAutomatica.consulta.servico.status.descricao}" />
+				</div>
+				<div class="span2" style="width: 100px">
+					<h:outputLabel value="data status" />
+					<h:outputText value="#{consultaAutomatica.consulta.servico.dataStatus}" />
+				</div>
+			</div>
+
+			<h:outputLabel value="Cliente" />
+			<h:outputText value="#{consultaAutomatica.consulta.servico.cliente.razaoSocial}" />
+			<div class="row">
+				<div class="span2" style="width: 150px">
+					<h:outputLabel value="Processo" />
+					<h:outputText value="#{consultaAutomatica.consulta.servico.numeroProcesso}" />
+				</div>
+				<div class="span2" style="width: 80px">
+					<h:outputLabel value="Expediente" />
+					<h:outputText value="#{consultaAutomatica.consulta.servico.expediente}" />
+				</div>
+				<div class="span2" style="width: 80px">
+					<h:outputLabel value="DataEntrada" />
+					<h:outputText value="#{consultaAutomatica.consulta.servico.dataEntrada}" />
+				</div>
+				<div class="span2" style="width: 150px">
+					<h:outputLabel value="Protocolo" />
+					<h:outputText value="#{consultaAutomatica.consulta.servico.protocolo}" />
+				</div>
+
+			</div>
+			<h:outputLabel value="assunto" />
+			<h:outputText value="#{consultaAutomatica.consulta.servico.assunto.descricao}" />
+
+			<h:outputLabel value="Produto" />
+			<h:outputText value="#{consultaAutomatica.consulta.servico.nomeProduto}" />
+			<div class="row">
+				<div class="span2" style="width: 260px;">
+					<h:outputLabel value="Situação" />
+					<h:outputText value="#{consultaAutomatica.consulta.servico.situacao}" />
+				</div>
+				<div class="span2" style="width: 260px;">
+					<h:outputLabel value="tipo" />
+					<h:outputText value="#{consultaAutomatica.consulta.servico.tipoServico.descricao}" />
+				</div>
+			</div>
+
+			<div class="row">
+				<div class="span2" style="width: 140px">
+					<h:outputLabel value="Encontra-se" />
+					<h:outputText value="#{consultaAutomatica.consulta.servico.encontraSeNa}" />
+				</div>
+				<div class="span2" style="width: 80px">
+					<h:outputLabel value="Desde" />
+					<h:outputText value="#{consultaAutomatica.consulta.servico.encontraSeDesde}" />
+				</div>
+				<div class="span2" style="width: 80px">
+					<h:outputLabel value="Publicação" />
+					<h:outputText value="#{consultaAutomatica.consulta.servico.dataPublicacao}" />
+				</div>
+				<div class="span2" style="width: 100px">
+					<h:outputLabel value="Resolução" />
+					<h:outputText value="#{consultaAutomatica.consulta.servico.resolucao}" />
+				</div>
+			</div>
+
+
+
+			<style>
+.table td {
+	vertical-align: middle !important;
+	text-align: center;
+}
+
+.col1 {
+	text-align: left !important;
+	width: 25%
+}
+
+.col2 {
+	width: 15%
+}
+
+.col3 {
+	width: 10%
+}
+
+.col4 {
+	width: 10%
+}
+
+.col5 {
+	width: 10%
+}
+
+.col6 {
+	width: 5%
+}
+
+.col7 {
+	width: 15%
+}
+</style>
+			<legend>Serviços Alterados</legend>
+			<h:dataTable columnClasses="col1,col2,col3,col4,col5,col6,col7"
+				styleClass="table table-bordered table-hover"
+				value="#{consultaAutomatica.servicosAlterados}" var="p">
+				<h:column>
+					<f:facet name="header">
+						<h:outputText value="Cliente" />
+						<br />
+						<h:outputText value="Produto ou Assunto" />
+					</f:facet>
+					<h:outputText value="#{p.cliente.razaoSocial}"
+						style="font-weight:bold" />
+					<br />
+					<h:outputText value="#{p.nomeProduto}"
+						rendered="#{not stringTools.isNullOrBlank(p.nomeProduto)}" />
+					<h:outputText value="#{p.assunto.descricao}"
+						rendered="#{stringTools.isNullOrBlank(p.nomeProduto)}" />
+				</h:column>
+				<h:column>
+					<f:facet name="header">
+						<h:outputText value="Processo" />
+						<br />
+						<h:outputText value="(Protocolo)" />
+					</f:facet>
+					<h:outputText value="#{p.numeroProcesso}" />
+					<h:outputText value="(#{p.protocolo})" />
+				</h:column>
+				<h:column>
+					<f:facet name="header">
+						<h:outputText value="Expediente" />
+						<br />
+						<h:outputText value="(Entrada)" />
+					</f:facet>
+					<h:outputText value="#{p.expediente}" />
+					<br />
+				(<h:outputText value="#{p.dataEntrada}" />)
+			</h:column>
+				<h:column>
+					<f:facet name="header">
+						<h:outputText value="Situação" />
+					</f:facet>
+					<h:outputText value="#{p.situacao}" />
+				</h:column>
+				<h:column>
+					<f:facet name="header">
+						<h:outputText value="Encontra-se na" />
+					</f:facet>
+					<h:outputText value="#{p.encontraSeNa}" />
+					<br />
+					<h:outputText value="#{p.encontraSeDesde}" />
+				</h:column>
+
+				<h:column>
+					<f:facet name="header">
+						<h:outputText value="Publicação" />
+						<br />
+						<h:outputText value="(Resolução)" />
+					</f:facet>
+					<h:outputText value="#{p.dataPublicacao}" />
+					<br />
+					<h:outputText value="(#{p.resolucao})" />
+				</h:column>
+				<h:column>
+					<f:facet name="header">
+						<h:outputText value="Status/Opções" />
+					</f:facet>
+
+					<a4j:commandLink immediate="true" render=":form" styleClass="btn"
+						action="#{consultaAutomatica.servicoRevisado(p)}">
+						<b class="icon-ok"></b>
+					</a4j:commandLink>
+
+					<h:link class="btn" target="_blank" style="margin-left:5px"
+						outcome="#{nav.editaServico.includeViewParams().s()}">
+						<b class="icon-edit"></b>
+						<f:param name="id" value="#{p.id}" />
+					</h:link>
+
+
+
+					<h:link class="btn" style="margin-left:5px" target="_blank"
+						outcome="#{nav.detalheServico.includeViewParams().s()}"
+						includeViewParams="true">
+						<b class="icon-eye-open"></b>
+						<f:param name="id" value="#{p.id}" />
+					</h:link>
+
+					<br />
+					<h:outputText value="#{p.status.descricao}" /> (<h:outputText
+						value="#{p.dataStatus}" />)
+			</h:column>
+			</h:dataTable>
+
+
+		</h:form>
+		<audio id="audio">
+			<source src="/sim/alarme.mp3" type="audio/mpeg" />
+		</audio>
+
+		<script type="text/javascript">
+			function stop(){
+				document.getElementById('audio').currentTime = 0;
+				document.getElementById('audio').pause();
+			}
+			
+			document.getElementById('audio').addEventListener('ended', function(){
+			  this.currentTime = 0;
+			  this.play();
+			}, false);
+		</script>
+	</ui:define>
+</ui:composition>

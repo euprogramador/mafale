@@ -19,6 +19,7 @@ import javax.validation.constraints.NotNull;
 import org.hibernate.annotations.Type;
 import org.hibernate.validator.constraints.NotBlank;
 import org.joda.time.LocalDate;
+import org.joda.time.LocalDateTime;
 
 import br.com.aexo.sim.assuntos.Assunto;
 import br.com.aexo.sim.clientes.Cliente;
@@ -64,6 +65,9 @@ public class Servico implements Serializable {
 	private Status status;
 	@Type(type = "org.jadira.usertype.dateandtime.joda.PersistentLocalDate")
 	private LocalDate dataStatus;
+
+	@Type(type = "org.jadira.usertype.dateandtime.joda.PersistentLocalDateTime")
+	private LocalDateTime dataUltimaConsulta;
 
 	@SuppressWarnings("unused")
 	@OneToMany(cascade = CascadeType.REMOVE)
@@ -206,6 +210,14 @@ public class Servico implements Serializable {
 
 	public void setCliente(Cliente cliente) {
 		this.cliente = cliente;
+	}
+
+	public LocalDateTime getDataUltimaConsulta() {
+		return dataUltimaConsulta;
+	}
+
+	public void setDataUltimaConsulta(LocalDateTime dataUltimaConsulta) {
+		this.dataUltimaConsulta = dataUltimaConsulta;
 	}
 
 }

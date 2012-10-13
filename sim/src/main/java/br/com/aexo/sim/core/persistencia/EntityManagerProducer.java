@@ -1,6 +1,7 @@
 package br.com.aexo.sim.core.persistencia;
 
 import javax.enterprise.context.ConversationScoped;
+import javax.enterprise.inject.Disposes;
 import javax.enterprise.inject.Produces;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
