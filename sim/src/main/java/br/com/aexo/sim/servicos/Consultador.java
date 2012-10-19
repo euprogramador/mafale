@@ -24,12 +24,14 @@ public class Consultador implements Serializable {
 
 	private Integer consultarNovamenteEmXHoras = 3 ;
 	
-	
 	@Inject
 	private Event<Consulta> processadorConsulta;
 
 	@Inject
 	private Instance<EntityManager> em;
+	
+	@Inject
+	private AgendadorExecucaoConsulta agendadorExecucao;
 
 	
 	private ResultadoConsulta resultadoConsulta = new ResultadoConsulta();
@@ -41,6 +43,7 @@ public class Consultador implements Serializable {
 	@PostConstruct
 	public void configurar(){
 		resultadoConsulta.setProcessadorConsulta(processadorConsulta);
+		resultadoConsulta.setAgendadorExecucao(agendadorExecucao);
 	}
 	
 	public void efetuarConsulta(){

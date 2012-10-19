@@ -23,18 +23,22 @@ import br.com.aexo.sim.core.processos.Passo;
 import br.com.aexo.sim.core.util.exceptions.ConsultaException;
 
 public class PassoExecucaoDaConsulta implements Passo {
+	
 	protected Properties config = new Properties();
 	private HttpPost request;
+	private DefaultHttpClient connection;
 
+	public PassoExecucaoDaConsulta(){
+		InputStream stream = getClass().getClassLoader().getResourceAsStream("anvisa.properties");
+		carregarConfiguracoes(stream);
+		connection = new DefaultHttpClient();
+	}
+	
 	@Override
 	public void executar(Contexto contexto) {
 		
 		ProcessoNaAnvisa processo = contexto.get("processo");
 		
-		InputStream stream = getClass().getClassLoader().getResourceAsStream("anvisa.properties");
-		carregarConfiguracoes(stream);
-		DefaultHttpClient connection = new DefaultHttpClient();
-
 		request = new HttpPost(config.getProperty("url.consulta"));
 		if (config.get("proxy").equals("true")) {
 			HttpHost proxy = new HttpHost(config.getProperty("proxy.host"), Integer.parseInt(config.getProperty("proxy.port")));
@@ -46,7 +50,6 @@ public class PassoExecucaoDaConsulta implements Passo {
 			}
 		}
 		
-
 		List<NameValuePair> params = new ArrayList<NameValuePair>();
 		params.add(new BasicNameValuePair("hdnProcesso", processo.getProcesso().replace(".", "").replace("/", "").replace("-", "")));
 		params.add(new BasicNameValuePair("hdnCNPJ", processo.getCnpj().replace(".", "").replace("/", "").replace("-", "")));
@@ -62,11 +65,11 @@ public class PassoExecucaoDaConsulta implements Passo {
 				HttpResponse response = connection.execute(request);
 				HttpEntity entity = response.getEntity();
 				if (response.getStatusLine().getStatusCode() != 200) {
-					System.out.println(EntityUtils.toString(entity));
 					throw new ConsultaException("Não foi possivel executar a consulta devido a um erro no servidor");
 				}
 				contexto.set("consulta", EntityUtils.toString(entity));
 			} finally {
+				connection.getConnectionManager().closeExpiredConnections();
 				connection.getConnectionManager().shutdown();
 			}
 		} catch (Exception e) {

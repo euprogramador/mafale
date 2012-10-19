@@ -1,7 +1,10 @@
 package br.com.aexo.sim.servicos;
 
-public class Consulta {
+import java.io.Serializable;
 
+public class Consulta implements Serializable {
+
+	private static final long serialVersionUID = 1L;
 	private final Servico servico;
 	private final ResultadoConsulta resultadoConsulta;
 	private Integer delay = 0;

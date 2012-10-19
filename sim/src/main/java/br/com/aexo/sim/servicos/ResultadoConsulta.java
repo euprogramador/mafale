@@ -11,7 +11,7 @@ public class ResultadoConsulta implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	private boolean continuarConsultando;
-	
+
 	// tempo em minutos
 	private Integer consultarNovamenteEmCasoDeErro = 5;
 
@@ -29,6 +29,8 @@ public class ResultadoConsulta implements Serializable {
 
 	private Event<Consulta> processadorConsulta;
 
+	private AgendadorExecucaoConsulta agendadorExecucao;
+
 	public synchronized void registrarTentativa(Consulta consulta) {
 		quantidadeDeTentativas++;
 	}
@@ -36,7 +38,7 @@ public class ResultadoConsulta implements Serializable {
 	public synchronized void registrarErro(Consulta consulta) {
 		quantidaDeConsultasComErro++;
 		consulta.setDelay(1000 * 60 * consultarNovamenteEmCasoDeErro);
-		getProcessadorConsulta().fire(consulta);
+		agendadorExecucao.agendar(consulta);
 	}
 
 	public synchronized void registrarQuantidadeDeConsultas(Integer quantidade) {
@@ -76,7 +78,8 @@ public class ResultadoConsulta implements Serializable {
 		return quantidadeDeConsultasRestantes;
 	}
 
-	public void setQuantidadeDeConsultasRestantes(Integer quantidadeDeConsultasRestantes) {
+	public void setQuantidadeDeConsultasRestantes(
+			Integer quantidadeDeConsultasRestantes) {
 		this.quantidadeDeConsultasRestantes = quantidadeDeConsultasRestantes;
 	}
 
@@ -112,7 +115,8 @@ public class ResultadoConsulta implements Serializable {
 		return consultarNovamenteEmCasoDeErro;
 	}
 
-	public void setConsultarNovamenteEmCasoDeErro(Integer consultarNovamenteEmCasoDeErro) {
+	public void setConsultarNovamenteEmCasoDeErro(
+			Integer consultarNovamenteEmCasoDeErro) {
 		this.consultarNovamenteEmCasoDeErro = consultarNovamenteEmCasoDeErro;
 	}
 
@@ -128,8 +132,13 @@ public class ResultadoConsulta implements Serializable {
 		return continuarConsultando;
 	}
 
-	public synchronized void setContinuarConsultando(boolean continuarConsultando) {
+	public synchronized void setContinuarConsultando(
+			boolean continuarConsultando) {
 		this.continuarConsultando = continuarConsultando;
+	}
+
+	public void setAgendadorExecucao(AgendadorExecucaoConsulta agendadorExecucao) {
+		this.agendadorExecucao = agendadorExecucao;
 	}
 
 }

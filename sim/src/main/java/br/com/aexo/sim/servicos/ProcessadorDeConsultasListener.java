@@ -6,10 +6,9 @@ import javax.ejb.Asynchronous;
 import javax.ejb.Stateless;
 import javax.ejb.TransactionAttribute;
 import javax.ejb.TransactionAttributeType;
-import javax.ejb.TransactionManagement;
 import javax.enterprise.event.Observes;
-import javax.inject.Inject;
 import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 
 import org.joda.time.LocalDate;
 import org.joda.time.LocalDateTime;
@@ -26,26 +25,18 @@ import br.com.aexo.sim.movimentacao.Movimentacao;
 @Stateless
 public class ProcessadorDeConsultasListener {
 
-	@Inject
+	@PersistenceContext
 	private EntityManager em;
 
-	@SuppressWarnings("static-access")
 	@Asynchronous
 	@TransactionAttribute(TransactionAttributeType.REQUIRES_NEW)
 	public void consultarNaAnvisa(@Observes Consulta consulta) {
-
-		// delay para aguardar n segundos até executar novamente a consulta;
-		if (!consulta.getDelay().equals(0)) {
-			try {
-				Thread.currentThread().sleep(consulta.getDelay());
-			} catch (Exception e) {
-			}
-		}
 
 		if (consulta.getResultadoConsulta().isContinuarConsultando()) {
 			consulta.getResultadoConsulta().registrarTentativa(consulta);
 			fazerConsulta(consulta);
 		}
+
 	}
 
 	private void fazerConsulta(Consulta consulta) {
@@ -61,11 +52,14 @@ public class ProcessadorDeConsultasListener {
 
 		PassoExecucaoDaConsulta passoExecucaoDaConsulta = new PassoExecucaoDaConsulta();
 		PassoInterpretacaoDoResultadoDaConsulta passoInterpretacaoDoResultadoDaConsulta = new PassoInterpretacaoDoResultadoDaConsulta();
-		ProcedimentoParaConsultaNaAnvisa procedimento = new ProcedimentoParaConsultaNaAnvisa(passoExecucaoDaConsulta, passoInterpretacaoDoResultadoDaConsulta);
+		ProcedimentoParaConsultaNaAnvisa procedimento = new ProcedimentoParaConsultaNaAnvisa(
+				passoExecucaoDaConsulta,
+				passoInterpretacaoDoResultadoDaConsulta);
 
 		Anvisa anvisa = new Anvisa(procedimento);
 		try {
 			anvisa.consultar(processo);
+			
 		} catch (Exception e) {
 			consulta.getResultadoConsulta().registrarErro(consulta);
 		}
@@ -79,7 +73,8 @@ public class ProcessadorDeConsultasListener {
 		}
 	}
 
-	private void atualizarSeNecessario(Consulta consulta, PeticaoNaAnvisa peticao) {
+	private void atualizarSeNecessario(Consulta consulta,
+			PeticaoNaAnvisa peticao) {
 		Servico servico = consulta.getServico();
 
 		Movimentacao movimentacao = new Movimentacao();
@@ -100,22 +95,35 @@ public class ProcessadorDeConsultasListener {
 
 		LocalDate data = new LocalDate();
 
-		LocalDate SencontraSeDesde = servico.getEncontraSeDesde() == null ? data : servico.getEncontraSeDesde();
-		LocalDate PencontraSeDesde = peticao.getEncontraSeDesde() == null ? data : peticao.getEncontraSeDesde();
+		LocalDate SencontraSeDesde = servico.getEncontraSeDesde() == null ? data
+				: servico.getEncontraSeDesde();
+		LocalDate PencontraSeDesde = peticao.getEncontraSeDesde() == null ? data
+				: peticao.getEncontraSeDesde();
 
-		String SencontraSeNa = servico.getEncontraSeNa() == null ? "" : servico.getEncontraSeNa();
-		String PencontraSeNa = peticao.getEncontraSeNa() == null ? "" : peticao.getEncontraSeNa();
+		String SencontraSeNa = servico.getEncontraSeNa() == null ? "" : servico
+				.getEncontraSeNa();
+		String PencontraSeNa = peticao.getEncontraSeNa() == null ? "" : peticao
+				.getEncontraSeNa();
 
-		LocalDate SdataPublicacao = servico.getDataPublicacao() == null ? data : servico.getDataPublicacao();
-		LocalDate PdataPublicacao = peticao.getDataPublicacao() == null ? data : peticao.getDataPublicacao();
+		LocalDate SdataPublicacao = servico.getDataPublicacao() == null ? data
+				: servico.getDataPublicacao();
+		LocalDate PdataPublicacao = peticao.getDataPublicacao() == null ? data
+				: peticao.getDataPublicacao();
 
-		String Sresolucao = servico.getResolucao() == null ? "" : servico.getResolucao();
-		String Presolucao = peticao.getResolucao() == null ? "" : peticao.getResolucao();
+		String Sresolucao = servico.getResolucao() == null ? "" : servico
+				.getResolucao();
+		String Presolucao = peticao.getResolucao() == null ? "" : peticao
+				.getResolucao();
 
-		String Ssituacao = servico.getSituacao() == null ? "" : servico.getSituacao();
-		String Psituacao = peticao.getSituacao() == null ? "" : peticao.getSituacao();
+		String Ssituacao = servico.getSituacao() == null ? "" : servico
+				.getSituacao();
+		String Psituacao = peticao.getSituacao() == null ? "" : peticao
+				.getSituacao();
 
-		if (!SencontraSeDesde.equals(PencontraSeDesde) || !SencontraSeNa.equals(PencontraSeNa) || !SdataPublicacao.equals(PdataPublicacao) || !Sresolucao.equals(Presolucao)
+		if (!SencontraSeDesde.equals(PencontraSeDesde)
+				|| !SencontraSeNa.equals(PencontraSeNa)
+				|| !SdataPublicacao.equals(PdataPublicacao)
+				|| !Sresolucao.equals(Presolucao)
 				|| !Ssituacao.equals(Psituacao)) {
 
 			consulta.getResultadoConsulta().registrarAlteracao();
@@ -134,6 +142,7 @@ public class ProcessadorDeConsultasListener {
 			consultaEfetuada.setData(new LocalDateTime());
 
 			em.persist(consultaEfetuada);
+			em.merge(servico);
 			em.persist(movimentacao);
 			consulta.getResultadoConsulta().registrarServicoAlterado(servico);
 		}

@@ -28,7 +28,7 @@ public class AssuntoQuery {
 
 		if (context.isPostback())
 			return new ArrayList<Assunto>();
-
+ 
 		return session.createCriteria(Assunto.class).addOrder(Order.asc("descricao")).list();
 	}
 
