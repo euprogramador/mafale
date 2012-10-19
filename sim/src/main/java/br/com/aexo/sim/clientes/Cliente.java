@@ -9,6 +9,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.PreRemove;
@@ -48,6 +49,10 @@ public class Cliente implements Serializable {
 	private String contato;
 	private String telefone1;
 	private String telefone2;
+	
+	@Lob
+	@org.hibernate.annotations.Type(type="org.hibernate.type.TextType")
+	private String observacao;
 
 	@Email(message = "Informe um email válido")
 	private String email;
@@ -172,6 +177,16 @@ public class Cliente implements Serializable {
 
 	public void setTipo(TipoCliente tipo) {
 		this.tipo = tipo;
+	}
+
+
+	public String getObservacao() {
+		return observacao;
+	}
+
+
+	public void setObservacao(String observacao) {
+		this.observacao = observacao;
 	}
 
 }

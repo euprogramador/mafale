@@ -10,6 +10,8 @@ import javax.enterprise.event.Observes;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
+import org.hibernate.Session;
+import org.hibernate.criterion.Restrictions;
 import org.joda.time.LocalDate;
 import org.joda.time.LocalDateTime;
 
@@ -19,6 +21,7 @@ import br.com.aexo.sim.anvisa.ProcessoNaAnvisa;
 import br.com.aexo.sim.anvisa.procedimentoparaconsulta.PassoExecucaoDaConsulta;
 import br.com.aexo.sim.anvisa.procedimentoparaconsulta.PassoInterpretacaoDoResultadoDaConsulta;
 import br.com.aexo.sim.anvisa.procedimentoparaconsulta.ProcedimentoParaConsultaNaAnvisa;
+import br.com.aexo.sim.assuntos.Assunto;
 import br.com.aexo.sim.consultaefetuada.ConsultaEfetuada;
 import br.com.aexo.sim.movimentacao.Movimentacao;
 
@@ -59,7 +62,7 @@ public class ProcessadorDeConsultasListener {
 		Anvisa anvisa = new Anvisa(procedimento);
 		try {
 			anvisa.consultar(processo);
-			
+
 		} catch (Exception e) {
 			consulta.getResultadoConsulta().registrarErro(consulta);
 		}
@@ -69,6 +72,14 @@ public class ProcessadorDeConsultasListener {
 			if (servico.getExpediente().equals(peticao.getExpediente())) {
 				consulta.getResultadoConsulta().registarSucesso(consulta);
 				atualizarSeNecessario(consulta, peticao);
+				
+				ConsultaEfetuada consultaEfetuada = new ConsultaEfetuada();
+
+				consultaEfetuada.setServico(servico);
+				consultaEfetuada.setHouveModificacao(true);
+				consultaEfetuada.setData(new LocalDateTime());
+
+				em.persist(consultaEfetuada);
 			}
 		}
 	}
@@ -120,14 +131,33 @@ public class ProcessadorDeConsultasListener {
 		String Psituacao = peticao.getSituacao() == null ? "" : peticao
 				.getSituacao();
 
+		String Sassunto = servico.getAssunto() == null ? "" : servico
+				.getAssunto().getDescricao();
+
+		String Passunto = peticao.getAssunto() == null ? "" : peticao
+				.getAssunto();
+
 		if (!SencontraSeDesde.equals(PencontraSeDesde)
 				|| !SencontraSeNa.equals(PencontraSeNa)
 				|| !SdataPublicacao.equals(PdataPublicacao)
 				|| !Sresolucao.equals(Presolucao)
-				|| !Ssituacao.equals(Psituacao)) {
+				|| !Ssituacao.equals(Psituacao)
+				|| !Sassunto.equals(Passunto)
+				) {
 
 			consulta.getResultadoConsulta().registrarAlteracao();
 
+			
+			Session session = em.unwrap(Session.class);
+			
+			Assunto assunto = (Assunto) session.createCriteria(Assunto.class).add(Restrictions.eq("descricao", peticao.getAssunto())).setMaxResults(1).uniqueResult();
+			if (assunto == null) {
+				assunto = new Assunto();
+				assunto.setDescricao(peticao.getAssunto());
+				session.saveOrUpdate(assunto);
+				servico.setAssunto(assunto);
+			}
+			
 			servico.setEncontraSeDesde(peticao.getEncontraSeDesde());
 			servico.setEncontraSeNa(peticao.getEncontraSeNa());
 			servico.setDataPublicacao(peticao.getDataPublicacao());
@@ -135,13 +165,6 @@ public class ProcessadorDeConsultasListener {
 			servico.setSituacao(peticao.getSituacao());
 			servico.setDataUltimaConsulta(new LocalDateTime());
 
-			ConsultaEfetuada consultaEfetuada = new ConsultaEfetuada();
-
-			consultaEfetuada.setServico(servico);
-			consultaEfetuada.setHouveModificacao(true);
-			consultaEfetuada.setData(new LocalDateTime());
-
-			em.persist(consultaEfetuada);
 			em.merge(servico);
 			em.persist(movimentacao);
 			consulta.getResultadoConsulta().registrarServicoAlterado(servico);

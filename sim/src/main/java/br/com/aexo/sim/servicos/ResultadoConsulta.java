@@ -12,6 +12,8 @@ public class ResultadoConsulta implements Serializable {
 
 	private boolean continuarConsultando;
 
+	private Long servicoId;
+
 	// tempo em minutos
 	private Integer consultarNovamenteEmCasoDeErro = 5;
 
@@ -107,8 +109,15 @@ public class ResultadoConsulta implements Serializable {
 		this.servicosAlterados = servicosAlterados;
 	}
 
-	public synchronized void servicoRevisado(Servico servico) {
-		this.servicosAlterados.remove(servico);
+	public synchronized void servicoRevisado() {
+		Servico servico = null;
+		for (Servico servicoAlterado : servicosAlterados) {
+			if (servicoAlterado.getId().equals(servicoId))
+				servico = servicoAlterado;
+		}
+
+		if (servico != null)
+			this.servicosAlterados.remove(servico);
 	}
 
 	public Integer getConsultarNovamenteEmCasoDeErro() {
@@ -139,6 +148,14 @@ public class ResultadoConsulta implements Serializable {
 
 	public void setAgendadorExecucao(AgendadorExecucaoConsulta agendadorExecucao) {
 		this.agendadorExecucao = agendadorExecucao;
+	}
+
+	public Long getServicoId() {
+		return servicoId;
+	}
+
+	public void setServicoId(Long servicoId) {
+		this.servicoId = servicoId;
 	}
 
 }

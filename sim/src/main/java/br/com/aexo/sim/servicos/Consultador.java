@@ -49,6 +49,7 @@ public class Consultador implements Serializable {
 	public void efetuarConsulta(){
 		if (!consultando)
 			return;
+		resultadoConsulta = new ResultadoConsulta();
 		fazerConsultas();
 	}
 

@@ -85,18 +85,20 @@
 			</h:panelGroup>
 
 
-			<a4j:poll interval="3000"
+			<a4j:poll interval="10000"
 				actionListener="#{consultador.atualizarStatus()}" execute=":this"
 				enabled="true" render=":sumario, :servicos" 
-				oncomplete="if (#{consultador.resultadoConsulta.registrosAlterados}) document.getElementById('audio').play() "
+				oncomplete="if (#{consultador.resultadoConsulta.registrosAlterados})  document.getElementById('audio').play() "
 				immediate="true">
 			</a4j:poll>
+			
+			
 
 			<a4j:poll actionListener="#{consultador.efetuarConsulta()}"
 				interval="#{1000 * 60 * consultador.consultarNovamenteEmXHoras}"
 				execute=":form" enabled="true"
 				oncomplete="if (#{consultador.resultadoConsulta.registrosAlterados}) document.getElementById('audio').play() "
-				render=":form, :servicos" immediate="true">
+				render=":sumario, :servicos" immediate="true">
 			</a4j:poll>
 		</h:form>
 
@@ -140,7 +142,9 @@
 			<br />
 			<br />
 			<br />
-
+			<div class="clearfix"></div>
+			<br />
+			<br />
 			<legend>Serviços Alterados</legend>
 			<h:dataTable id="alterados" columnClasses="col1,col2,col3,col4,col5,col6,col7"
 				styleClass="table table-bordered table-hover"
@@ -208,9 +212,9 @@
 						<h:outputText value="Status/Opções" />
 					</f:facet>
 
-					<a4j:commandLink immediate="true" render=":servicos"
+					<a4j:commandLink immediate="true" render=":alterados"
 						styleClass="btn"
-						action="#{consultador.resultadoConsulta.servicoRevisado(p)}">
+						action="okalterado" onclick="termina(${p.id})">
 						<b class="icon-ok"></b>
 					</a4j:commandLink>
 
@@ -236,6 +240,16 @@
 
 
 		</h:form>
+		
+		<h:form>
+		
+			<a4j:jsFunction name="termina" action="#{consultador.resultadoConsulta.servicoRevisado}">
+				<a4j:param name="id" assignTo="#{consultador.resultadoConsulta.servicoId}"></a4j:param>
+			</a4j:jsFunction>	
+	
+		
+		</h:form>
+		
 		<audio id="audio">
 			<source src="/sim/alerta.wav" type="audio/wav" />
 		</audio>

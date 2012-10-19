@@ -40,7 +40,6 @@ public class Servico implements Serializable {
 	@JoinColumn(name = "cliente_id")
 	@NotNull(message = "Informe o cliente")
 	private Cliente cliente;
-	@NotBlank(message = "Informe o numero do processo")
 	private String numeroProcesso;
 	@ManyToOne
 	@JoinColumn(name = "assunto_id")
@@ -52,6 +51,7 @@ public class Servico implements Serializable {
 	private String expediente;
 	@Type(type = "org.jadira.usertype.dateandtime.joda.PersistentLocalDate")
 	private LocalDate dataEntrada;
+	private String transacao;
 	private String protocolo;
 	private String situacao;
 	private String encontraSeNa;
@@ -218,6 +218,14 @@ public class Servico implements Serializable {
 
 	public void setDataUltimaConsulta(LocalDateTime dataUltimaConsulta) {
 		this.dataUltimaConsulta = dataUltimaConsulta;
+	}
+
+	public String getTransacao() {
+		return transacao;
+	}
+
+	public void setTransacao(String transacao) {
+		this.transacao = transacao;
 	}
 
 }
